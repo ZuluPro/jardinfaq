@@ -1,0 +1,16 @@
+#header {
+  background: #137a00;
+}
+
+#userToolsNav a {
+  color: #f4f450;
+}
+
+#userToolsNav .user-info,
+#userToolsNav .user-micro-info {
+  color: #ffbc00;
+}
+
+#metaNav a {
+  color: #f4f450;
+}
