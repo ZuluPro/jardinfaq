@@ -1,0 +1,65 @@
+<!-- template secondary_header.html -->
+<div id="secondaryHeader">
+    <div class="content-wrapper">
+        {# form is wrapping search buttons and the search bar inputs #}
+        {% set enabled_scopes_class = 'scopes-' + 
+            '%s'|format(settings.ALL_SCOPE_ENABLED) + '-' +
+            '%s'|format(settings.UNANSWERED_SCOPE_ENABLED) + '-' +
+            '%s'|format((request.user.is_authenticated() and settings.FOLLOWED_SCOPE_ENABLED))
+        %}
+        <form
+            {% if active_tab == "tags" %}
+                action="{% url tags %}" 
+            {% elif page_class == 'user-profile-page' %}
+                action="{% url questions %}" id="searchForm"
+            {% elif active_tab == "users" %}
+                action="" 
+            {% else %}
+                action="{% url questions %}" id="searchForm"
+            {% endif %}
+            class="{{ enabled_scopes_class }}"
+            method="get">
+            {# 
+                A single row table to help the semi-fixed width layout where:
+                * all cells have "tight width" without linebreaks
+                * except that the search bar cell takes the remaining width
+                We had hard time making this layout work without tables.
+                Please suggest if there is a better way.
+            #}
+        <table width="100%">
+         <tr>
+          <td width="1">
+           <a id="navQuestion" href="{% url questions %}" class="scope-selector{% if active_tab == 'questions' %} on{% endif %}">{% trans %}Questions{% endtrans %}</a>
+          </td>
+
+          <td width="1">
+           <a id="navTags" href="{% url tags %}" class="scope-selector{% if active_tab == 'tags' %} on{% endif %}">{% trans %}tags{% endtrans %}</a>
+          </td>
+          <td width="1">
+           {% if settings.GROUPS_ENABLED %}
+            <a id="navGroups" class="scope-selector {% if active_tab == 'groups' %} on{% endif %}" href="{% url groups %}">
+              {% trans %}people & groups{% endtrans %}
+            </a>
+            </span>
+            {% else %}
+            <a id="navUsers" href="{% url users %}" class="scope-selector{% if active_tab == 'users' %} on{% endif %}">{% trans %}users{% endtrans %}</a>
+            {% endif %}
+          </td>
+
+          {% if settings.BADGES_MODE == 'public' %}
+          <td width="1">
+           <a id="navBadges" href="{% url badges %}" class="scope-selector{% if active_tab == 'badges' %} on{% endif %}">{% trans %}badges{% endtrans %}</a>
+          </td>
+          {% endif %}
+
+          <td width="*" class="search-bar">{% include "widgets/search_bar.html" %}</td> 
+          {% if settings.ASK_BUTTON_ENABLED %}
+          <td width="1">
+              {% include "widgets/ask_button.html" %}            
+          </td>
+          {% endif %}
+         </tr>
+        </table>
+    </form>
+</div>
+</div>

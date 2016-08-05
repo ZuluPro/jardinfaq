@@ -14,6 +14,7 @@ DEBUG = True
 TEMPLATE_DEBUG = False
 INTERNAL_IPS = ['127.0.0.1']
 ALLOWED_HOSTS = ['*']
+SECRET_KEY = '597e509713a64bafadbb2469fe979a87'
 
 ADMINS = (
     ('Your Name', 'your_email@domain.com'),
@@ -24,7 +25,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/tmp/cannafaq.sql',                      # Or path to database file if using sqlite3.
+        'NAME': 'jardinfaq.sql',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -52,26 +53,22 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Europe/Paris'
 
 SITE_ID = 1
 
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
 USE_I18N = True
 LANGUAGE_CODE = 'fr'
 
-ASKBOT_EXTRA_SKINS_DIR = os.path.join(PROJECT_ROOT, 'core/jardinskin/')
+ASKBOT_EXTRA_SKINS_DIR = os.path.join(PROJECT_ROOT, 'core/skins/')
 
-# Absolute path to the directory that holds uploaded media
-# Example: "/home/media/media.lawrence.com/"
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'askbot', 'upfiles')
 MEDIA_URL = '/upfiles/'
 STATIC_URL = '/m/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATICFILES_DIRS = (
     ASKBOT_EXTRA_SKINS_DIR,
-    ('jardinskin/media', ASKBOT_EXTRA_SKINS_DIR + 'media'),
     ('default/media', os.path.join(ASKBOT_ROOT, 'media')),
 )
 STATICFILES_FINDERS = (
@@ -80,13 +77,16 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+ADMIN_MEDIA_PREFIX = os.path.join(STATIC_URL, 'admin/')
 
-# Make up some unique string, and don't share it with anybody.
-SECRET_KEY = '597e509713a64bafadbb2469fe979a87'
+FILE_UPLOAD_TEMP_DIR = os.path.join(
+                                os.path.dirname(__file__),
+                                'tmp'
+                            ).replace('\\','/')
+FILE_UPLOAD_HANDLERS = (
+    'django.core.files.uploadhandler.MemoryFileUploadHandler',
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+)
 
 TEMPLATES = (
     {
@@ -132,20 +132,8 @@ ATOMIC_REQUESTS = True
 
 ROOT_URLCONF = os.path.basename(os.path.dirname(__file__)) + '.urls'
 
-
-#UPLOAD SETTINGS
-FILE_UPLOAD_TEMP_DIR = os.path.join(
-                                os.path.dirname(__file__),
-                                'tmp'
-                            ).replace('\\','/')
-
-FILE_UPLOAD_HANDLERS = (
-    'django.core.files.uploadhandler.MemoryFileUploadHandler',
-    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
-)
-ASKBOT_ALLOWED_UPLOAD_FILE_TYPES = ('.jpg', '.jpeg', '.gif', '.bmp', '.png', '.tiff')
+ASKBOT_ALLOWED_UPLOAD_FILE_TYPES = ('.jpg', '.jpeg', '.gif', '.bmp', '.png',)
 ASKBOT_MAX_UPLOAD_FILE_SIZE = 1024 * 1024 #result in bytes
-DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -178,26 +166,23 @@ INSTALLED_APPS = [
     'avatar',
 ]
 
-
-#setup memcached for production use!
-# See http://docs.djangoproject.com/en/1.8/topics/cache/ for details.
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'askbot',
         'TIMEOUT': 6000,
-        # Chose a unique KEY_PREFIX to avoid clashes with other applications
-        # using the same cache (e.g. a shared memcache instance).
         'KEY_PREFIX': 'askbot',
     }
 }
 
-#sets a special timeout for livesettings if you want to make them different
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+
+# Sets a special timeout for livesettings if you want to make them different
 LIVESETTINGS_CACHE_TIMEOUT = CACHES['default']['TIMEOUT']
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 CACHE_MIDDLEWARE_SECONDS = 600
-#If you use memcache you may want to uncomment the following line to enable memcached based sessions
-#SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -218,15 +203,13 @@ logging.basicConfig(
 #
 #   ASKBOT_URL = 'forum/'
 #
-ASKBOT_URL = '' #no leading slash, default = '' empty string
-ASKBOT_TRANSLATE_URL = True #translate specific URLs
-_ = lambda v:v #fake translation function for the login url
-LOGIN_URL = '/%s%s%s' % (ASKBOT_URL,_('account/'),_('signin/'))
-LOGIN_REDIRECT_URL = ASKBOT_URL #adjust, if needed
-#note - it is important that upload dir url is NOT translated!!!
-#also, this url must not have the leading slash
+ASKBOT_URL = ''
+ASKBOT_TRANSLATE_URL = True
+_ = lambda v: v  #fake translation function for the login url
+LOGIN_URL = '/%s%s%s' % (ASKBOT_URL, _('account/'), _('signin/'))
+LOGIN_REDIRECT_URL = ASKBOT_URL
 ALLOW_UNICODE_SLUGS = False
-ASKBOT_USE_STACKEXCHANGE_URLS = False #mimic url scheme of stackexchange
+ASKBOT_USE_STACKEXCHANGE_URLS = False
 
 #Celery Settings
 BROKER_TRANSPORT = "djkombu.transport.DatabaseTransport"
@@ -273,7 +256,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_toolbar_align': 'left',
     'theme_advanced_buttons1': 'bold,italic,underline,|,bullist,numlist,|,undo,redo,|,link,unlink,askbot_imageuploader,askbot_attachment',
     'theme_advanced_buttons2': '',
-    'theme_advanced_buttons3' : '',
+    'theme_advanced_buttons3': '',
     'theme_advanced_path': False,
     'theme_advanced_resizing': True,
     'theme_advanced_resize_horizontal': False,
@@ -283,7 +266,7 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 #delayed notifications, time in seconds, 15 mins by default
-NOTIFICATION_DELAY_TIME = 60 * 15
+NOTIFICATION_DELAY_TIME = 60 * 10
 
 GROUP_MESSAGING = {
     'BASE_URL_GETTER_FUNCTION': 'askbot.models.user_get_profile_url',
@@ -308,9 +291,7 @@ JINJA2_TEMPLATES = ('captcha',)
 SOUTH_TESTS_MIGRATE = False
 
 VERIFIER_EXPIRE_DAYS = 3
-AVATAR_AUTO_GENERATE_SIZES = (16, 32, 48, 128) #change if avatars are sized differently
-
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+AVATAR_AUTO_GENERATE_SIZES = (16, 32, 48, 128)
 
 
 def add_debug_toolbar():
@@ -319,8 +300,8 @@ def add_debug_toolbar():
         INSTALLED_APPS.append('debug_toolbar')
         INTERNAL_IPS.extend(os.environ.get('INTERNAL_IPS', '127.0.0.1').split(','))
         MIDDLEWARE_CLASSES.append('debug_toolbar.middleware.DebugToolbarMiddleware')
-        TEMPLATES[1]['OPTIONS']['context_processors'].insert(0,
-            'django.template.context_processors.debug')
+        TEMPLATES[1]['OPTIONS']['context_processors'].insert(
+            0, 'django.template.context_processors.debug')
     except ImportError:
         pass
 
