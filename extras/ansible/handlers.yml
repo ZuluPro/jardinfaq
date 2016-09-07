@@ -1,0 +1,25 @@
+---
+- name: restart sshd
+  service: name=sshd state=restarted
+  remote_user: root
+
+- name: restart fail2ban
+  service: name=fail2ban state=restarted
+  remote_user: root
+
+- name: update timezone
+  command: dpkg-reconfigure -f noninteractive tzdata
+  remote_user: root
+
+- name: restart nginx
+  service: name=nginx state=restarted
+  remote_user: root
+
+- name: reload nginx
+  service: name=nginx state=reloaded
+  remote_user: root
+
+- name: restart uwsgi
+  command: "docker-compose restart middleware"
+  args:
+    chdir: "{{ jardinfaq_src_dir }}"

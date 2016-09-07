@@ -1629,6 +1629,7 @@ ul.js-related-tags li {
 .js-tag-extra-content {
   padding-left: 4px;
   vertical-align: text-top;
+  float: right;
 }
 .js-tag-name {
   cursor: pointer;
@@ -5220,9 +5221,9 @@ textarea {
 img.avatar {
     height: 25px;
 }
-#searchForm {
+#secondaryHeader form {
   margin: 10px 0 10px;
 }
-#searchForm a {
+#secondaryHeader form a {
   white-space: nowrap;
 }

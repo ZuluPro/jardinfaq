@@ -1,7 +1,6 @@
 {% compress css %}
     <link href="{{ '/style/style.css'|media }}" rel="stylesheet" type="text/css" />
-    <link href="{{ '/css/jardinfaq.css'|media }}" rel="stylesheet" type="text/css" />
-    {% set extra_css = '/style/extra.css'|media(ignore_missing=True) %}
+    {% set extra_css = '/style/extra.css'|media %}
     {% if extra_css %}
         <link href="{{ extra_css }}" rel="stylesheet" type="text/css" />
     {% endif %}
@@ -10,10 +9,6 @@
 {% endcompress %}
 {% if settings.USE_CUSTOM_CSS %}
     {# can't compress yet because this comes from live settings #}
-    <link
-        href="{% url "custom_css" %}?v={{ settings.MEDIA_RESOURCE_REVISION }}"
-        rel="stylesheet"
-        type="text/css"
-    />
+    <link href="{% url "custom_css" %}?v={{ settings.MEDIA_RESOURCE_REVISION }}" rel="stylesheet" type="text/css" />
 {% endif %}
 

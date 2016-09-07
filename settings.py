@@ -1,6 +1,10 @@
-## Django settings for ASKBOT enabled project.
-import os.path
-import logging
+import os
+import dj_database_url
+
+try:
+    from ConfigParser import SafeConfigParser
+except ImportError:
+    from configparser import SafeConfigParser
 import askbot
 import site
 import sys
@@ -8,85 +12,140 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 PROJECT_ROOT = os.path.dirname(__file__)
 ASKBOT_ROOT = os.path.abspath(os.path.dirname(askbot.__file__))
-site.addsitedir(os.path.join(ASKBOT_ROOT, 'deps'))
 
-DEBUG = True
-TEMPLATE_DEBUG = False
-INTERNAL_IPS = ['127.0.0.1']
-ALLOWED_HOSTS = ['*']
-SECRET_KEY = '597e509713a64bafadbb2469fe979a87'
-
-ADMINS = (
-    ('Your Name', 'your_email@domain.com'),
-)
-
-MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'jardinfaq.sql',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-        'TEST_CHARSET': 'utf8',              # Setting the character set and collation to utf-8
-        'TEST_COLLATION': 'utf8_general_ci', # is necessary for MySQL tests to work properly.
-    }
+# Get env vars
+ENV_VARS = {
+    k.replace('JARDINFAQ_', '').lower(): v
+    for k, v in os.environ.items()
+    if k.startswith('JARDINFAQ_')
+}
+# Set default values
+DEFAULT_CONFIG = {
+    'debug': 'False',
+    'template_debug': 'False',
+    'server_url': 'jardinfaq.com',
+    'allowed_hosts': '*',
+    'internal_ips': '127.0.0.1',
+    'secret_key': 'fooo',
+    'wsgi_application': 'wsgi.application',
+    'session_engine': 'django.contrib.sessions.backends.cached_db',
+    'log_filename': '/dev/null',
+    # Database
+    'default_db': 'sqlite:///jardinfaq.sql',
+    # Email
+    'admins': '',
+    'server_email': 'jardinfaq.com',
+    'email_backend': 'django.core.mail.backends.smtp.EmailBackend',
+    'email_host': 'localhost',
+    'email_host_password': '',
+    'email_host_user': '',
+    'email_port': '25',
+    'email_use_tls': 'False',
+    'email_use_ssl': 'False',
+    'default_from_email': 'equipe@jardinfaq.com',
+    'email_subject_prefix': '',
+    # Extra files
+    'default_file_storage': 'django.core.files.storage.FileSystemStorage',
+    'static_url': '/m/',
+    'media_url': '/upfiles/',
+    'backup_dir': os.path.expanduser('~'),
+    'static_root': os.path.join(PROJECT_ROOT, 'static/'),
+    'media_root': os.path.join(os.path.dirname(__file__), 'askbot', 'upfiles'),
+    # Cache
+    'cache_backend': 'django_redis.cache.RedisCache',
+    'cache_location': 'redis://127.0.0.1:6379:1',
+    'cache_option_client_class': 'django_redis.client.DefaultClient',
+    # Broker
+    'broker_url': 'redis://127.0.0.1:6379:2',
+    'broker_transport': 'djkombu.transport.DatabaseTransport',
+    'celery_result_backend': 'djcelery.backends.database:DatabaseBackend',
+    # Captcha
+    'recaptcha_public_key': None,
+    'recaptcha_private_key': None,
+    'nocaptcha': 'True',
+    'recaptcha_use_ssl': 'True',
+    'akismet_api_key': None,
 }
 
-#outgoing mail server settings
-SERVER_EMAIL = ''
-DEFAULT_FROM_EMAIL = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_SUBJECT_PREFIX = ''
-EMAIL_HOST=''
-EMAIL_PORT=''
-EMAIL_USE_TLS=False
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+CONFIG_FILE = os.environ.get('JARDINFAQ_CONFIG_FILE',
+                             os.path.join(PROJECT_ROOT, 'jardinfaq.cfg'))
+CONFIG = SafeConfigParser(defaults=DEFAULT_CONFIG, allow_no_value=True)
+CONFIG.read([
+    CONFIG_FILE,
+    '/etc/jardinfaq.cfg',
+    os.path.expanduser('~/.jardinfaq.cfg')
+])
+map(lambda i: CONFIG.set('DEFAULT', i[0], i[1]),
+    ENV_VARS.items())
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
-TIME_ZONE = 'Europe/Paris'
+site.addsitedir(os.path.join(ASKBOT_ROOT, 'deps'))
 
+DEBUG = CONFIG.getboolean('DEFAULT', 'debug')
+TEMPLATE_DEBUG = CONFIG.getboolean('DEFAULT', 'template_debug')
+ALLOWED_HOSTS = CONFIG.get('DEFAULT', 'allowed_hosts').split(',')
+INTERNAL_IPS = CONFIG.get('DEFAULT', 'internal_ips').split(',')
 SITE_ID = 1
+SECRET_KEY = CONFIG.get('DEFAULT', 'secret_key')
 
-USE_I18N = True
+# i18n
 LANGUAGE_CODE = 'fr'
+TIME_ZONE = 'Europe/Paris'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+# Email
+ADMINS = CONFIG.get('DEFAULT', 'admins').split(',')
+MANAGERS = ADMINS
+SERVER_EMAIL = ''
+EMAIL_BACKEND = CONFIG.get('DEFAULT', 'email_backend')
+EMAIL_HOST = CONFIG.get('DEFAULT', 'email_host')
+EMAIL_HOST_PASSWORD = CONFIG.get('DEFAULT', 'email_host_password')
+EMAIL_HOST_USER = CONFIG.get('DEFAULT', 'email_host_user')
+EMAIL_PORT = CONFIG.getint('DEFAULT', 'email_port')
+EMAIL_USE_TLS = CONFIG.getboolean('DEFAULT', 'email_use_tls')
+EMAIL_USE_SSL = CONFIG.getboolean('DEFAULT', 'email_use_ssl')
+DEFAULT_FROM_EMAIL = CONFIG.get('DEFAULT', 'default_from_email')
+EMAIL_SUBJECT_PREFIX = CONFIG.get('DEFAULT', 'email_subject_prefix')
+
+DATABASES = {
+    'default': dj_database_url.parse(CONFIG.get('DEFAULT', 'default_db'))
+}
+
+# Extra files (CSS, JavaScript, Images)
+DEFAULT_FILE_STORAGE = CONFIG.get('DEFAULT', 'default_file_storage')
 
 ASKBOT_EXTRA_SKINS_DIR = os.path.join(PROJECT_ROOT, 'core/skins/')
-
-DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'askbot', 'upfiles')
-MEDIA_URL = '/upfiles/'
-STATIC_URL = '/m/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     ASKBOT_EXTRA_SKINS_DIR,
     ('default/media', os.path.join(ASKBOT_ROOT, 'media')),
-)
+]
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
 
+STATIC_ROOT = CONFIG.get('DEFAULT', 'static_root')
+STATIC_URL = CONFIG.get('DEFAULT', 'static_url')
+
+MEDIA_ROOT = CONFIG.get('DEFAULT', 'media_root')
+MEDIA_URL = CONFIG.get('DEFAULT', 'media_url')
 ADMIN_MEDIA_PREFIX = os.path.join(STATIC_URL, 'admin/')
 
-FILE_UPLOAD_TEMP_DIR = os.path.join(
-                                os.path.dirname(__file__),
-                                'tmp'
-                            ).replace('\\','/')
+FILE_UPLOAD_TEMP_DIR = os.path.join(os.path.dirname(__file__), 'tmp').replace('\\','/')
 FILE_UPLOAD_HANDLERS = (
     'django.core.files.uploadhandler.MemoryFileUploadHandler',
     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
 )
+
+# Captcha
+RECAPTCHA_PUBLIC_KEY = CONFIG.get('DEFAULT', 'recaptcha_public_key')
+RECAPTCHA_PRIVATE_KEY = CONFIG.get('DEFAULT', 'recaptcha_private_key')
+NOCAPTCHA = CONFIG.getboolean('DEFAULT', 'nocaptcha')
+RECAPTCHA_USE_SSL = CONFIG.getboolean('DEFAULT', 'recaptcha_use_ssl')
+AKISMET_API_KEY = CONFIG.get('DEFAULT', 'akismet_api_key')
+
 
 TEMPLATES = (
     {
@@ -100,6 +159,7 @@ TEMPLATES = (
             'context_processors': [
                 'django.core.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.static',
             ]
         }
     },
@@ -130,10 +190,10 @@ MIDDLEWARE_CLASSES = [
 
 ATOMIC_REQUESTS = True
 
-ROOT_URLCONF = os.path.basename(os.path.dirname(__file__)) + '.urls'
+ROOT_URLCONF = 'urls'
 
 ASKBOT_ALLOWED_UPLOAD_FILE_TYPES = ('.jpg', '.jpeg', '.gif', '.bmp', '.png',)
-ASKBOT_MAX_UPLOAD_FILE_SIZE = 1024 * 1024 #result in bytes
+ASKBOT_MAX_UPLOAD_FILE_SIZE = 1024 * 1024
 
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -142,7 +202,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
 
-    #all of these are needed for the askbot
+    # All of these are needed for the askbot
     'django.contrib.admin',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
@@ -168,10 +228,13 @@ INSTALLED_APPS = [
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'askbot',
+        'BACKEND': CONFIG.get('DEFAULT', 'cache_backend'),
+        'LOCATION': CONFIG.get('DEFAULT', 'cache_location'),
         'TIMEOUT': 6000,
         'KEY_PREFIX': 'askbot',
+        'OPTIONS': {
+            'CLIENT_CLASS': CONFIG.get('DEFAULT', 'cache_option_client_class')
+        }
     }
 }
 
@@ -190,19 +253,13 @@ AUTHENTICATION_BACKENDS = (
 )
 
 #logging settings
-LOG_FILENAME = 'askbot.log'
-logging.basicConfig(
-    filename=os.path.join(os.path.dirname(__file__), 'log', LOG_FILENAME),
-    level=logging.CRITICAL,
-    format='%(pathname)s TIME: %(asctime)s MSG: %(filename)s:%(funcName)s:%(lineno)d %(message)s',
-)
+# LOG_FILENAME = CONFIG.get('DEFAULT', 'log_filename')
+# logging.basicConfig(
+#     filename=LOG_FILENAME,
+#     level=logging.CRITICAL,
+#     format='%(pathname)s TIME: %(asctime)s MSG: %(filename)s:%(funcName)s:%(lineno)d %(message)s',
+# )
 
-###########################
-#
-#   this will allow running your forum with url like http://site.com/forum
-#
-#   ASKBOT_URL = 'forum/'
-#
 ASKBOT_URL = ''
 ASKBOT_TRANSLATE_URL = True
 _ = lambda v: v  #fake translation function for the login url
@@ -212,7 +269,9 @@ ALLOW_UNICODE_SLUGS = False
 ASKBOT_USE_STACKEXCHANGE_URLS = False
 
 #Celery Settings
-BROKER_TRANSPORT = "djkombu.transport.DatabaseTransport"
+BROKER_URL = CONFIG.get('DEFAULT', 'broker_url')
+BROKER_TRANSPORT = CONFIG.get('DEFAULT', 'broker_transport')
+CELERY_RESULT_BACKEND = CONFIG.get('DEFAULT', 'celery_result_backend')
 CELERY_ALWAYS_EAGER = True
 
 import djcelery
@@ -245,14 +304,14 @@ TINYMCE_DEFAULT_CONFIG = {
     'plugins': 'askbot_imageuploader,askbot_attachment',
     'convert_urls': False,
     'theme': 'advanced',
-    'content_css': STATIC_URL + 'default/media/style/tinymce/content.css',
+    'content_css': os.path.join(STATIC_URL, 'default/media/style/tinymce/content.css'),
     'force_br_newlines': True,
     'force_p_newlines': False,
     'forced_root_block': '',
-    'mode' : 'textareas',
+    'mode': 'textareas',
     'oninit': "TinyMCE.onInitHook",
     'plugins': 'askbot_imageuploader,askbot_attachment',
-    'theme_advanced_toolbar_location' : 'top',
+    'theme_advanced_toolbar_location': 'top',
     'theme_advanced_toolbar_align': 'left',
     'theme_advanced_buttons1': 'bold,italic,underline,|,bullist,numlist,|,undo,redo,|,link,unlink,askbot_imageuploader,askbot_attachment',
     'theme_advanced_buttons2': '',
@@ -265,7 +324,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'height': '250'
 }
 
-#delayed notifications, time in seconds, 15 mins by default
+# delayed notifications, time in seconds, 15 mins by default
 NOTIFICATION_DELAY_TIME = 60 * 10
 
 GROUP_MESSAGING = {
@@ -276,7 +335,7 @@ GROUP_MESSAGING = {
 ASKBOT_LANGUAGE_MODE = 'single-lang'
 
 ASKBOT_CSS_DEVEL = False
-if 'ASKBOT_CSS_DEVEL' in locals() and ASKBOT_CSS_DEVEL == True:
+if 'ASKBOT_CSS_DEVEL' in locals() and ASKBOT_CSS_DEVEL:
     COMPRESS_PRECOMPILERS = (
         ('text/less', 'lessc {infile} {outfile}'),
     )
@@ -298,7 +357,6 @@ def add_debug_toolbar():
     try:
         __import__('imp').find_module('debug_toolbar')
         INSTALLED_APPS.append('debug_toolbar')
-        INTERNAL_IPS.extend(os.environ.get('INTERNAL_IPS', '127.0.0.1').split(','))
         MIDDLEWARE_CLASSES.append('debug_toolbar.middleware.DebugToolbarMiddleware')
         TEMPLATES[1]['OPTIONS']['context_processors'].insert(
             0, 'django.template.context_processors.debug')

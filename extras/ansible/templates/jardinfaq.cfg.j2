@@ -1,0 +1,35 @@
+[DEFAULT]
+env = {{ env }}
+server_url = {{ server_url }}
+
+static_url = /static/
+static_root = /static/
+media_url = /media/
+media_root = /media/
+backup_dir = {{ backup_dir }}
+secret_key = {{ secret_key }}
+
+default_db = mysql://{{ db_user }}:{{ db_password }}@database/{{ db_name }}
+
+admins = {{ admins }}
+email_backend = django.core.mail.backends.smtp.EmailBackend
+email_host = {{ email_host|default("localhost") }}
+email_host_user = {{ email_host_user }}
+email_host_password = {{ email_host_password }}
+email_port = {{ email_port|default("25") }}
+email_use_tls = {{ email_use_tls|default("false") }}
+
+cache_backend = django_redis.cache.RedisCache
+cache_location = redis://redis:6379:1
+cache_option_client_class = django_redis.client.DefaultClient
+
+session_engine = django.contrib.sessions.backends.cache
+
+broker_url = redis://redis:6379:2
+
+recaptcha_public_key = {{ recaptcha_public_key }}
+recaptcha_private_key = {{ recaptcha_private_key }}
+recaptcha_use_ssl = {{ recaptcha_use_ssl|default("false") }}
+nocaptcha = {{ nocaptcha|default("false") }}
+
+akismet_api_key = {{ akismet_api_key }}

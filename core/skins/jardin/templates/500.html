@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Questions - JardinFAQ</title>
+        <meta name="description" content="Foire aux questions à propos de jardinage, potager et permaculture" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+        <meta name="keywords" content=",Askbot,forum,community" />
+        <meta name="referrer" content="always" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="shortcut icon" href="/static/jardin/media/images/favicon.gif?v=1" />
+        <link rel="alternate" type="application/rss+xml" title="Flux RSS de JardinFAQ" href="http://192.168.254.53:8080/feeds/rss/" />
+        <link href="/static/jardin/media/style/style.css?v=1" rel="stylesheet" type="text/css" />
+        <link href="None" rel="stylesheet" type="text/css" />
+        <link href="/static/default/media/fa-4.3.0/css/font-awesome.css?v=1" rel="stylesheet" type="text/css" />
+        <link href="/static/default/media/bootstrap/css/bootstrap.css?v=1" rel="stylesheet" type="text/css" />
+        <link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:700&amp;subset=latin-ext" rel="stylesheet" type="text/css" />
+        <link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:700&amp;subset=cyrillic-ext" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="/static/default/media/jslib/modernizr.custom.js?v=1"></script>
+    
+        <script type="text/javascript" src="/jsi18n/"></script>
+    </head>
+    <body class="two-col main-page anon lang-fr">
+     <div class="notify" style="display:none">
+      <div class="content-wrapper"> <a id="closeNotify" onclick="notify.close(true)"></a></div>
+     </div> <!-- template header.html -->
+     <div id="header" class="without-logo">
+      <div class="content-wrapper">
+       <div id="BrandToolNav"><a id="logo" href="/questions/"> <i class="fa fa-home"></i>JardinFAQ</a></div>
+       <div id="userToolsNav">
+        <a href="/account/signin/?next=/">Connexion</a>
+        <a class="help" href="/help/" title="aide">aide</a>
+       </div>
+       <div class="clean"></div>
+      </div></div> <!-- end template header.html --> <!-- template secondary_header.html -->
+      <div id="secondaryHeader">
+       <div class="content-wrapper">
+        <form action="/questions/" id="searchForm" class="scopes-True-True-False" method="get">
+         <table width="100%">
+          <tr>
+           <td width="1"><a id="navQuestion" href="/questions/" class="scope-selector on">Questions</a></td>
+           <td width="1"><a id="navTags" href="/tags/" class="scope-selector">Mots-clés (tags)</a></td>
+           <td width="1"><a id="navUsers" href="/users/" class="scope-selector">utilisateurs</a></td>
+           <td width="1"><a id="navBadges" href="/badges/" class="scope-selector">médailles</a></td>
+           <td width="*" class="search-bar">
+            <div id="searchBar" class="search-bar">
+             <input class="searchInput" type="text" autocomplete="off" value="" name="query" placeholder="search or ask your question" id="keywords" />
+             <input type="submit" value="" name="search" class="searchBtn" /><input type="button" value="X" name="reset_query" class="cancelSearchBtn" style="display: none;" />
+            </div>
+           </td>
+           <td width="1"> <a id="askButton" class="button" href="/questions/ask/">Poser votre question </a></td>
+          </tr>
+         </table>
+        </form>
+       </div>
+      </div>
+      <div class="content-wrapper">
+       <div id="ContentLeft">
+        <h1 id="questionCount" class="search-result-summary">2 questions</h1>
+       </div>
+       <!-- template footer.html -->
+       <div id="ground"> <div class="content-wrapper"> <div class="footer-links" > <a href="/about/">À propos</a> <span class="link-separator"> |</span> <a href="/faq/">FAQ</a> <span class="link-separator"> |</span> <a href="/help/" title="aide">aide</a> <!--
+            <span class="link-separator"> |</span> <a href="/privacy/">Respect de la vie privée</a> <span class="link-separator"> |</span> <a href="/terms/">terms of service</a>
+            --> <span class="link-separator"> |</span> <a 
+                
+                    href="/feedback/?next=/questions/"
+                
+            >
+                Faire une remarque
+            </a> </div> <div class="clean"></div> </div> </div> <!-- end template footer.html --> <div id="no-javascript"> <noscript class="noscript">
+        À noter : JardinFAQ nécessite javascript pour fonctionner correctement, veuillez activer javascript dans votre navigateur, <a href="https://www.google.com/support/bin/answer.py?answer=23852">voici comment</a> </noscript> <script type="text/javascript">
+        //IE fix to hide the red margin
+        var noscript = document.getElementsByTagName('noscript')[0];
+        noscript.style.padding = '0px';
+        noscript.style.backgroundColor = 'transparent';
+    </script> </div> <script type="text/javascript">
+    askbot['urls']['mark_read_message'] = '/messages/markread/';
+    askbot['urls']['get_tags_by_wildcard'] = '/get-tags-by-wildcard/';
+    askbot['urls']['get_tag_list'] = '/get-tag-list/';
+    askbot['urls']['follow_user'] = '/followit/follow/user/{{userId}}/';
+    askbot['urls']['unfollow_user'] = '/followit/unfollow/user/{{userId}}/';
+    askbot['urls']['user_signin'] = '/account/signin/';
+    askbot['urls']['getEditor'] = '/get-editor/';
+    
+    askbot['urls']['apiGetQuestions'] = '/api/get_questions/';
+    askbot['urls']['ask'] = '/questions/ask/';
+    askbot['urls']['questions'] = '/questions/';
+    askbot['settings']['groupsEnabled'] = false;
+    askbot['settings']['static_url'] = '/static/';
+    askbot['settings']['minSearchWordLength'] = 4;
+    askbot['settings']['mathjaxEnabled'] = false;
+    askbot['settings']['sharingSuffixText'] = '';
+    askbot['settings']['errorPlacement'] = 'after-label';
+    askbot['data']['maxCommentLength'] = 300;
+    askbot['settings']['editorType'] = 'markdown';
+    
+    askbot['settings']['commentsEditorType'] = 'plain-text';
+    askbot['messages']['askYourQuestion'] = 'Poser votre question';
+    askbot['messages']['questionSingular'] = 'question';
+    askbot['messages']['answerSingular'] = 'answer';
+    askbot['messages']['acceptOwnAnswer'] = 'accept or unaccept your own answer';
+    askbot['messages']['followQuestions'] = 'follow questions';
+    
+        askbot['settings']['allowedUploadFileTypes'] = [
+            "jpg", "jpeg", "gif", "bmp", "png"
+        ];
+    
+    askbot['data']['haveFlashNotifications'] = false;
+    askbot['data']['activeTab'] = 'questions';
+    askbot['settings']['csrfCookieName'] = '_csrf';
+    
+        askbot['data']['searchUrl'] = 'scope:all/sort:activity\u002Ddesc/page:1/';
+    
+</script> <script type="text/javascript" src="/static/default/media/jslib/jquery-1.7.2.min.js?v=1"></script> <script type="text/javascript" src="/static/default/media/bootstrap/js/bootstrap.js?v=1"></script> <script type='text/javascript' src="/static/default/media/jslib/timeago.js?v=1"></script> <!-- History.js --> <script type='text/javascript' src="/static/default/media/jslib/jquery.history.js?v=1"></script> <!-- Utils.js --> <script type='text/javascript' src="/static/default/media/js/utils.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/q_sutils.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/wrapped_element.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/wait_icon.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/paginator.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/limited_width_image.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/one_shot_form.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/link.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/widget.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/tipped_input.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/flash_alert.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/alert_box.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/simple_content.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/simple_control.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/post_expander.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/edit_link.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/comment_convert_link.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/delete_icon.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/modal_dialog.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/file_upload_dialog.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/text_property_editor.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/toggle.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/ajax_toggle.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/dropdown_select.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/box_item_content.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/select_box_item.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/select_box.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/group_dropdown.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/tag.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/hover_card.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/perms_hover_card.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/show_perms_trigger.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/autocompleter.js?v=1"></script> <script type='text/javascript' src="/static/default/media/js/utils/lang_nav.js?v=1"></script> <script type='text/javascript' src="/static/default/media/jslib/se_hilite.js?v=1"></script> <script type='text/javascript' src="/static/default/media/jslib/json.js?v=1"></script> <script type='text/javascript' src="/static/default/media/jslib/jquery-fieldselection.js?v=1"></script> <!-- End Utils.js --> <script type="text/javascript" src="/static/default/media/js/live_search.js?v=1"></script> <script type="text/javascript">
+    /*<![CDATA[*/
+    $('.mceStatusbar').remove();//a hack to remove the tinyMCE status bar
+    $(document).ready(function(){
+        // focus input on the search bar endcomment
+        var activeTab = askbot['data']['activeTab'];
+        if (inArray(activeTab, ['users', 'questions', 'tags', 'badges'])) {
+            var searchInput = $('#keywords');
+        } else if (activeTab === 'ask') {
+            var searchInput = $('#id_title');
+        } else {
+            var searchInput = undefined;
+            animateHashes();
+        }
+
+        if (searchInput) {
+            searchInput.focus();
+            putCursorAtEnd(searchInput);
+        }
+
+        var haveFullTextSearchTab = inArray(activeTab, ['questions', 'badges', 'ask']);
+        var haveUserProfilePage = $('body').hasClass('user-profile-page');
+        if ((haveUserProfilePage || haveFullTextSearchTab) && searchInput && searchInput.length) {
+            var search = new FullTextSearch();
+            askbot['controllers'] = askbot['controllers'] || {};
+            askbot['controllers']['fullTextSearch'] = search;
+            search.setSearchUrl(askbot['data']['searchUrl']);
+            if (activeTab === 'ask') {
+                search.setAskButtonEnabled(false);
+            }
+            search.decorate(searchInput);
+        } else if (activeTab === 'tags') {
+            var search = new TagSearch();
+            search.decorate(searchInput);
+        }
+
+        if (askbot['data']['userIsAdminOrMod']) {
+            $('body').addClass('admin');
+        }
+        if (askbot['settings']['groupsEnabled']) {
+            askbot['urls']['add_group'] = "/add-group/";
+            var group_dropdown = new GroupDropdown();
+            $('.groups-dropdown').append(group_dropdown.getElement());
+        }
+        var userRep = $('#userToolsNav .reputation');
+        if (userRep.length) {
+            var showPermsTrigger = new ShowPermsTrigger();
+            showPermsTrigger.decorate(userRep);
+        }
+    });
+    if (askbot['data']['haveFlashNotifications']) {
+        $('#validate_email_alert').click(function(){notify.close(true)})
+        notify.show();
+    }
+
+    var langNav = $('.lang-nav');
+    if (langNav.length) {
+        var nav = new LangNav();
+        nav.decorate(langNav);
+    }
+    /*]]>*/
+</script> <div class="js-templates" style="display: none;"><div class="js-tag  js-deletable-tag"><a
+            class="js-tag-name"
+            rel="tag"
+            
+            href="/questions/scope:all/sort:activity-desc/tags:dummy/page:1/"
+            
+            data-tag-name="dummy"
+        >dummy</a><span class="js-delete-icon">&times;</span></div></div> <script type="text/javascript">
+        
+        askbot['settings']['showSortByRelevance'] = false;
+    </script> <script type="text/javascript">
+    /*<![CDATA[*/
+    $(document).ready(function(){
+        /*var on_tab = '#nav_questions';
+        $(on_tab).attr('className','on');*/
+        Hilite.exact = false;
+        Hilite.elementid = "question-list";
+        Hilite.debug_referrer = location.href;
+    });
+
+    askbot['urls']['mark_interesting_tag'] = '/mark-tag/interesting/';
+    askbot['urls']['mark_ignored_tag'] = '/mark-tag/ignored/';
+    askbot['urls']['mark_subscribed_tag'] = '/mark-tag/subscribed/';
+    askbot['urls']['unmark_tag'] = '/unmark-tag/';
+    askbot['urls']['set_tag_filter_strategy'] = '/set-tag-filter-strategy/';
+    askbot['settings']['tag_editor'] = '{\u0022tag_forbidden_first_chars\u0022: \u0022#\u0022, \u0022max_tag_length\u0022: 20, \u0022force_lowercase_tags\u0022: false, \u0022max_tags_per_post\u0022: 5, \u0022messages\u0022: {\u0022wrong_first_char\u0022: \u0022# is not a valid character at the beginning of tags, use only letters and numbers\u0022, \u0022wrong_chars\u0022: \u0022veuilez utiliser des lettres, nombres et caract\u005Cu00e8res \u005C\u0022\u002D+.#\u005C\u0022\u0022, \u0022required\u0022: \u0022Les mots\u002Dcl\u005Cu00e9s sont obligatoires.\u0022}, \u0022tags_are_required\u0022: false}';
+
+    if (Modernizr.history) {
+        // history management works!
+    } else {
+        // no history support :(
+        //hash = unescape(window.location.hash).replace('#','').split("?")[0]
+        
+        var hash = History.unescapeHash(window.location.hash).replace('#','').split("?")[0];
+        var questions_url = askbot['urls']['questions'];
+        if (hash.substring(0, questions_url.length) === questions_url) {
+            var url = hash;
+        } else {
+            var url = questions_url + hash;
+        }
+        if (hash !== '' && hash !== undefined && url !== undefined){
+            
+            window.location = document.location.protocol + '//' + window.location.host + url;
+        }
+    }
+    /*]]>*/
+</script> <script type="text/javascript" src="/static/default/media/jslib/editor.js?v=1"></script> <script type="text/javascript" src="/static/default/media/js/tag_selector.js?v=1"></script> <script type="text/javascript">
+            for (url_name in askbot['urls']){
+                askbot['urls'][url_name] = cleanUrl(askbot['urls'][url_name]);
+            }
+        </script>
+    </body>
+</html>

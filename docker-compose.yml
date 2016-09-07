@@ -1,0 +1,37 @@
+database:
+  image: mariadb
+  volumes:
+    - /opt/jardinfaq/dbdata/:/var/lib/mysql:rw
+    - /opt/jardinfaq/my.cnf/etc/mysql/my.cnf:ro
+
+redis:
+  image: redis
+
+mta:
+  image: tozd/postfix
+
+middleware:
+  build: .
+  command: uwsgi --ini /conf/uwsgi.ini
+  ports:
+    - "30310:3031"
+  links:
+    - database
+    - redis
+    - mta
+  volumes:
+    - /var/www/jardinfaq/static/:/static/
+    - /var/www/jardinfaq/media/:/media/
+    - /opt/jardinfaq/conf/:/conf/:ro
+
+celery:
+  build: .
+  command: celery -A celeryapp worker -l info
+  links:
+    - database
+    - redis
+    - mta
+  volumes:
+    - /var/www/jardinfaq/static/:/static/
+    - /var/www/jardinfaq/media/:/media/
+    - /opt/jardinfaq/conf/:/conf/:ro

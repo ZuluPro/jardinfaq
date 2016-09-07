@@ -1,0 +1,92 @@
+---
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  handlers:
+    - include: handlers.yml
+
+  tasks:
+  # Setup frontend
+  - name: Setup jardinfaq Nginx configuration
+    template: src=templates/nginx-site.conf.j2 dest=/etc/nginx/sites-available/jardinfaq.conf
+    notify: reload nginx
+    remote_user: root
+  
+  - name: Enable jardinfaq Nginx configuration
+    file: src=/etc/nginx/sites-available/jardinfaq.conf dest=/etc/nginx/sites-enabled/jardinfaq.conf state=link
+    notify: restart nginx
+    remote_user: root
+  
+  - name: Disable server_tokens
+    lineinfile: dest=/etc/nginx/nginx.conf regexp=server_tokens
+                line="        server_tokens off;" 
+    remote_user: root
+  
+  # Prepare
+  - name: Create jardinfaq data directory
+    file: path=/opt/jardinfaq/ state=directory
+    remote_user: root
+
+  - name: Download code
+    git: repo=git://github.com/ZuluPro/jardinfaq
+         dest={{ jardinfaq_src_dir }} version={{ jardinfaq_version }}
+    remote_user: root
+    register: git_pull_src
+  
+  - name: Create database data directory
+    file: path={{ db_datadir }} state=directory
+    remote_user: root
+  
+  - name: Create database configuration
+    template: src=templates/my.cnf.j2 dest={{ db_conf_file }} mode=0644 owner=root
+    remote_user: root
+  
+  - name: Create jardinfaq configuration directory
+    file: path={{ jardinfaq_conf_dir }} state=directory
+    remote_user: root
+
+  - name: Create jardinfaq configuration
+    template: src=templates/jardinfaq.cfg.j2 dest={{ jardinfaq_conf_dir }}jardinfaq.cfg mode=0644 owner=root
+  
+  - name: Create jardinfaq uWSGI configuration
+    template: src=templates/uwsgi.ini.j2 dest={{ jardinfaq_conf_dir }}uwsgi.ini
+  
+  - name: Create static root directory
+    file: dest="{{ static_root }}" state=directory mode=0740
+  
+  - name: Create media root directory
+    file: dest="{{ media_root }}" state=directory mode=0755
+  
+  - name: Create backup directory
+    file: dest="{{ backup_dir }}" state=directory mode=0755
+
+  # Docker
+  - name: Build images
+    command: "docker-compose build"
+    args:
+      chdir: "{{ jardinfaq_src_dir }}"
+    when: git_pull_src.changed
+
+  - name: Launch migrations
+    command: "docker-compose run -d --rm middleware python manage.py migrate --noinput"
+    args:
+      chdir: "{{ jardinfaq_src_dir }}"
+
+  - name: Collect static
+    command: "docker-compose run -d --rm middleware python manage.py collectstatc --noinput"
+    args:
+      chdir: "{{ jardinfaq_src_dir }}"
+  
+  # - name: Generate favicon
+  #   command: "docker-compose run middleware python manage.py generate_favicon file://img/avatar.png --noinput"
+  #   args:
+  #     chdir: "{{ jardinfaq_src_dir }}"
+  
+  - name: Add robots.txt
+    copy: src=files/robots.txt dest=/var/www/jardinfaq/robots.txt mode=660 owner=www-data group=www-data
+
+  - name: Up platform
+    command: "docker-compose up -d"
+    args:
+      chdir: "{{ jardinfaq_src_dir }}"
