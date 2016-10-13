@@ -1,0 +1,48 @@
+---
+- name: Check SSH public key
+  local_action: command test -e {{ ssh_public_key_file }}
+  register: ssh_public_key_test
+  ignore_errors: yes
+
+- name: Git pull jardinfaq
+  git: repo=https://github.com/ZuluPro/jardinfaq.git
+       dest={{ jardinfaq_src_dir }} version={{ jardinfaq_version }}
+  register: git_pull_jardinfaq
+
+- name: Setup jardinfaq configuration
+  template: src=jardinfaq.cfg.j2 dest={{ jardinfaq_src_dir }}jardinfaq.cfg mode=0644 owner=root
+
+
+- name: Create backup directory
+  file: dest="{{ backup_dir }}" state=directory mode=0740
+
+# - name: Generate favicon
+#   command: "{{ jardinfaq_venv }}/bin/jardinfaq generate_favicon file://img/avatar.png --noinput"
+# 
+# - name: Generate admin favicon
+#   command: "{{ jardinfaq_venv }}/bin/jardinfaq generate_favicon file://img/avatar-grey.png --prefix=admin/ --noinput"
+
+- name: Setup jardinfaq uWSGI configuration
+  template: src=uwsgi.ini.j2 dest={{ jardinfaq_src_dir }}uwsgi.ini
+
+- name: Enable jardinfaq uWSGI configuration
+  file: src=/etc/uwsgi/apps-available/jardinfaq.ini dest=/etc/uwsgi/apps-enabled/jardinfaq.ini state=link
+
+# Nginx
+- include: ../../common/tasks/install_nginx.yml
+- include: ../../common/tasks/install_ssl_key.yml
+
+- name: Setup media Nginx configuration
+  template: src=nginx-media.conf.j2 dest=/etc/nginx/sites-available/media-jardinfaq.conf
+  notify: reload nginx
+
+- name: Enable jardinfaq Nginx configuration
+  file: src=/etc/nginx/sites-available/media-jardinfaq.conf dest=/etc/nginx/sites-enabled/media-jardinfaq.conf state=link
+  notify: restart nginx
+
+- name: Create www directory
+  file: dest="/var/www/" state=directory owner=www-data group=www-data
+        mode=0744
+
+- name: Add symlink for media files
+  file: src={{ media_root }} dest=/var/www/media state=link owner=www-data group=www-data

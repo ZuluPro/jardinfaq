@@ -106,4 +106,4 @@
 - name: Create auto-signed SSL key and cert
   command: openssl req -new -x509 -subj "/C=FR/ST=IDF/L=Paris/O=IT/CN={{ server_url }}" -nodes -days 3650 -newkey rsa:2048 -keyout {{ ssl_key_addr }} -out {{ ssl_cert_addr }}
   when: not ssl_key_stat.stat.exists
-  notify: reload nginx
+  notify: restart nginx

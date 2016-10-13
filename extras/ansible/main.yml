@@ -7,6 +7,7 @@
     - include: handlers.yml
 
   tasks:
+  - include: install_system.yml
   # Setup frontend
   - name: Setup jardinfaq Nginx configuration
     template: src=templates/nginx-site.conf.j2 dest=/etc/nginx/sites-available/jardinfaq.conf
@@ -31,12 +32,14 @@
   - name: Download code
     git: repo=git://github.com/ZuluPro/jardinfaq
          dest={{ jardinfaq_src_dir }} version={{ jardinfaq_version }}
+         accept_hostkey=True
     remote_user: root
     register: git_pull_src
   
   - name: Create database data directory
     file: path={{ db_datadir }} state=directory
     remote_user: root
+    register: db_directory
   
   - name: Create database configuration
     template: src=templates/my.cnf.j2 dest={{ db_conf_file }} mode=0644 owner=root
@@ -52,11 +55,14 @@
   - name: Create jardinfaq uWSGI configuration
     template: src=templates/uwsgi.ini.j2 dest={{ jardinfaq_conf_dir }}uwsgi.ini
   
+  - name: Add robots.txt
+    copy: src=files/robots.txt dest=/var/www/jardinfaq/robots.txt mode=660 owner=www-data group=www-data
+
   - name: Create static root directory
-    file: dest="{{ static_root }}" state=directory mode=0740
+    file: dest="{{ static_root }}" state=directory mode=0740 owner=www-data group=www-data
   
   - name: Create media root directory
-    file: dest="{{ media_root }}" state=directory mode=0755
+    file: dest="{{ media_root }}" state=directory mode=0755  owner=www-data group=www-data
   
   - name: Create backup directory
     file: dest="{{ backup_dir }}" state=directory mode=0755
@@ -67,26 +73,34 @@
     args:
       chdir: "{{ jardinfaq_src_dir }}"
     when: git_pull_src.changed
+    remote_user: root
+
+  - name: Create database
+    command: "docker-compose run -d --rm -e MYSQL_ROOT_PASSWORD={{ root_db_password }} -e MYSQL_DATABASE={{ db_name }} -e MYSQL_USER={{ db_user }} -e MYSQL_PASSWORD={{ db_password }} database"
+    args:
+      chdir: "{{ jardinfaq_src_dir }}"
+    remote_user: root
 
   - name: Launch migrations
     command: "docker-compose run -d --rm middleware python manage.py migrate --noinput"
     args:
       chdir: "{{ jardinfaq_src_dir }}"
+    remote_user: root
 
   - name: Collect static
     command: "docker-compose run -d --rm middleware python manage.py collectstatc --noinput"
     args:
       chdir: "{{ jardinfaq_src_dir }}"
+    remote_user: root
   
   # - name: Generate favicon
   #   command: "docker-compose run middleware python manage.py generate_favicon file://img/avatar.png --noinput"
   #   args:
   #     chdir: "{{ jardinfaq_src_dir }}"
   
-  - name: Add robots.txt
-    copy: src=files/robots.txt dest=/var/www/jardinfaq/robots.txt mode=660 owner=www-data group=www-data
 
   - name: Up platform
     command: "docker-compose up -d"
     args:
       chdir: "{{ jardinfaq_src_dir }}"
+    remote_user: root
