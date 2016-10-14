@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from askbot.models.post import Post, PostManager
+from askbot.models.question import Thread
 from askbot import signals
 from core.facebook_sync import conf
 from askbot.conf import settings as askbot_settings
@@ -11,6 +12,18 @@ from askbot.conf import settings as askbot_settings
 from core.facebook_sync import utils
 
 LANGUAGE = 'fr'
+
+
+def post_get_facebook_post(self):
+    try:
+        if isinstance(self, Thread):
+            return self.get_post_data()[0].facebookpost
+        return self.facebookpost
+    except Post.DoesNotExist:
+        return
+
+Post.add_to_class('get_facebook_post', post_get_facebook_post)
+Thread.add_to_class('get_facebook_post', post_get_facebook_post)
 
 
 class FacebookPostManager(PostManager):
