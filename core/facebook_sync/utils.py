@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import facebook
+from faker import Factory
 
 from django.utils import timezone
 from django.contrib.auth import get_user_model
@@ -10,8 +11,8 @@ from askbot.models import Tag
 from askbot.deps.django_authopenid.models import UserAssociation
 
 
-FEEDS_URL = '%s/feed?fields=full_picture,link,message,from,likes,reactions,type,created_time,updated_time,message_tags'
-POST_URL = '%s?fields=type,message,from,likes,created_time,attachments,comments{message,from,like_count,created_time,comment_count}'
+FEEDS_URL = '%s/feed?fields=full_picture,link,message,from,likes,reactions,type,created_time,updated_time,message_tags,permalink_url'
+POST_URL = '%s?fields=type,message,from,likes,created_time,attachments,link,permalink_url,comments{message,from,like_count,created_time,comment_count,link}'
 COMMENT_URL = '%s?fields=message,from,likes,created_time,comments{message,from,like_count,created_time,comment_count}'
 
 
@@ -31,18 +32,29 @@ def get_facebook_user():
 
 
 def guess_user(fb_obj):
-    fb_user = UserAssociation.objects\
+    User = get_user_model()
+
+    fb_asso = UserAssociation.objects\
         .filter(provider_name='facebook', openid_url=fb_obj['from']['id'])
-    if fb_user.exists():
-        user = fb_user.first().user
+
+    # Create fake name to preserve anonymous
+    fake = Factory.create('fr')
+    fake.seed(fb_obj['from']['id'])
+    fake_username = fake.user_name()
+
+    if fb_asso.exists():
+        user = fb_asso.first().user
+    elif User.objects.filter(username=fake_username).exists():
+        user = User.objects.filter(username=fake_username).first()
     else:
-        User = get_user_model()
-        user = User.objects.get(username='Facebook')
+        user = User.objects.create(username=fake_username)
     return user
 
 
 def guess_title(fb_obj):
-    return fb_obj['message'].splitlines()[0]
+    text = fb_obj['message']
+    text = text.splitlines()[0][:300]
+    return text.capitalize()
 
 
 def guess_tags(fb_obj):
@@ -63,7 +75,7 @@ def guess_text(fb_obj):
             if 'subattachments' in fb_image:
                 for fb_image_ in fb_image['subattachments']['data']:
                     image_url = fb_image_['media']['image']['src']
-                    text += "\n![](%s)" % image_url
+                    text += "\n\n![](%s)" % image_url
             else:
                 image_url = fb_image['media']['image']['src']
                 text += "\n![](%s)" % image_url
@@ -77,3 +89,6 @@ def guess_timestamp(fb_obj):
     timestamp = current_tz.localize(timestamp)
     return timestamp
 
+
+def guess_url(fb_obj):
+    return fb_obj['permalink_url']

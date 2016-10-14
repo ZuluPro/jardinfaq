@@ -33,8 +33,8 @@ class FacebookPostManager(PostManager):
                                  for f in question._meta.fields])
         fb_question_data.update({
             'facebook_id': fb_obj['id'],
-            'picture_url': fb_obj.get('full_picture', 'https://foo'),
-            'facebook_url': fb_obj.get('link', 'https://foo'),
+            'picture_url': fb_obj.get('full_picture', ''),
+            'facebook_url': utils.guess_url(fb_obj),
             'facebook_author_id': fb_obj['from']['id'],
             'likes': len(fb_obj.get('likes', {'data': []})),
         })
@@ -61,8 +61,8 @@ class FacebookPostManager(PostManager):
                                for f in answer._meta.fields])
         fb_answer_data.update({
             'facebook_id': fb_obj['id'],
-            'picture_url': fb_obj.get('full_picture', 'https://foo'),
-            'facebook_url': fb_obj.get('link', 'https://foo'),
+            'picture_url': fb_obj.get('full_picture', ''),
+            'facebook_url': fb_obj.get('link', ''),
             'facebook_author_id': fb_obj['from']['id'],
             'likes': len(fb_obj.get('likes', {'data': []})),
         })
@@ -86,8 +86,8 @@ class FacebookPostManager(PostManager):
                                 for f in comment._meta.fields])
         fb_comment_data.update({
             'facebook_id': fb_obj['id'],
-            'picture_url': fb_obj.get('full_picture', 'https://foo'),
-            'facebook_url': fb_obj.get('link', 'https://foo'),
+            'picture_url': fb_obj.get('full_picture', ''),
+            'facebook_url': fb_obj.get('link', ''),
             'facebook_author_id': fb_obj['from']['id'],
             'likes': len(fb_obj.get('likes', {'data': []})),
         })
@@ -122,6 +122,7 @@ class FacebookPostManager(PostManager):
                 return
             question = self.create_question(fb_question)
         question.sync()
+        return question
 
 
 class FacebookPost(Post):
@@ -137,6 +138,28 @@ class FacebookPost(Post):
         app_label = 'facebook_sync'
         verbose_name = _("Facebook post")
         verbose_name_plural = _("Facebook posts")
+
+    def get_facebook_url(self):
+        if self.post_type == 'question':
+            return self.facebook_url
+        if self.post_type == 'answer':
+            return "%(question_id)s?comment_id=%(comment_id)s" % {
+                'question_id': self.get_parent_post().facebookpost.facebook_url,
+                'comment_id': self.facebook_id,
+            }
+        return "%(question_id)s?comment_id=%(comment_id)s" % {
+            'question_id': self.get_parent_post().get_parent_post().facebookpost.facebook_url,
+            'comment_id': self.facebook_id,
+        }
+
+    def get_facebook_link(self, text=None):
+        url = self.get_facebook_url()
+        return '<a target="blank" href="%(url)s">%(text)s</a>' % {
+            'url': url,
+            'text': text or url
+        }
+    get_facebook_link.allow_tags = True
+    get_facebook_link.short_description = _("Facebook link")
 
     def sync(self):
         if self.post_type != 'question':
