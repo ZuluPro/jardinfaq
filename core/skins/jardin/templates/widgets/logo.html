@@ -1,4 +1,4 @@
 <a id="logo" href="{% if settings.LOGO_DESTINATION_URL %}{{ settings.LOGO_DESTINATION_URL }}{% else %}{% url questions %}{% endif %}">
- <img src="{{ settings.SITE_LOGO_URL|media }}" alt="{% trans site=settings.APP_SHORT_NAME %}{{site}} logo{% endtrans %}"/>
- {{ settings.APP_SHORT_NAME }}
+ <img src="{{ 'images/jardinfaq_logo.png'|media }}" alt="{% trans site=settings.APP_SHORT_NAME %}{{site}} logo{% endtrans %}"/>
+ {# settings.APP_SHORT_NAME #}
 </a>

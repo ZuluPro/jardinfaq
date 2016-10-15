@@ -1,24 +1,6 @@
 <!-- template header.html -->
 {% import "macros.html" as macros %}
-<div id="header" class="{% if settings.SHOW_LOGO %}with-logo{% else %}without-logo{% endif %}">
-    <div class="content-wrapper">
-        <div id="BrandToolNav">
-           {% if settings.SHOW_LOGO %}
-            {% include "widgets/logo.html" %}
-           {% else %}
-            <a id="logo" href="{% url questions %}">
-             <i class="fa fa-home"></i>{{ settings.APP_SHORT_NAME }}
-            </a>
-           {% endif %}
-        </div>
-        <div id="userToolsNav">
-            {% include "widgets/user_navigation.html" %}
-            {% if settings.MULTILINGUAL %}
-                {% include "widgets/language_nav.html" %}
-            {% endif %}
-        </div>
-        <div class="clean"></div>
-    </div>
+<div id="header">
     {% if settings.READ_ONLY_MODE_ENABLED %}
         <div class="content-wrapper system-messages">
             {{ settings.READ_ONLY_MESSAGE }}

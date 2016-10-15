@@ -708,7 +708,7 @@ for the purposes of the AJAX comment editor #}
 {%- macro inbox_link(user) -%}
     {% if user.new_response_count %}
     <a id='ab-responses' href="{{user.get_absolute_url()}}?sort=inbox&section=forum" alt="">
-        {{ user.new_response_count }}
+        <i class="fa fa-bell" aria-hidden="true"></i>
     </a>
     {% endif %}
 {%- endmacro -%}

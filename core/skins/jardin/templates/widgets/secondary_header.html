@@ -1,3 +1,4 @@
+{% import "macros.html" as macros %}
 <!-- template secondary_header.html -->
 <div id="secondaryHeader">
     <div class="content-wrapper">
@@ -26,40 +27,63 @@
                 We had hard time making this layout work without tables.
                 Please suggest if there is a better way.
             #}
-        <table width="100%">
-         <tr>
-          <td width="1">
-           <a id="navQuestion" href="{% url questions %}" class="scope-selector{% if active_tab == 'questions' %} on{% endif %}">{% trans %}Questions{% endtrans %}</a>
-          </td>
-
-          <td width="1">
-           <a id="navTags" href="{% url tags %}" class="scope-selector{% if active_tab == 'tags' %} on{% endif %}">{% trans %}tags{% endtrans %}</a>
-          </td>
-          <td width="1">
-           {% if settings.GROUPS_ENABLED %}
-            <a id="navGroups" class="scope-selector {% if active_tab == 'groups' %} on{% endif %}" href="{% url groups %}">
-              {% trans %}people & groups{% endtrans %}
-            </a>
-            </span>
-            {% else %}
-            <a id="navUsers" href="{% url users %}" class="scope-selector{% if active_tab == 'users' %} on{% endif %}">{% trans %}users{% endtrans %}</a>
-            {% endif %}
-          </td>
-
-          {% if settings.BADGES_MODE == 'public' %}
-          <td width="1">
-           <a id="navBadges" href="{% url badges %}" class="scope-selector{% if active_tab == 'badges' %} on{% endif %}">{% trans %}badges{% endtrans %}</a>
-          </td>
-          {% endif %}
-
-          <td width="*" class="search-bar">{% include "widgets/search_bar.html" %}</td> 
-          {% if settings.ASK_BUTTON_ENABLED %}
-          <td width="1">
-              {% include "widgets/ask_button.html" %}            
-          </td>
-          {% endif %}
-         </tr>
-        </table>
+        <div class="row-fluid">
+          <div class="span3">
+              {% include "widgets/logo.html" %}
+          </div>
+          <div class="span7">
+              {% include "widgets/search_bar.html" %}
+          </div>
+          <div class="span2">
+              {% include "widgets/user_navigation.html" %}
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+              <div class="navbar">
+                <div class="navbar-inner">
+                  <div class="container">
+                    <ul class="nav">
+                     <li class="scope-selector {% if active_tab == 'questions' %}active on{% endif %}">
+                       <a id="navQuestion" href="{% url questions %}" class="scope-selector{% if active_tab == 'questions' %} on{% endif %}">{% trans %}Questions{% endtrans %}</a>
+                     </li>
+                     <li class="scope-selector {% if active_tab == 'tags' %}active on{% endif %}">
+                       <a id="navTags" href="{% url tags %}" class="scope-selector{% if active_tab == 'tags' %} on{% endif %}">{% trans %}tags{% endtrans %}</a>
+                     </li>
+                     {% if settings.GROUPS_ENABLED %}
+                     <li class="scope-selector {% if active_tab == 'groups' %}active on{% endif %}">
+                      <a id="navGroups" class="scope-selector {% if active_tab == 'groups' %} on{% endif %}" href="{% url groups %}">
+                        {% trans %}people & groups{% endtrans %}
+                      </a>
+                     </li>
+                     {% else %}
+                     <li class="scope-selector {% if active_tab == 'users' %}active on{% endif %}">
+                      <a id="navUsers" href="{% url users %}" class="scope-selector{% if active_tab == 'users' %} on{% endif %}">{% trans %}Users{% endtrans %}</a>
+                     </li>
+                     {% endif %}
+                     {% if settings.BADGES_MODE == 'public' %}
+                     <li class="scope-selector {% if active_tab == 'badges' %}active on{% endif %}">
+                      <a id="navBadges" href="{% url badges %}" class="scope-selector{% if active_tab == 'badges' %} on{% endif %}">{% trans %}Badges{% endtrans %}</a>
+                     </li>
+                     {% endif %}
+                    </ul>
+                    <ul class="nav">
+                     <li class="scope-selector">
+                      <a class="help" href="{% url "help" %}" title="{% trans %}Help{% endtrans %}">{% trans %}help{% endtrans %}</a>
+                     </li>
+                    </ul>
+                    <ul class="nav pull-right">
+                     {% if settings.ASK_BUTTON_ENABLED %}
+                     <li>
+                      {% include "widgets/ask_button.html" %}            
+                     </li>
+                     {% endif %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
     </form>
 </div>
 </div>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.utils.translation import ugettext as _
 from django.contrib import messages
 
@@ -34,9 +34,12 @@ class FacebookPostAdmin(PostAdmin.__class__):
         if request.method == 'GET':
             return super(FacebookPostAdmin, self).add_view(request, form_url, extra_context)
         try:
-            models.FacebookPost.objects.import_question(request.POST['facebook_id'])
+            question = models.FacebookPost.objects.import_question(request.POST['facebook_id'])
             return redirect("/admin/facebook_sync/facebookpost/")
+            return render(request, '/admin/facebook_post_review.html', {
+                'question': question,
+                'answers': question.answers.all(),
+            })
         except Exception as err:
-            raise
             self.message_user(request, str(err), messages.ERROR)
             return redirect("/admin/facebook_sync/facebookpost/add/")

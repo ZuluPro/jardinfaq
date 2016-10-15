@@ -49,7 +49,7 @@ class FacebookPostManager(PostManager):
             'picture_url': fb_obj.get('full_picture', ''),
             'facebook_url': utils.guess_url(fb_obj),
             'facebook_author_id': fb_obj['from']['id'],
-            'likes': len(fb_obj.get('likes', {'data': []})),
+            'likes': len(fb_obj.get('likes', {'data': []})['data']),
         })
         fb_question = self.create(**fb_question_data)
         signals.new_question_posted.send(None,
@@ -77,7 +77,7 @@ class FacebookPostManager(PostManager):
             'picture_url': fb_obj.get('full_picture', ''),
             'facebook_url': fb_obj.get('link', ''),
             'facebook_author_id': fb_obj['from']['id'],
-            'likes': len(fb_obj.get('likes', {'data': []})),
+            'likes': len(fb_obj.get('likes', {'data': []})['data']),
         })
         fb_answer = self.create(**fb_answer_data)
         signals.new_answer_posted.send(None,
@@ -102,7 +102,7 @@ class FacebookPostManager(PostManager):
             'picture_url': fb_obj.get('full_picture', ''),
             'facebook_url': fb_obj.get('link', ''),
             'facebook_author_id': fb_obj['from']['id'],
-            'likes': len(fb_obj.get('likes', {'data': []})),
+            'likes': len(fb_obj.get('likes', {'data': []})['data']),
         })
         fb_comment = self.create(**fb_comment_data)
         signals.new_comment_posted.send(None,
@@ -155,13 +155,8 @@ class FacebookPost(Post):
     def get_facebook_url(self):
         if self.post_type == 'question':
             return self.facebook_url
-        if self.post_type == 'answer':
-            return "%(question_id)s?comment_id=%(comment_id)s" % {
-                'question_id': self.get_parent_post().facebookpost.facebook_url,
-                'comment_id': self.facebook_id,
-            }
-        return "%(question_id)s?comment_id=%(comment_id)s" % {
-            'question_id': self.get_parent_post().get_parent_post().facebookpost.facebook_url,
+        return "%(question_url)s?comment_id=%(comment_id)s" % {
+            'question_url': self.get_parent_post_chain()[-1].facebookpost.facebook_url,
             'comment_id': self.facebook_id,
         }
 
