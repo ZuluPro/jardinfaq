@@ -4,7 +4,7 @@
 <link href="{{ 'style/home.css'|media }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
-{% block body_class %}one-col home{% endblock %}
+{% block body_class %}one-col wide home{% endblock %}
 {% block title %}{% spaceless %}{% trans %}Home{% endtrans %}{% endspaceless %}{% endblock %}
 
 {% block content %}
@@ -44,7 +44,7 @@
 <div id="go" class="splash">
     <div>
         <h1><a class="big-btn" href="{% url "questions" %}">{% trans %}Join us{% endtrans %}</a></h1>
-        <h2>{% trans %}And{% endtrans %}</h2>
+        <h1>{% trans %}And{% endtrans %}</h1>
         <h1>{% trans %}Enjoy our community{% endtrans %}</h1>
     </div>
 </div>

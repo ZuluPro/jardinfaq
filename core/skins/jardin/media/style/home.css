@@ -1,19 +1,19 @@
-body.home {
-  background: #728e5b;
-}
 
-body.home > .content-wrapper {
+body.wide > .content-wrapper {
   width: 100%;
+}
+body.wide #ContentFull {
+  width: 100%;
+  padding-bottom: 0px;
 }
 
 body.home > #secondaryHeader {
   background: none;
 }
 
-body.home #ContentFull {
-  width: 100%;
+body.home {
+  background: #728e5b;
 }
-
 body.home #secondaryHeader .navbar-inner {
   background-color: #79a655 !important;
   background-image: -moz-linear-gradient(top, #79a655, #79a655);
@@ -128,4 +128,29 @@ a.big-btn {
 a.big-btn:hover {
   color: #c1ceb5;
   text-decoration: none;
+}
+
+#logout.splash {
+  background: url(/static/jardin/media/images/jardinfaq/poulet.jpg?v=1);
+  background-size: cover;
+}
+#logout.splash h2 {
+  font-size: 40px;
+  line-height: 40px;
+  color: #EEE;
+}
+#logout.splash h2 a {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #b6c6a9;
+}
+#logout.splash h2 a:hover {
+  text-decoration: none;
+  color: #4e6050;
+}
+body.logout {
+  background: #b7c5e1;
+}
+body.logout #secondaryHeader {
+  background-color: #b7c5e1 !important;
 }

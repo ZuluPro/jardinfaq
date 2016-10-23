@@ -1,0 +1,16 @@
+{% extends "one_column_body.html" %}
+<!-- template logout.html -->
+{% block body_class %}one-col wide logout{% endblock %}
+{% block title %}{% spaceless %}{% trans %}Logout{% endtrans %}{% endspaceless %}{% endblock %}
+
+{% block before_css %}
+<link href="{{ 'style/home.css'|media }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<div id="logout" class="splash">
+<h1>{% trans %}You have successfully logged out{% endtrans %}</h1>
+<h2>{% trans facebook_page=settings.FACEBOOK_PAGE %}Don't hesitate to take a look at our <a href="//facebook.com/{{ facebook_page }}">Facebook page{% endtrans %}</a></h2>
+</div>
+{% endblock %}
+<!-- end logout.html -->
