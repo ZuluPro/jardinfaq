@@ -48,7 +48,7 @@
                        <a id="navQuestion" href="{% url questions %}" class="scope-selector{% if active_tab == 'questions' %} on{% endif %}">{% trans %}Questions{% endtrans %}</a>
                      </li>
                      <li class="scope-selector {% if active_tab == 'tags' %}active on{% endif %}">
-                       <a id="navTags" href="{% url tags %}" class="scope-selector{% if active_tab == 'tags' %} on{% endif %}">{% trans %}tags{% endtrans %}</a>
+                       <a id="navTags" href="{% url tags %}" class="scope-selector{% if active_tab == 'tags' %} on{% endif %}">{% trans %}Tags{% endtrans %}</a>
                      </li>
                      {% if settings.GROUPS_ENABLED %}
                      <li class="scope-selector {% if active_tab == 'groups' %}active on{% endif %}">
@@ -69,7 +69,7 @@
                     </ul>
                     <ul class="nav">
                      <li class="scope-selector">
-                      <a class="help" href="{% url "help" %}" title="{% trans %}Help{% endtrans %}">{% trans %}help{% endtrans %}</a>
+                      <a class="help" href="{% url "help" %}" title="{% trans %}Help{% endtrans %}">{% trans %}Help{% endtrans %}</a>
                      </li>
                     </ul>
                     <ul class="nav pull-right">

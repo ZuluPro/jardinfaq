@@ -615,7 +615,6 @@ body.user-messages {
 }
 #secondaryHeader {
   background: #fffbec;
-  border-top: #fcfcfc 1px solid;
   margin-bottom: 10px;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
   box-sizing: border-box;
@@ -1482,6 +1481,15 @@ ul#searchTags {
   text-decoration: underline;
   color: #1b79bd;
 }
+.pager .page a,
+.pager .paginator .prev a,
+.pager .paginator .next a {
+  background-color: #e3efe0 !important;
+}
+.pager .paginator .curr a {
+  background: #8ebcc7 !important;
+}
+
 .pager {
   margin: 10px 0;
 }

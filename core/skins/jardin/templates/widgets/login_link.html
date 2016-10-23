@@ -16,6 +16,6 @@
         />
     </form>
 {% else %}
-    <a class="login-link" href="{{ settings.LOGIN_URL }}?next={{ request.path|clean_login_url|escape }}"
+    <a class="login-link" href="{{ settings.LOGIN_URL }}?next={% block next_login %}{{ request.path|clean_login_url|escape }}{% endblock %}"
     >{% trans %}Sign in{% endtrans %}</a>
 {% endif %}

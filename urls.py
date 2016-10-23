@@ -22,6 +22,7 @@ if getattr(settings, 'ASKBOT_MULTILINGUAL', False) == True:
     )
 else:
     urlpatterns = patterns('',
+        url(r'^$', 'core.views.home', name="home"),
         (r'%s' % settings.ASKBOT_URL, include('askbot.urls'))
     )
 

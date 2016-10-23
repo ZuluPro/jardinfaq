@@ -1,0 +1,477 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 23:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: skins/jardin/templates/home.html:8
+msgid "Home"
+msgstr "Acceuil"
+
+#: skins/jardin/templates/home.html:13
+#, python-format
+msgid "Welcome to %(app_name)s"
+msgstr "Bienvenue sur %(app_name)s"
+
+#: skins/jardin/templates/home.html:14
+#, python-format
+msgid ""
+"<b>%(app_name)s</b> is question and answer website for gardening enthusiast. "
+"It's built by a community of horticulturist, permaculturist and nature "
+"lovers."
+msgstr ""
+"<b>%(app_name)s est un site de questions/réponses pour les passionnés du "
+"jardin. Il est construit par une communauté d'horticulturistes, "
+"permaculteurs et amoureux de la nature."
+
+#: skins/jardin/templates/home.html:19
+msgid "Ask questions about:"
+msgstr "Posez des questions à propos de:"
+
+#: skins/jardin/templates/home.html:40
+msgid "Or answer to questions"
+msgstr "Ou répondez aux questions"
+
+#: skins/jardin/templates/home.html:41
+msgid "And earn badges and points"
+msgstr "Et gagner des médailles et des points"
+
+#: skins/jardin/templates/home.html:46
+msgid "Join us"
+msgstr "Rejoignez-nous"
+
+#: skins/jardin/templates/home.html:47
+msgid "And"
+msgstr "Et"
+
+#: skins/jardin/templates/home.html:48
+msgid "Enjoy our community"
+msgstr "Prenez plaisir dans notre communauté"
+
+#: skins/jardin/templates/macros.html:5
+#, python-format
+msgid "Share this content on %(site)s"
+msgstr "Partager ce conteny sur %(site)s"
+
+#: skins/jardin/templates/macros.html:48
+msgid "current number of votes"
+msgstr "Nombre actuel de votes"
+
+#: skins/jardin/templates/macros.html:61
+msgid "anonymous user"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:80
+msgid "posted"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:86
+msgid "this post is marked as community wiki"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:90
+#, python-format
+msgid ""
+"This post is a wiki.\n"
+"        Anyone with karma &gt;%(wiki_min_rep)s is welcome to improve it."
+msgstr ""
+
+#: skins/jardin/templates/macros.html:239
+#: skins/jardin/templates/macros.html:245
+msgid "Leave this group"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:240
+#: skins/jardin/templates/macros.html:242
+#: skins/jardin/templates/macros.html:261
+msgid "Join this group"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:241
+#: skins/jardin/templates/macros.html:246
+#: skins/jardin/templates/macros.html:256
+msgid "You are a member"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:248
+msgid "Cancel application"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:249
+#: skins/jardin/templates/macros.html:258
+msgid "Awaiting approval"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:251
+#: skins/jardin/templates/macros.html:252
+#: skins/jardin/templates/macros.html:263
+msgid "Ask to join"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:337
+#: skins/jardin/templates/macros.html:348
+msgid "add a comment"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:341
+msgid "load older comments"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:343
+msgid "see more comments"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:376
+msgid "delete this comment"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:379
+msgid "This post is awaiting moderation"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:395
+#: skins/jardin/templates/question/answer_controls.html:5
+msgid "edit"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:404
+msgid "convert to answer"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:583
+#, python-format
+msgid "%(username)s gravatar image"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:592
+#, python-format
+msgid "%(username)s's website is %(url)s"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:613
+#: skins/jardin/templates/macros.html:614
+#: skins/jardin/templates/macros.html:675
+#: skins/jardin/templates/macros.html:676
+msgid "previous"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:632
+#: skins/jardin/templates/macros.html:687
+msgid "current page"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:638
+#: skins/jardin/templates/macros.html:651
+#: skins/jardin/templates/macros.html:689
+#: skins/jardin/templates/macros.html:696
+#, python-format
+msgid "page %(num)s"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:660
+#: skins/jardin/templates/macros.html:700
+msgid "next page"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:661
+msgid "next"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:722
+#: skins/jardin/templates/macros.html:723
+#, python-format
+msgid "%(new)s new flagged posts and %(seen)s previous"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:725
+#: skins/jardin/templates/macros.html:726
+#, python-format
+msgid "%(new)s new flagged posts"
+msgstr ""
+
+#: skins/jardin/templates/macros.html:731
+#: skins/jardin/templates/macros.html:732
+#, python-format
+msgid "%(seen)s flagged posts"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:11
+msgid "remove offensive flag"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:13
+msgid "remove flag"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:18
+#: skins/jardin/templates/question/answer_controls.html:26
+msgid ""
+"report as offensive (i.e containing spam, advertising, malicious text, etc.)"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:20
+#: skins/jardin/templates/question/answer_controls.html:28
+msgid "flag offensive"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:33
+msgid "undelete"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:33
+msgid "delete"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:44
+msgid "unpublish"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:49
+msgid "publish"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:56
+msgid "permanent link"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:57
+msgid "link"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:65
+msgid "Facebook link link"
+msgstr ""
+
+#: skins/jardin/templates/question/answer_controls.html:71
+msgid "more"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:14
+msgid "Unfollow"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:15
+#: skins/jardin/templates/question/sidebar.html:17
+#: skins/jardin/templates/question/sidebar.html:23
+msgid "Follow"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:16
+#: skins/jardin/templates/question/sidebar.html:21
+msgid "Following"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:30
+#, python-format
+msgid "%(count)s follower"
+msgid_plural "%(count)s followers"
+msgstr[0] ""
+msgstr[1] ""
+
+#: skins/jardin/templates/question/sidebar.html:38
+msgid "subscribe to the RSS feed"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:39
+msgid "subscribe to rss feed"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:44
+msgid "see on Facebook"
+msgstr "voir sur Facebook"
+
+#: skins/jardin/templates/question/sidebar.html:54
+msgid "Invite"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:59
+#: skins/jardin/templates/question/sidebar.html:65
+msgid "add"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:61
+#: skins/jardin/templates/question/sidebar.html:67
+msgid "- or -"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:79
+msgid "share with everyone"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:92
+msgid "Individual users"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:97
+msgid "You"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:104
+#: skins/jardin/templates/question/sidebar.html:124
+#, fuzzy
+#| msgid "And"
+msgid "and"
+msgstr "Et"
+
+#: skins/jardin/templates/question/sidebar.html:117
+msgid "Groups"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:129
+#, python-format
+msgid "%(more_count)s more"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:135
+msgid "Public thread"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:136
+#, python-format
+msgid "This thread is public, all members of %(site_name)s can read this page."
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:144
+msgid "Stats"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:146
+msgid "Asked"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:149
+msgid "Seen"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:149
+msgid "times"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:152
+msgid "Last updated"
+msgstr ""
+
+#: skins/jardin/templates/question/sidebar.html:156
+msgid "Likes"
+msgstr "J'aimes"
+
+#: skins/jardin/templates/widgets/footer.html:33
+#, python-format
+msgid "Content on this site is licensed under a %(license)s"
+msgstr ""
+
+#: skins/jardin/templates/widgets/footer.html:38
+msgid "about"
+msgstr ""
+
+#: skins/jardin/templates/widgets/footer.html:40
+msgid "faq"
+msgstr ""
+
+#: skins/jardin/templates/widgets/footer.html:42
+#: skins/jardin/templates/widgets/secondary_header.html:72
+msgid "Help"
+msgstr ""
+
+#: skins/jardin/templates/widgets/footer.html:42
+#: skins/jardin/templates/widgets/secondary_header.html:72
+msgid "help"
+msgstr ""
+
+#: skins/jardin/templates/widgets/footer.html:45
+msgid "settings"
+msgstr ""
+
+#: skins/jardin/templates/widgets/footer.html:47
+msgid "widgets"
+msgstr ""
+
+#: skins/jardin/templates/widgets/footer.html:51
+msgid "privacy policy"
+msgstr ""
+
+#: skins/jardin/templates/widgets/footer.html:53
+msgid "terms of service"
+msgstr ""
+
+#: skins/jardin/templates/widgets/footer.html:66
+msgid "give feedback"
+msgstr ""
+
+#: skins/jardin/templates/widgets/login_link.html:15
+#, python-format
+msgid "Sign in via %(login_name)s"
+msgstr ""
+
+#: skins/jardin/templates/widgets/login_link.html:20
+msgid "Sign in"
+msgstr ""
+
+#: skins/jardin/templates/widgets/logo.html:2
+#, python-format
+msgid "%(site)s logo"
+msgstr ""
+
+#: skins/jardin/templates/widgets/question_summary.html:15
+msgid "view"
+msgid_plural "views"
+msgstr[0] ""
+msgstr[1] ""
+
+#: skins/jardin/templates/widgets/question_summary.html:44
+msgid "vote"
+msgid_plural "votes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: skins/jardin/templates/widgets/question_summary.html:51
+msgid "like"
+msgid_plural "likes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: skins/jardin/templates/widgets/secondary_header.html:48
+msgid "Questions"
+msgstr ""
+
+#: skins/jardin/templates/widgets/secondary_header.html:51
+msgid "tags"
+msgstr ""
+
+#: skins/jardin/templates/widgets/secondary_header.html:56
+msgid "people & groups"
+msgstr ""
+
+#: skins/jardin/templates/widgets/secondary_header.html:61
+msgid "Users"
+msgstr ""
+
+#: skins/jardin/templates/widgets/secondary_header.html:66
+msgid "Badges"
+msgstr ""
+
+#: skins/jardin/templates/widgets/user_long_score_and_badge_summary.html:3
+msgid "read only access"
+msgstr ""
+
+#: skins/jardin/templates/widgets/user_long_score_and_badge_summary.html:6
+msgid "points"
+msgstr ""
+
+#: skins/jardin/templates/widgets/user_navigation.html:12
+msgid "sign out"
+msgstr ""
