@@ -1,6 +1,9 @@
-https://github.com/ASKBOT/askbot-devel/archive/48a89fb249d6d9338a7b7cd4354f97d60c088f23.zip
+https://github.com/ASKBOT/ZuluPro/archive/stable.zip
 redis
 django-celery
 
 dj_database_url
 django_redis
+
+django-dbbackup
+django-super-favicon

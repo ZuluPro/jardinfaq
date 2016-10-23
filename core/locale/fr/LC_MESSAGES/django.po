@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-22 23:08+0200\n"
+"POT-Creation-Date: 2016-10-23 16:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,58 +18,237 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: skins/jardin/templates/home.html:8
-msgid "Home"
-msgstr "Acceuil"
+#: skins/jardin/templates/authopenid/complete.html:21
+#: skins/jardin/templates/authopenid/complete.html:30
+msgid "Complete registration"
+msgstr "Terminer l'enregistrement"
 
-#: skins/jardin/templates/home.html:13
+#: skins/jardin/templates/authopenid/complete.html:27
+msgid "New user registrations are disabled"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/complete.html:60
+msgid "Choose a screen name"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/complete.html:72
+msgid "Email address"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/complete.html:88
+msgid "Signup"
+msgstr "S'inscrire"
+
+#: skins/jardin/templates/authopenid/complete.html:95
+#: skins/jardin/templates/authopenid/signin.html:184
+msgid "Recover account"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/complete.html:100
+msgid "Already have an account?"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/complete.html:101
+msgid "Recover it by email."
+msgstr ""
+
+#: skins/jardin/templates/authopenid/complete.html:104
+msgid "Prefer to create a new account?"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/complete.html:105
+msgid "Return to registration."
+msgstr ""
+
+#: skins/jardin/templates/authopenid/logout.html:4
+msgid "Logout"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/logout.html:12
+msgid "You have successfully logged out"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/logout.html:13
+#, python-format
+msgid ""
+"Don't hesitate to take a look at our <a href=\"//facebook.com/"
+"%(facebook_page)s\">Facebook page"
+msgstr "N'hésitez pas à jeter un œil à notre <a href=\"//facebook.com/%(facebook_page)s\">page Facebook"
+
+#: skins/jardin/templates/authopenid/signin.html:6
+msgid "User login"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:18
+msgid ""
+"It's a good idea to make sure that your existing login methods still work, "
+"or add a new one. Please click any of the icons below to check/change or add "
+"new login methods."
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:20
+msgid ""
+"Please add a more permanent login method by clicking one of the icons below, "
+"to avoid logging in via email each time."
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:24
+msgid ""
+"Click on one of the icons below to add a new login method or re-validate an "
+"existing one."
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:26
+msgid ""
+"You don't have a method to log in right now, please add one or more by "
+"clicking any of the icons below."
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:29
+msgid ""
+"Please check your email and visit the enclosed link to re-connect to your "
+"account"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:50
+msgid "Authentication without password with:"
+msgstr "Identification sans mot de passe avec:"
+
+#: skins/jardin/templates/authopenid/signin.html:51
+msgid "Facebook connection"
+msgstr "Connexion Facebook"
+
+#: skins/jardin/templates/authopenid/signin.html:55
+msgid "Facebook users have their public posts counted in their karma"
+msgstr "Les utilisateurs Facebook ont leur publications publiques comptées dans leur karma"
+
+#: skins/jardin/templates/authopenid/signin.html:64
+msgid "Or enter your <span>user name and password</span>"
+msgstr "Ou entrez votre nom et mot de passe"
+
+#: skins/jardin/templates/authopenid/signin.html:68
+msgid "Please, sign in"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:73
+msgid "Login failed, please try again"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:82
+msgid "Username"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:84
+msgid "Username or email"
+msgstr "Nom ou mot de passe"
+
+#: skins/jardin/templates/authopenid/signin.html:94
+msgid "Password"
+msgstr "Mot de passe"
+
+#: skins/jardin/templates/authopenid/signin.html:98
+#: skins/jardin/templates/widgets/login_link.html:20
+msgid "Sign in"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:100
+msgid "Create a password-protected account"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:105
+msgid "To change your password - please enter the new one twice, then submit"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:115
+msgid "New password"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:125
+msgid "Please, retype"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:130
+msgid "Change password"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:146
+msgid "Here are your current login methods"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:150
+msgid "provider"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:151
+msgid "last used"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:165
+#: skins/jardin/templates/question/answer_controls.html:33
+msgid "delete"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:167
+msgid "cannot be deleted"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:179
+msgid "Having trouble signing in?"
+msgstr ""
+
+#: skins/jardin/templates/authopenid/signin.html:183
+msgid "Enter your email"
+msgstr ""
+
+#: skins/jardin/templates/home.html:9
+msgid "Home"
+msgstr "Accueil"
+
+#: skins/jardin/templates/home.html:15
 #, python-format
 msgid "Welcome to %(app_name)s"
 msgstr "Bienvenue sur %(app_name)s"
 
-#: skins/jardin/templates/home.html:14
+#: skins/jardin/templates/home.html:16
 #, python-format
 msgid ""
 "<b>%(app_name)s</b> is question and answer website for gardening enthusiast. "
 "It's built by a community of horticulturist, permaculturist and nature "
 "lovers."
-msgstr ""
-"<b>%(app_name)s est un site de questions/réponses pour les passionnés du "
-"jardin. Il est construit par une communauté d'horticulturistes, "
-"permaculteurs et amoureux de la nature."
+msgstr "<b>%(app_name)s</b> est site de questions/réponses pour les passionnés de jardin. Il est créer par une communauté d'horticulturistes, pérmatculteurs et amoureux de la nature"
 
-#: skins/jardin/templates/home.html:19
+#: skins/jardin/templates/home.html:21
 msgid "Ask questions about:"
 msgstr "Posez des questions à propos de:"
 
-#: skins/jardin/templates/home.html:40
+#: skins/jardin/templates/home.html:42
 msgid "Or answer to questions"
 msgstr "Ou répondez aux questions"
 
-#: skins/jardin/templates/home.html:41
+#: skins/jardin/templates/home.html:43
 msgid "And earn badges and points"
-msgstr "Et gagner des médailles et des points"
+msgstr "Et gagnez des points et des médailles"
 
-#: skins/jardin/templates/home.html:46
+#: skins/jardin/templates/home.html:48
 msgid "Join us"
 msgstr "Rejoignez-nous"
 
-#: skins/jardin/templates/home.html:47
+#: skins/jardin/templates/home.html:49
 msgid "And"
 msgstr "Et"
 
-#: skins/jardin/templates/home.html:48
+#: skins/jardin/templates/home.html:50
 msgid "Enjoy our community"
-msgstr "Prenez plaisir dans notre communauté"
+msgstr "Prenez plaisir dans notre commaunauté"
 
 #: skins/jardin/templates/macros.html:5
 #, python-format
 msgid "Share this content on %(site)s"
-msgstr "Partager ce conteny sur %(site)s"
+msgstr ""
 
 #: skins/jardin/templates/macros.html:48
 msgid "current number of votes"
-msgstr "Nombre actuel de votes"
+msgstr ""
 
 #: skins/jardin/templates/macros.html:61
 msgid "anonymous user"
@@ -232,10 +411,6 @@ msgstr ""
 msgid "undelete"
 msgstr ""
 
-#: skins/jardin/templates/question/answer_controls.html:33
-msgid "delete"
-msgstr ""
-
 #: skins/jardin/templates/question/answer_controls.html:44
 msgid "unpublish"
 msgstr ""
@@ -322,10 +497,8 @@ msgstr ""
 
 #: skins/jardin/templates/question/sidebar.html:104
 #: skins/jardin/templates/question/sidebar.html:124
-#, fuzzy
-#| msgid "And"
 msgid "and"
-msgstr "Et"
+msgstr ""
 
 #: skins/jardin/templates/question/sidebar.html:117
 msgid "Groups"
@@ -382,43 +555,29 @@ msgstr ""
 msgid "faq"
 msgstr ""
 
-#: skins/jardin/templates/widgets/footer.html:42
-#: skins/jardin/templates/widgets/secondary_header.html:72
-msgid "Help"
-msgstr ""
-
-#: skins/jardin/templates/widgets/footer.html:42
-#: skins/jardin/templates/widgets/secondary_header.html:72
-msgid "help"
-msgstr ""
-
-#: skins/jardin/templates/widgets/footer.html:45
+#: skins/jardin/templates/widgets/footer.html:43
 msgid "settings"
 msgstr ""
 
-#: skins/jardin/templates/widgets/footer.html:47
+#: skins/jardin/templates/widgets/footer.html:45
 msgid "widgets"
 msgstr ""
 
-#: skins/jardin/templates/widgets/footer.html:51
+#: skins/jardin/templates/widgets/footer.html:49
 msgid "privacy policy"
 msgstr ""
 
-#: skins/jardin/templates/widgets/footer.html:53
+#: skins/jardin/templates/widgets/footer.html:51
 msgid "terms of service"
 msgstr ""
 
-#: skins/jardin/templates/widgets/footer.html:66
+#: skins/jardin/templates/widgets/footer.html:64
 msgid "give feedback"
 msgstr ""
 
 #: skins/jardin/templates/widgets/login_link.html:15
 #, python-format
 msgid "Sign in via %(login_name)s"
-msgstr ""
-
-#: skins/jardin/templates/widgets/login_link.html:20
-msgid "Sign in"
 msgstr ""
 
 #: skins/jardin/templates/widgets/logo.html:2
@@ -441,16 +600,16 @@ msgstr[1] ""
 #: skins/jardin/templates/widgets/question_summary.html:51
 msgid "like"
 msgid_plural "likes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "j'aime"
+msgstr[1] "j'aimes"
 
 #: skins/jardin/templates/widgets/secondary_header.html:48
 msgid "Questions"
 msgstr ""
 
 #: skins/jardin/templates/widgets/secondary_header.html:51
-msgid "tags"
-msgstr ""
+msgid "Tags"
+msgstr "Mots-clés"
 
 #: skins/jardin/templates/widgets/secondary_header.html:56
 msgid "people & groups"
@@ -462,6 +621,10 @@ msgstr ""
 
 #: skins/jardin/templates/widgets/secondary_header.html:66
 msgid "Badges"
+msgstr ""
+
+#: skins/jardin/templates/widgets/secondary_header.html:72
+msgid "Help"
 msgstr ""
 
 #: skins/jardin/templates/widgets/user_long_score_and_badge_summary.html:3

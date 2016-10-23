@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from askbot.models import Thread
 
 
 def home(request):
+    if request.user.is_authenticated():
+        return redirect('questions')
     most_viewed_thread = Thread.objects.order_by('-view_count').first()
     most_answered_thread = Thread.objects.order_by('-answer_count')\
         .exclude(id=most_viewed_thread.id)\

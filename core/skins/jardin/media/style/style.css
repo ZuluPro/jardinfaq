@@ -5330,3 +5330,92 @@ a.login-link {
 .search-drop-menu a {
   white-space: normal;
 }
+input[name="facebook"] {
+  font-size: 40px;
+  line-height: 50px;
+  height: 60px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: #FFF;
+  background: #3F51B5;
+}
+.section-title {
+  text-align: center;
+}
+body.large #ContentFull {
+  width: 100%;
+  padding-bottom: 0px;
+}
+#signin-form {
+  display: inline-block;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  padding-top: 2%;
+  padding-bottom: 5%;
+}
+#signin-form .span6:first-child {
+    margin-right: -1px;
+    border-right-width: 1px;
+    border-right-style: dotted;
+}
+
+.login .form-group #id_username,
+.login .form-group #id_password,
+#register-form #id_email {
+  font-size: 30px !important;
+  height: 50px !important;
+  width: 90% !important;
+}
+#register-button,
+#signup-button,
+#local_login_buttons input {
+  font-size: 30px;
+  height: 50px;
+
+}
+#account-recovery-form h2,
+#signin-form h2 {
+  color: #7ea9b3;
+  font-family: 'Open Sans Condensed', Arial, sans-serif;
+  font-weight: bold;
+}
+.openid-signin h2 {
+  font-size: 25px;
+  line-height: 30px;
+}
+#account-recovery-form {
+  margin: 25px 0 25px;
+}
+#account-recovery-form h2 {
+  margin-bottom: 15px !important;
+}
+#account-recovery-form #id_email {
+  width: 33%;
+  height: 30px;
+  font-size: 15px;
+}
+#signup-form,
+#register-form {
+  text-align: center;
+}
+#signup-form ul.errorlist li,
+#signin-form span.error,
+#register-form span.error {
+  text-align: center;
+  font-size: 16px;
+}
+#signin-form input[type="text"],
+#signin-form input[type="password"],
+#signin-form input[type="email"] {
+  font-size: 30px !important;
+  height: 50px !important;
+  width: 70% !important;
+}
+#signup-form input[type="text"],
+#signup-form input[type="password"],
+#signup-form input[type="email"] {
+  font-size: 30px !important;
+  height: 50px !important;
+  width: 50% !important;
+}

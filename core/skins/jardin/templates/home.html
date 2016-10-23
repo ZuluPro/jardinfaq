@@ -1,4 +1,5 @@
 {% extends "one_column_body.html" %}
+{% set next_path=request.path|clean_login_url|escape %}
 
 {% block before_css %}
 <link href="{{ 'style/home.css'|media }}" rel="stylesheet" type="text/css" />
@@ -7,6 +8,7 @@
 {% block body_class %}one-col wide home{% endblock %}
 {% block title %}{% spaceless %}{% trans %}Home{% endtrans %}{% endspaceless %}{% endblock %}
 
+{% block next_login %}foo{% endblock %}
 {% block content %}
 <div id="welcome" class="splash">
     <div>
