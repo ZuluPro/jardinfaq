@@ -2,7 +2,7 @@ database:
   image: mariadb
   volumes:
     - /opt/jardinfaq/dbdata/:/var/lib/mysql:rw
-    - /opt/jardinfaq/my.cnf/etc/mysql/my.cnf:ro
+    - /opt/jardinfaq/my.cnf/etc/mysql/my.cnf
 
 redis:
   image: redis
@@ -14,7 +14,7 @@ middleware:
   build: .
   command: uwsgi --ini /conf/uwsgi.ini
   ports:
-    - "30310:3031"
+    - "127.0.0.1:30310:3031"
   links:
     - database
     - redis
@@ -22,7 +22,7 @@ middleware:
   volumes:
     - /var/www/jardinfaq/static/:/static/
     - /var/www/jardinfaq/media/:/media/
-    - /opt/jardinfaq/conf/:/conf/:ro
+    - /opt/jardinfaq/conf/:/conf/
 
 celery:
   build: .
@@ -34,4 +34,4 @@ celery:
   volumes:
     - /var/www/jardinfaq/static/:/static/
     - /var/www/jardinfaq/media/:/media/
-    - /opt/jardinfaq/conf/:/conf/:ro
+    - /opt/jardinfaq/conf/:/conf/

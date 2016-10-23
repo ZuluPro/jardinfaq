@@ -89,10 +89,12 @@ SECRET_KEY = CONFIG.get('DEFAULT', 'secret_key')
 
 # i18n
 LANGUAGE_CODE = 'fr'
+LANGUAGES = (('fr', 'French'),)
 TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+ASKBOT_LANGUAGE_MODE = 'single-lang'
 
 # Email
 ADMINS = CONFIG.get('DEFAULT', 'admins').split(',')
@@ -160,7 +162,8 @@ TEMPLATES = (
                 'django.core.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.core.context_processors.static',
-            ]
+                'django.contrib.messages.context_processors.messages',
+            ],
         }
     },
 )
@@ -186,6 +189,8 @@ MIDDLEWARE_CLASSES = [
     'askbot.middleware.view_log.ViewLogMiddleware',
     'askbot.middleware.spaceless.SpacelessMiddleware',
     'askbot.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'core.middlewares.UserBasedExceptionMiddleware',
 ]
 
 ATOMIC_REQUESTS = True
@@ -224,6 +229,9 @@ INSTALLED_APPS = [
     #'avatar',#experimental use git clone git://github.com/ericflo/django-avatar.git$
     'captcha',
     'avatar',
+    'core.facebook_sync',
+    'favicon',
+    'dbbackup',
 ]
 
 CACHES = {
@@ -332,7 +340,6 @@ GROUP_MESSAGING = {
     'BASE_URL_PARAMS': {'section': 'messages', 'sort': 'inbox'}
 }
 
-ASKBOT_LANGUAGE_MODE = 'single-lang'
 
 ASKBOT_CSS_DEVEL = False
 if 'ASKBOT_CSS_DEVEL' in locals() and ASKBOT_CSS_DEVEL:
@@ -342,15 +349,17 @@ if 'ASKBOT_CSS_DEVEL' in locals() and ASKBOT_CSS_DEVEL:
 
 COMPRESS_JS_FILTERS = []
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
-JINJA2_EXTENSIONS = ('compressor.contrib.jinja2ext.CompressorExtension',)
+JINJA2_EXTENSIONS = (
+    'compressor.contrib.jinja2ext.CompressorExtension',
+)
 JINJA2_TEMPLATES = ('captcha',)
-
-# Use syncdb for tests instead of South migrations. Without this, some tests
-# fail spuriously in MySQL.
-SOUTH_TESTS_MIGRATE = False
 
 VERIFIER_EXPIRE_DAYS = 3
 AVATAR_AUTO_GENERATE_SIZES = (16, 32, 48, 128)
+
+DBBACKUP_STORAGE_OPTIONS = {
+    'location': CONFIG.get('DEFAULT', 'backup_dir')
+}
 
 
 def add_debug_toolbar():
@@ -365,3 +374,33 @@ def add_debug_toolbar():
 
 if DEBUG:
     add_debug_toolbar()
+
+ASKBOT_MIN_DAYS_TO_ANSWER_OWN_QUESTION = 0
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+     'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}

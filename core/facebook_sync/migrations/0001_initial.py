@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('askbot', '0013_auto_20161012_0020'),
+        ('askbot', '0013_auto_20161024_0010'),
     ]
 
     operations = [
@@ -20,8 +20,6 @@ class Migration(migrations.Migration):
                 ('facebook_url', models.URLField()),
                 ('facebook_author_id', models.PositiveIntegerField()),
                 ('likes', models.PositiveIntegerField()),
-                ('last_update', models.DateTimeField()),
-                ('hidden', models.BooleanField()),
             ],
             options={
                 'verbose_name': 'Facebook post',

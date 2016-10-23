@@ -93,11 +93,11 @@
       chdir: "{{ jardinfaq_src_dir }}"
     remote_user: root
   
-  # - name: Generate favicon
-  #   command: "docker-compose run middleware python manage.py generate_favicon file://img/avatar.png --noinput"
-  #   args:
-  #     chdir: "{{ jardinfaq_src_dir }}"
-  
+  - name: Generate favicon
+    command: "docker-compose run middleware python manage.py generate_favicon file://jardin/media/images/jardinfaq_logo.png --noinput"
+    args:
+      chdir: "{{ jardinfaq_src_dir }}"
+    remote_user: root
 
   - name: Up platform
     command: "docker-compose up -d"
