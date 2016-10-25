@@ -617,7 +617,7 @@ msgstr ""
 
 #: skins/jardin/templates/widgets/secondary_header.html:61
 msgid "Users"
-msgstr ""
+msgstr "Utilisateurs"
 
 #: skins/jardin/templates/widgets/secondary_header.html:66
 msgid "Badges"

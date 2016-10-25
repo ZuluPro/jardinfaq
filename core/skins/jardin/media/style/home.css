@@ -74,10 +74,12 @@ body.home .navbar .nav li:hover {
 #welcome {
   background: url(/static/jardin/media/images/jardinfaq/sauterelle.jpg?v=1);
   background-size: 100%;
+  background-repeat: round;
 }
 #whatis {
   background: url(/static/jardin/media/images/jardinfaq/olives-large.jpg?v=1);
   background-size: 100%;
+  background-repeat: round;
 }
 #whatis h2 {
   text-align: left;
@@ -85,10 +87,12 @@ body.home .navbar .nav li:hover {
 #votes {
   background: url(/static/jardin/media/images/jardinfaq/robinet.jpg?v=1);
   background-size: 100%;
+  background-repeat: round;
 }
 #go {
   background: url(/static/jardin/media/images/jardinfaq/caneton.jpg?v=1);
   background-size: 100%;
+  background-repeat: round;
 }
 a.tag {
   padding-left: 5px;
