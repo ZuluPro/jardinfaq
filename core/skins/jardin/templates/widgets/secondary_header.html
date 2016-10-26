@@ -73,6 +73,11 @@
                      </li>
                     </ul>
                     <ul class="nav pull-right">
+                     {% if request.user.is_superuser %}
+                     <li>
+                         <a href="{% url 'admin:index' %}">{% trans %}Admin{% endtrans %}</a>
+                     </li>
+                     {% endif %}
                      {% if settings.ASK_BUTTON_ENABLED %}
                      <li>
                       {% include "widgets/ask_button.html" %}            

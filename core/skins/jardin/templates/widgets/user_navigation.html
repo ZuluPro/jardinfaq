@@ -2,14 +2,14 @@
 <div class="user-widget">
     <a href="{{ request.user.get_absolute_url() }}"><img class="avatar" src="{{ request.user.get_avatar_url() }}"/></a> 
     <span class="user-info">
-    {{ macros.inbox_link(request.user) }}
     {{ macros.moderation_items_link(request.user, moderation_items) }}
     {%- if settings.KARMA_MODE != 'hidden' or settings.BADGES_MODE != 'hidden' -%}
         {{ macros.user_long_score_and_badge_summary(user) }}
     {%- endif -%}
     <br>
+    {{ macros.inbox_link(request.user) }}
     {% if settings.USE_ASKBOT_LOGIN_SYSTEM %}
-         <a class="logout-link" href="{{ settings.LOGOUT_URL }}?next={{ settings.LOGOUT_REDIRECT_URL }}">{% trans %}sign out{% endtrans %}</a>
+     <a class="logout-link" href="{{ settings.LOGOUT_URL }}?next={{ settings.LOGOUT_REDIRECT_URL }}">{% trans %}sign out{% endtrans %}</a>
     {% endif %}
     </span>
 </div>
