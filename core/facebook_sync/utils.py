@@ -15,6 +15,8 @@ FEEDS_URL = '%s/feed?fields=full_picture,link,message,from,likes,reactions,type,
 POST_URL = '%s?fields=type,message,from,likes,created_time,attachments,link,permalink_url,comments{message,from,like_count,created_time,comment_count,link}'
 COMMENT_URL = '%s?fields=message,from,likes,created_time,comments{message,from,like_count,created_time,comment_count}'
 
+VIDEO_IFRAME = '<iframe src="https://www.facebook.com/plugins/video.php?href=%(video_url)s&width=500&show_text=false&appId=%(app_id)s&height=280" width="500" height="280" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>'
+
 
 def get_facebook_api(token=None):
     token = token or askbot_settings.FACEBOOK_TOKEN
@@ -79,6 +81,10 @@ def guess_text(fb_obj):
             else:
                 image_url = fb_image['media']['image']['src']
                 text += "\n![](%s)" % image_url
+    elif fb_obj.get('type') == 'video':
+        text += '\n\n' + VIDEO_IFRAME % {'video_url': fb_obj['link'],
+                                         'app_id': askbot_settings.FACEBOOK_KEY}
+
     return text
 
 

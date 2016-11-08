@@ -12,9 +12,9 @@ body.home > #secondaryHeader {
 }
 
 body.home {
-  background: #728e5b;
+  background: #728e5b !important;
 }
-body.home #secondaryHeader .navbar-inner {
+body.home #secondaryHeader .navbar {
   background-color: #79a655 !important;
   background-image: -moz-linear-gradient(top, #79a655, #79a655);
   background-image: -ms-linear-gradient(top, #79a655, #79a655);
@@ -22,15 +22,16 @@ body.home #secondaryHeader .navbar-inner {
   background-image: -webkit-linear-gradient(top, #79a655, #79a655);
   background-image: -o-linear-gradient(top, #79a655, #79a655);
   background-image: linear-gradient(top, #79a655, #79a655);
+  border-width: 0px;
 }
 
-body.home .navbar .nav > li > a {
+body.home .nav li > a {
   color: #fbfbf5;
 }
-body.home .navbar .nav li.on.active a,
-body.home .navbar .nav li a:hover,
-body.home .navbar .nav li.on.active,
-body.home .navbar .nav li:hover {
+body.home .nav li.on.active a,
+body.home .nav li a:hover,
+body.home .nav li.on.active,
+body.home .nav li:hover {
   background-color: #79a655 !important;
   color: #c5c5c5 !important;
 }
@@ -75,24 +76,30 @@ body.home .navbar .nav li:hover {
   background: url(/static/jardin/media/images/jardinfaq/sauterelle.jpg?v=1);
   background-size: 100%;
   background-repeat: round;
+  min-height: 700px;
 }
 #whatis {
   background: url(/static/jardin/media/images/jardinfaq/olives-large.jpg?v=1);
   background-size: 100%;
   background-repeat: round;
+  min-height: 700px;
 }
 #whatis h2 {
   text-align: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 #votes {
   background: url(/static/jardin/media/images/jardinfaq/robinet.jpg?v=1);
   background-size: 100%;
   background-repeat: round;
+  min-height: 800px;
 }
 #go {
   background: url(/static/jardin/media/images/jardinfaq/caneton.jpg?v=1);
   background-size: 100%;
   background-repeat: round;
+  min-height: 800px;
 }
 a.tag {
   padding-left: 5px;

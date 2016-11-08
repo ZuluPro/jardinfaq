@@ -45,8 +45,8 @@
             <input type="hidden" name="in_recovery" value="true" />
         {% endif %}
 
-        <div class="row-fluid">
-          <div class="span6">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
             <h2>{% trans %}Authentication without password with:{% endtrans %}</h2>
         <input name="facebook" type="button" class="oauth2" value="{% trans %}Facebook connection{% endtrans %}"/>
         {{ login_form.login_provider_name }}
@@ -54,7 +54,7 @@
         {{ login_form.persona_assertion }}
             <h2>{% trans %}Facebook users have their public posts counted in their karma{% endtrans %}</h2>
           </div>
-          <div class="span6">
+          <div class="col-xs-6 col-md-6">
           {% if use_password_login == True %}
         <fieldset id="password-fs">
             {{login_form.password_action}}

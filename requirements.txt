@@ -10,3 +10,5 @@ django-super-favicon
 
 facebook-sdk
 Faker
+
+django-web-rich-object

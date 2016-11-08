@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 from askbot.models.post import Post, PostManager
 from askbot.models.question import Thread
@@ -130,14 +131,15 @@ class FacebookPostManager(PostManager):
         if self.filter(facebook_id=fb_question['id']).exists():
             question = self.get(facebook_id=fb_question['id'])
         else:
-            if not(fb_question['type'] in ('status', 'photo') and
-                   'message' in fb_question):
-                return
+            if fb_question['type'] in ('status', 'photo', 'video'):
+                if 'message' not in fb_question:
+                    return
             question = self.create_question(fb_question)
         question.sync()
         return question
 
 
+@python_2_unicode_compatible
 class FacebookPost(Post):
     facebook_id = models.CharField(max_length=64)
     picture_url = models.URLField()
@@ -151,6 +153,9 @@ class FacebookPost(Post):
         app_label = 'facebook_sync'
         verbose_name = _("Facebook post")
         verbose_name_plural = _("Facebook posts")
+
+    def __str__(self):
+        return str(self)
 
     def get_facebook_url(self):
         if self.post_type == 'question':

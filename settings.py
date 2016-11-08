@@ -232,6 +232,7 @@ INSTALLED_APPS = [
     'core.facebook_sync',
     'favicon',
     'dbbackup',
+    'dj_web_rich_object',
 ]
 
 CACHES = {
@@ -376,6 +377,8 @@ if DEBUG:
     add_debug_toolbar()
 
 ASKBOT_MIN_DAYS_TO_ANSWER_OWN_QUESTION = 0
+ASKBOT_MARKDOWN_CLASS = 'core.markdown.Markdown'
+ASKBOT_EXTRA_ACCEPTABLE_ATTRIBUTES = ('id', 'data-image', 'data-description')
 
 LOGGING = {
     'version': 1,
@@ -391,7 +394,7 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
         },
-     'console':{
+     'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
         },

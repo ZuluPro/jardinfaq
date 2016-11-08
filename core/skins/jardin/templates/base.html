@@ -64,5 +64,16 @@
                 askbot['urls'][url_name] = cleanUrl(askbot['urls'][url_name]);
             }
         </script>
+        <script type='text/javascript' src='/static/jardin/media/jslib/unitegallery/js/unitegallery.min.js'></script> 
+        <script type='text/javascript' src='/static/jardin/media/jslib/unitegallery/themes/default/ug-theme-default.js'></script> 
+        <link rel='stylesheet' href='/static/jardin/media/jslib/unitegallery/css/unite-gallery.css' type='text/css' /> 
+        <script type='text/javascript' src='/static/jardin/media/jslib/unitegallery/themes/tiles/ug-theme-tiles.js'></script>
+        <script type="text/javascript">
+          $(document).ready(function(){
+              $(".gallery:not(:empty)").not("iframe .gallery").unitegallery({
+                gallery_theme: "tiles",
+              });
+          })
+        </script>
     </body>
 </html>
