@@ -1372,7 +1372,8 @@ ul#searchTags {
   font-weight: normal;
   line-height: 26px;
   padding-left: 0;
-  margin-bottom: 7px;
+  margin-top: 3px;
+  margin-bottom: 3px;
   display: block;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
 }
@@ -1383,8 +1384,8 @@ ul#searchTags {
   text-align: right;
   line-height: 16px;
   font-family: Arial;
-  padding-right: 4px;
   font-size: 11px;
+  padding-right: 6%;
 }
 .short-summary .userinfo .timeago, .short-summary span.anonymous {
   clear: both;
@@ -1396,24 +1397,41 @@ ul#searchTags {
   font-size: 11px;
 }
 .short-summary .counts {
-  float: right;
-  margin: 4px 0 0 5px;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+.short-summary .counts ul {
+  min-height: 65px;
+  list-style: none;
+  margin: 0;
 }
 .short-summary .counts .item-count {
-  padding: 0px 5px 0px 5px;
   font-size: 25px;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
 }
-.short-summary .counts .likes div,
-.short-summary .counts .votes div,
-.short-summary .counts .views div,
-.short-summary .counts .answers div,
-.short-summary .counts .favorites div {
-  margin-top: 3px;
-  font-size: 14px;
+.short-summary .counts .likes,
+.short-summary .counts .votes,
+.short-summary .counts .views,
+.short-summary .counts .answers,
+.short-summary .counts .favorites {
+  font-size: 12px;
   line-height: 14px;
   color: #646464;
+  float: left;
+  min-height: 45px;
+  width: 25%;
+  padding: 10px;
+  text-align: center;
+}
+@media (max-width: 768px) {
+.short-summary .counts .likes,
+.short-summary .counts .votes,
+.short-summary .counts .views,
+.short-summary .counts .answers,
+.short-summary .counts .favorites {
+  width: 45%;
+}
 }
 .short-summary .tags {
   margin: 0 0 0 1px;
@@ -1424,11 +1442,6 @@ ul#searchTags {
 .short-summary .favorites,
 .short-summary .views {
   text-align: center;
-  margin: 0 3px;
-  padding: 8px 2px 0px 2px;
-  width: 51px;
-  float: right;
-  height: 44px;
   border-radius: 10px;
 }
 .short-summary .votes {
@@ -1468,7 +1481,6 @@ ul#searchTags {
   background: #cee9c7;
 }
 .short-summary .accepted .item-count {
-  display: block;
   text-align: center;
   width: 40px;
   color: #eab243;
@@ -2255,7 +2267,8 @@ tr.mceLast {
   margin-bottom: -5px !important;
   padding-left: 24px !important;
 }
-.question-page h1 {
+.question-page h1.js-editable {
+  font-size: 28px;
   display: inline-block;
   padding-top: 0px;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
@@ -2297,6 +2310,7 @@ tr.mceLast {
   font-family: 'Open Sans Condensed', Arial, sans-serif;
   font-size: 30px;
   line-height: 36px;
+  min-height: 100px;
   height: 66px;
   width: 100% !important;
 }
@@ -4812,9 +4826,6 @@ td.setting-input textarea {
   .short-summary {
     width: 100%;
   }
-  .short-summary .answers, .short-summary .views, .short-summary .votes {
-    height: 51px;
-  }
   .question-page .vote-buttons {
     margin-right: 2px;
   }
@@ -5281,6 +5292,7 @@ img.avatar {
 nav.navbar {
   background-color: #e3efe0 !important;
   min-height: initial;
+  text-align: center;
 }
 .navbar .nav a {
   height: 42px;
@@ -5294,6 +5306,11 @@ nav.navbar {
 .navbar .nav li:hover {
   background-color: #e3efe0 !important;
   color: #646464 !important;
+}
+nav.navbar button.navbar-toggle {
+  text-align: inherit;
+  float: inherit;
+  height: 30px;
 }
 #secondaryHeader .navbar-inner {
     padding-left: 20px;

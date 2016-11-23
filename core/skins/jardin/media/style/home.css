@@ -7,8 +7,8 @@ body.wide #ContentFull {
   padding-bottom: 0px;
 }
 
-body.home > #secondaryHeader {
-  background: none;
+body.home #secondaryHeader {
+  background: none !important;
 }
 
 body.home {
@@ -160,7 +160,7 @@ a.big-btn:hover {
   color: #4e6050;
 }
 body.logout {
-  background: #b7c5e1;
+  background: #b7c5e1 !important;
 }
 body.logout #secondaryHeader {
   background-color: #b7c5e1 !important;
