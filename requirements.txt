@@ -1,4 +1,4 @@
-https://github.com/ZuluPro/askbot-devel/archive/stable.zip
+https://github.com/ZuluPro/askbot-devel/archive/stable2.zip
 redis
 django-celery
 
@@ -6,9 +6,14 @@ dj_database_url
 django_redis
 
 django-dbbackup
+django-storages
+dropbox
+
 django-super-favicon
 
 facebook-sdk
 Faker
 
+bs4
+web-rich-object
 django-web-rich-object

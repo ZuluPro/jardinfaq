@@ -48,7 +48,7 @@ DEFAULT_CONFIG = {
     'default_file_storage': 'django.core.files.storage.FileSystemStorage',
     'static_url': '/m/',
     'media_url': '/upfiles/',
-    'backup_dir': os.path.expanduser('~'),
+    'dropbox_oauth2_token': '',
     'static_root': os.path.join(PROJECT_ROOT, 'static/'),
     'media_root': os.path.join(os.path.dirname(__file__), 'askbot', 'upfiles'),
     # Cache
@@ -358,8 +358,10 @@ JINJA2_TEMPLATES = ('captcha',)
 VERIFIER_EXPIRE_DAYS = 3
 AVATAR_AUTO_GENERATE_SIZES = (16, 32, 48, 128)
 
+DBBACKUP_HOSTNAME = 'jardinfaq'
+DBBACKUP_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 DBBACKUP_STORAGE_OPTIONS = {
-    'location': CONFIG.get('DEFAULT', 'backup_dir')
+    'oauth2_access_token': CONFIG.get('DEFAULT', 'dropbox_oauth2_token')
 }
 
 

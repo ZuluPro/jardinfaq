@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import re
 import hashlib
 import markdown2
@@ -9,8 +10,9 @@ URL_RE = re.compile(r"(https?://[^\"><\s]+)")
 
 
 class Markdown(markdown2.Markdown):
-    def preprocess(self, text):
-        return text
+    def convert(self, text, *args, **kwargs):
+        text = super(Markdown, self).convert(text, *args, **kwargs)
+        return unicode(text)
 
     def postprocess(self, text):
         # Hack for unescape special chars
@@ -39,7 +41,7 @@ class Markdown(markdown2.Markdown):
 
         post.append(gallery)
 
-        text = urlize_html(post.__unicode__())
+        text = urlize_html(post.__str__())
         # Add url as web rich object
         wros = ''
         for url in urls:
@@ -58,10 +60,10 @@ class Markdown(markdown2.Markdown):
                     })
                     gallery.append(img)
             except Exception as err:
-               print err
-               pass
+                print err
+                pass
 
         post.append(gallery)
-        text = urlize_html(post.__unicode__())
+        text = urlize_html(unicode(post))
         text += wros
         return text

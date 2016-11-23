@@ -2,7 +2,7 @@ database:
   image: mariadb
   volumes:
     - /opt/jardinfaq/dbdata/:/var/lib/mysql:rw
-    - /opt/jardinfaq/my.cnf/etc/mysql/my.cnf
+    - ./extras/docker-compose/mysql_conf.d/:/etc/mysql/conf.d
 
 redis:
   image: redis
@@ -23,6 +23,7 @@ middleware:
     - /var/www/jardinfaq/static/:/static/
     - /var/www/jardinfaq/media/:/media/
     - /opt/jardinfaq/conf/:/conf/
+    - .:/jardinfaq/
 
 celery:
   build: .
