@@ -144,7 +144,7 @@ class FacebookPost(Post):
     facebook_id = models.CharField(max_length=64)
     picture_url = models.URLField()
     facebook_url = models.URLField()
-    facebook_author_id = models.PositiveIntegerField()
+    facebook_author_id = models.CharField(max_length=100)
     likes = models.PositiveIntegerField()
 
     objects = FacebookPostManager()
@@ -155,7 +155,7 @@ class FacebookPost(Post):
         verbose_name_plural = _("Facebook posts")
 
     def __str__(self):
-        return str(self)
+        return self.text
 
     def get_facebook_url(self):
         if self.post_type == 'question':

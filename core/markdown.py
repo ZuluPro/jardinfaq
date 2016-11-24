@@ -1,6 +1,10 @@
 from __future__ import unicode_literals
 import re
 import hashlib
+try:
+    from HTMLParser import HTMLParser
+except ImportError:
+    from html.parser import HTMLParser
 import markdown2
 from bs4 import BeautifulSoup, Tag
 from askbot.utils.html import urlize_html
@@ -45,7 +49,7 @@ class Markdown(markdown2.Markdown):
         # Add url as web rich object
         wros = ''
         for url in urls:
-            if url in img_urls:
+            if HTMLParser().unescape(url) in img_urls:
                 continue
             try:
                 wro = WebRichObject.objects.create_or_update_from_url(url)
@@ -59,9 +63,8 @@ class Markdown(markdown2.Markdown):
                         'data-description': wro.description or ''
                     })
                     gallery.append(img)
-            except Exception as err:
+            except IOError as err:
                 print err
-                pass
 
         post.append(gallery)
         text = urlize_html(unicode(post))

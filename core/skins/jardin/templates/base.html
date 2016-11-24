@@ -72,8 +72,10 @@
         <script type='text/javascript' src='/static/jardin/media/jslib/unitegallery/themes/tiles/ug-theme-tiles.js'></script>
         <script type="text/javascript">
           $(document).ready(function(){
-              $(".gallery:not(:empty)").not("iframe .gallery").unitegallery({
-                gallery_theme: "tiles",
+              $(".gallery:not(:empty)").not("iframe .gallery").each(function() {
+                $('#'+this.id).unitegallery({
+                    gallery_theme: "tiles",
+                });
               });
           })
         </script>
