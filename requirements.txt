@@ -16,4 +16,4 @@ Faker
 
 bs4
 web-rich-object
-django-web-rich-object
+https://github.com/ZuluPro/django-web-rich-object/archive/master.zip

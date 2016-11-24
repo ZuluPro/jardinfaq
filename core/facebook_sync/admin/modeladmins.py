@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.contrib import admin
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext as _
@@ -41,5 +43,6 @@ class FacebookPostAdmin(PostAdmin.__class__):
                 'answers': question.answers.all(),
             })
         except Exception as err:
-            self.message_user(request, str(err), messages.ERROR)
+            msg = 'Error: %s' % (err.message or str(err.args))
+            self.message_user(request, msg, messages.ERROR)
             return redirect("/admin/facebook_sync/facebookpost/add/")

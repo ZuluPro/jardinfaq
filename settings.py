@@ -379,6 +379,7 @@ if DEBUG:
     add_debug_toolbar()
 
 ASKBOT_MIN_DAYS_TO_ANSWER_OWN_QUESTION = 0
+ASKBOT_LIMIT_ONE_ANSWER_PER_USER = False
 ASKBOT_MARKDOWN_CLASS = 'core.markdown.Markdown'
 ASKBOT_EXTRA_ACCEPTABLE_ATTRIBUTES = ('id', 'data-image', 'data-description')
 
