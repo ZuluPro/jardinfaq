@@ -54,7 +54,7 @@ class Markdown(markdown2.Markdown):
             try:
                 wro = WebRichObject.objects.create_or_update_from_url(url)
                 if wro.type != 'image':
-                    wros += wro.get_widget().content.decode('utf8')
+                    wros += wro.get_widget().decode('utf8')
                 else:
                     img = Tag(name='img', attrs={
                         'alt': wro.description or '',

@@ -5469,6 +5469,9 @@ body.large #ContentFull {
   padding: 5px;
   margin: 3px;
 }
+.wro-container {
+  width: 100%
+}
 .wro-widget a:hover {
   text-decoration: none;
 }

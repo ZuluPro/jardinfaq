@@ -12,10 +12,8 @@ from askbot.deps.django_authopenid.models import UserAssociation
 
 
 FEEDS_URL = '%s/feed?fields=full_picture,link,message,from,likes,reactions,type,created_time,updated_time,message_tags,permalink_url'
-POST_URL = '%s?fields=type,message,from,likes,created_time,attachments,link,permalink_url,comments{message,from,like_count,created_time,comment_count,link}'
+POST_URL = '%s?fields=type,message,from,likes,created_time,attachments,link,permalink_url,comments{message,from,like_count,created_time,comment_count,link,attachment}'
 COMMENT_URL = '%s?fields=message,from,likes,created_time,comments{message,from,like_count,created_time,comment_count}'
-
-VIDEO_IFRAME = '<iframe src="https://www.facebook.com/plugins/video.php?href=%(video_url)s&width=500&show_text=false&appId=%(app_id)s&height=280" width="500" height="280" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>'
 
 
 def get_facebook_api(token=None):
@@ -72,19 +70,28 @@ def guess_tags(fb_obj):
 
 def guess_text(fb_obj):
     text = fb_obj['message'].replace('\n', '\n\n')
-    if fb_obj.get('type') == 'photo' and 'attachments' in fb_obj:
-        for fb_image in fb_obj['attachments']['data']:
-            if 'subattachments' in fb_image:
-                for fb_image_ in fb_image['subattachments']['data']:
-                    image_url = fb_image_['media']['image']['src']
+    if 'attachments' in fb_obj:
+        for fb_atta in fb_obj['attachments']['data']:
+            if 'type' in fb_atta and fb_atta['type'].startswith('video'):
+                text += '\n\n' + fb_atta['url']
+            elif 'subattachments' in fb_atta:
+                for fb_atta_ in fb_atta['subattachments']['data']:
+                    image_url = fb_atta_['media']['image']['src']
                     text += "\n\n![](%s)" % image_url
             else:
-                image_url = fb_image['media']['image']['src']
+                image_url = fb_atta['media']['image']['src']
                 text += "\n![](%s)" % image_url
-    elif fb_obj.get('type') == 'video':
-        text += '\n\n' + VIDEO_IFRAME % {'video_url': fb_obj['link'],
-                                         'app_id': askbot_settings.FACEBOOK_KEY}
-
+    if 'attachment' in fb_obj:
+        fb_atta = fb_obj['attachment']
+        if 'type' in fb_atta and fb_atta['type'].startswith('video'):
+            text += '\n\n' + fb_atta['url']
+        elif 'subattachments' in fb_atta:
+            for fb_atta_ in fb_atta['subattachments']['data']:
+                image_url = fb_atta_['media']['image']['src']
+                text += "\n\n![](%s)" % image_url
+        else:
+            image_url = fb_atta['media']['image']['src']
+            text += "\n![](%s)" % image_url
     return text
 
 

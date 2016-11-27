@@ -88,13 +88,13 @@
     remote_user: root
 
   - name: Collect static
-    command: "docker-compose run -d --rm middleware python manage.py collectstatc --noinput"
+    command: "docker-compose run -d --rm middleware python manage.py collectstatic --noinput"
     args:
       chdir: "{{ jardinfaq_src_dir }}"
     remote_user: root
   
   - name: Generate favicon
-    command: "docker-compose run middleware python manage.py generate_favicon file://jardin/media/images/jardinfaq_logo.png --noinput"
+    command: "docker-compose run middleware python manage.py generate_favicon file://jardin/media/images/logofinal.png --noinput"
     args:
       chdir: "{{ jardinfaq_src_dir }}"
     remote_user: root
