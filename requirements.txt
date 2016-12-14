@@ -15,5 +15,5 @@ facebook-sdk
 Faker
 
 bs4
-web-rich-object
+https://github.com/ZuluPro/web-rich-object/archive/master.zip
 https://github.com/ZuluPro/django-web-rich-object/archive/master.zip
