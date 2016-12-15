@@ -11,7 +11,7 @@ mta:
   image: tozd/postfix
 
 middleware:
-  build: .
+  image: zulupro/jardinfaq
   command: uwsgi --ini /conf/uwsgi.ini
   ports:
     - "127.0.0.1:30310:3031"
@@ -26,7 +26,7 @@ middleware:
     - .:/jardinfaq/
 
 celery:
-  build: .
+  image: zulupro/jardinfaq
   command: celery -A celeryapp worker -l info
   links:
     - database

@@ -32,7 +32,7 @@ ADD . $repo_dir
 WORKDIR $repo_dir
 RUN chown -R jardinfaq $repo_dir
 
-RUN pip install -r requirements.txt MySQL-Python uwsgi
+RUN pip install -r requirements.txt MySQL-Python uwsgi -U
 
 USER jardinfaq
 
