@@ -42,7 +42,7 @@ class FacebookPostAdmin(PostAdmin.__class__):
                 'question': question,
                 'answers': question.answers.all(),
             })
-        except Exception as err:
+        except IOError as err:
             msg = 'Error: %s' % (err.message or str(err.args))
             self.message_user(request, msg, messages.ERROR)
             return redirect("/admin/facebook_sync/facebookpost/add/")

@@ -43,9 +43,6 @@ class Markdown(markdown2.Markdown):
             })
             gallery.append(img)
 
-        post.append(gallery)
-
-        text = urlize_html(post.__str__())
         # Add url as web rich object
         wros = ''
         for url in urls:

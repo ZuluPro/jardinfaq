@@ -1,4 +1,8 @@
 from datetime import datetime
+try:
+    from urllib.urlparse import urlparse, parse_qs
+except ImportError:
+    from urlparse import urlparse, parse_qs
 
 import facebook
 from faker import Factory
@@ -69,29 +73,29 @@ def guess_tags(fb_obj):
 
 
 def guess_text(fb_obj):
-    text = fb_obj['message'].replace('\n', '\n\n')
-    if 'attachments' in fb_obj:
-        for fb_atta in fb_obj['attachments']['data']:
-            if 'type' in fb_atta and fb_atta['type'].startswith('video'):
-                text += '\n\n' + fb_atta['url']
-            elif 'subattachments' in fb_atta:
-                for fb_atta_ in fb_atta['subattachments']['data']:
-                    image_url = fb_atta_['media']['image']['src']
-                    text += "\n\n![](%s)" % image_url
-            else:
-                image_url = fb_atta['media']['image']['src']
-                text += "\n![](%s)" % image_url
-    if 'attachment' in fb_obj:
-        fb_atta = fb_obj['attachment']
+    def _guess_atta(fb_atta, base_text):
+        text = ''
         if 'type' in fb_atta and fb_atta['type'].startswith('video'):
-            text += '\n\n' + fb_atta['url']
+            parsed_url = urlparse(fb_atta['url'])
+            parsed_qs = parse_qs(parsed_url.query)
+            if not parsed_qs['u'][0] in base_text:
+                text += '\n\n' + parsed_qs['u'][0]
         elif 'subattachments' in fb_atta:
             for fb_atta_ in fb_atta['subattachments']['data']:
                 image_url = fb_atta_['media']['image']['src']
                 text += "\n\n![](%s)" % image_url
-        else:
-            image_url = fb_atta['media']['image']['src']
-            text += "\n![](%s)" % image_url
+        elif 'media' in fb_atta:
+            if 'image' in fb_atta['media']:
+                image_url = fb_atta['media']['image']['src']
+                text += "\n![](%s)" % image_url
+        return text
+
+    text = fb_obj['message'].replace('\n', '\n\n')
+    if 'attachments' in fb_obj:
+        for fb_atta in fb_obj['attachments']['data']:
+            text += _guess_atta(fb_atta, text)
+    elif 'attachment' in fb_obj:
+        text += _guess_atta(fb_obj['attachment'], text)
     return text
 
 
