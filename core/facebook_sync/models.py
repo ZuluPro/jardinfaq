@@ -182,7 +182,9 @@ class FacebookPost(Post):
         # Create answers
         for fb_answer in fb_obj.get('comments', {'data': []})['data']:
             if FacebookPost.objects.filter(facebook_id=fb_answer['id']).exists():
-                answer = FacebookPost.objects.get(facebook_id=fb_answer['id'])
+                answer = FacebookPost.objects\
+                    .filter(facebook_id=fb_answer['id'])\
+                    .first()
             else:
                 answer = FacebookPost.objects.create_answer(self.facebook_id, fb_answer)
             # Create comments
@@ -192,7 +194,9 @@ class FacebookPost(Post):
                 else fb_api.get_object(utils.COMMENT_URL % fb_answer['id']).get('comments', {'data': []})['data']
             for fb_comment in fb_comments:
                 if FacebookPost.objects.filter(facebook_id=fb_comment['id']).exists():
-                    comment = FacebookPost.objects.get(facebook_id=fb_comment['id'])
+                    comment = FacebookPost.objects\
+                        .filter(facebook_id=fb_comment['id'])\
+                        .first()
                 else:
                     comment = FacebookPost.objects.create_comment(answer.facebook_id,
                                                                   fb_comment)
