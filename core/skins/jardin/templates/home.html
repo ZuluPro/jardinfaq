@@ -19,22 +19,30 @@
 <div id="whatis" class="splash">
     <div>
     <h1>{% trans %}Ask questions about:{% endtrans %}</h1>
+    {% if most_viewed_thread %}
     <h2>
      <a class="tag" href="{% url "questions" %}tags:{{ most_viewed_thread.tagnames.split()[0] }}/">{{ most_viewed_thread.tagnames.split()[0].capitalize() }}</a> : 
      <i><a class="question" href="{{ most_viewed_thread.get_absolute_url() }}">{{ most_viewed_thread.title }}</a></i>
     </h2>
+    {% endif %}
+    {% if most_answered_thread %}
     <h2>
      <a class="tag" href="{% url "questions" %}tags:{{ most_answered_thread.tagnames.split()[0] }}/">{{ most_answered_thread.tagnames.split()[0].capitalize() }}</a> : 
      <i><a class="question" href="{{ most_answered_thread.get_absolute_url() }}">{{ most_answered_thread.title }}</a></i>
     </h2>
+    {% endif %}
+    {% if most_favourited_thread %}
     <h2>
      <a class="tag" href="{% url "questions" %}tags:{{ most_favourited_thread.tagnames.split()[0] }}/">{{ most_favourited_thread.tagnames.split()[0].capitalize() }}</a> :
      <i><a class="question" href="{{ most_favourited_thread.get_absolute_url() }}">{{ most_favourited_thread.title }}</a></i>
     </h2>
+    {% endif %}
+    {% if most_scored_thread %}
     <h2>
      <a class="tag" href="{% url "questions" %}tags:{{ most_scored_thread.tagnames.split()[0] }}/">{{ most_scored_thread.tagnames.split()[0].capitalize() }}</a> : 
      <i><a class="question" href="{{ most_scored_thread.get_absolute_url() }}">{{ most_scored_thread.title }}</a></i>
     </h2>
+    {% endif %}
     </div>
 </div>
 <div id="votes" class="splash">
