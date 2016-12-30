@@ -27,7 +27,19 @@ middleware:
 
 celery:
   image: zulupro/jardinfaq
-  command: celery -A celeryapp worker -l info
+  command: ./manage.py celery worker -l info
+  links:
+    - database
+    - redis
+    - mta
+  volumes:
+    - /var/www/jardinfaq/static/:/static/
+    - /var/www/jardinfaq/media/:/media/
+    - /opt/jardinfaq/conf/:/conf/
+
+celerybeat:
+  image: zulupro/jardinfaq
+  command: ./manage.py celerybeat
   links:
     - database
     - redis

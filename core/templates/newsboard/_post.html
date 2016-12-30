@@ -1,0 +1,22 @@
+{% load i18n wro %}
+
+<div id="post-{{ post.id }}" class="post">
+ {% get_widget post video_width="98%" video_height="200px" url_suffix="&height=320" %}
+ {% if include_source %}
+ <small>
+   {% trans "From: " %}
+   {% for stream in post.streams.all %}
+     <a href="{{ stream.get_absolute_url }}">{{ stream.name }}</a>
+   {% endfor %}
+ </small>
+ {% endif %}
+ <small>
+ {% if user.is_staff %}
+ <form action="{{ post.get_remove_url }}" method="POST">
+   {% csrf_token %}
+   <input type="hidden" name="next" value="{{ request.path }}">
+   <button type="submit">{% trans "Remove" %}</button>
+ </form>
+ {% endif %}
+ </small>
+</div>

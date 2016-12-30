@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<div class="post col-xs-12 col-sm-12 col-md-4">
+{% for post in posts %}
+  {% if forloop.counter0|add:column_index|divisibleby:3 %}
+   {% include "newsboard/_post.html" %}
+  {% endif %}
+{% endfor %}
+</div>

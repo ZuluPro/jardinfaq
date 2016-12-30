@@ -1,0 +1,26 @@
+{% extends "newsboard/base.html" %}
+{% load i18n %}
+
+{% block newsboard_action %}
+{% if user.is_staff %}
+<li>
+ <form action="{{ obj.get_absolute_url }}" method="POST">
+   {% csrf_token %}
+   <input type="hidden" name="stream_id" value="{{ object.id }}">
+   <button type="submit" name="mode" value="async"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+ </form>
+</li>
+<li>
+ <form action="{{ obj.get_absolute_url }}" method="POST">
+   {% csrf_token %}
+   <input type="hidden" name="stream_id" value="{{ object.id }}">
+   <button type="submit" name="mode" value="sync"><i class="fa fa-refresh" aria-hidden="true"></i> {% trans "sync" %}</button>
+ </form>
+</li>
+{% endif %}
+{% endblock %}
+
+{% block newsboard_content %}
+  <h1>{% trans "L'actualité du jardin en coup d'oeil" %}</h1>
+  {% include "newsboard/_posts.html" with posts=object_list %}
+{% endblock %}

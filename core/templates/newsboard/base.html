@@ -1,0 +1,109 @@
+{% load compress i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+     <title>{{ title }}</title>
+     {% block meta_description %}
+     <meta name="description" content="{{settings.APP_DESCRIPTION|escape}}" />
+     {% endblock %}
+     {% include "meta/html_head_meta.html" %}
+     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+     <link href="/static/default/media/bootstrap/css/bootstrap.css?v=1" rel="stylesheet" type="text/css" />
+     <link href="/static/jardin/media/style/style.css?v=1" rel="stylesheet" type="text/css" />
+     {# include "meta/html_head_stylesheets.html" #}
+     {% include "meta/fonts.html" %} {# may contain external files #}
+     {% block forestyle %}{% endblock %}
+     {% block forejs %}{% endblock %}
+     {% if settings.USE_CUSTOM_HTML_HEAD %}
+         {{ settings.CUSTOM_HTML_HEAD }}
+     {% endif %}
+     <style>
+        nav {
+          margin-top: 3%;
+        }
+        nav ul.navbar-right {
+          margin-top: 1%;
+        }
+        .stream {
+          background: #e3efe0;
+          padding-bottom: 10px;
+          margin-bottom: 15px;
+          border-radius: 5px;
+        }
+        .stream p.stream-description {
+          text-align: center;
+        }
+        .stream hr {
+           margin: 5px 0px 5px 0px;
+        }
+        .stream h3 {
+          text-align: center;
+          padding: 10px 0 10px 0px;
+        }
+        .stream h3 a {
+          color: #464646;
+        }
+        .stream ul {
+          list-style: none;
+          margin: 0px;
+          padding: 0px 15px 0px 15px;
+          font-size: 14px;
+        }
+        .stream ul a {
+          color: #848484;
+        }
+        .wro-container {
+          text-align: center;
+        }
+        .wro-container .wro-image-container img {
+          float: none;
+          max-width: 98%;
+          max-height: 225px;
+          width: inherit;
+        }
+        .wro-container .wro-description {
+          text-align: justify;
+        }
+        .wro-container .wro-site-name {
+          text-align: left;
+        }
+        .wro-widget-video .wro-iframe-container {
+          padding: 10px 0px 10px 0px;
+        }
+        .wro-widget-video iframe {
+          padding: 10px 0px 10px 0px;
+        }
+     </style>
+ </head>
+ <body class="{% block body_class %}{% endblock %}{% if user_messages %} user-messages{% endif %}{% if page_class %} {{page_class}}{% endif %}{% if request.user.is_anonymous %} anon{% endif %} lang-{{ current_language_code }}">
+  <div class="content-wrapper">
+   <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-3">
+     <a id="logo" href="/questions/"> <img src="/static/jardin/media/images/jardinfaq_logo.png?v=1" alt="logo de JardinFAQ"> </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-9">
+     <nav class="navbar navbar-default">
+      <div class="container-fluid">
+       <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+         <li><a href="{% url "questions" %}" class="scope-selector on"><i class="fa fa-question-circle-o" aria-hidden="true"></i> {% trans "Questions" %}</a></li>
+         <li><a href="{% url "stream-list" %}" class="scope-selector on"><i class="fa fa-list" aria-hidden="true"></i> {% trans "Streams" %}</a></li>
+         <li><a href="{% url "post-list" %}" class="scope-selector on"><i class="fa fa-th-large" aria-hidden="true"></i> {% trans "Posts" %}</a> </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+         {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+         {% endfor %}
+         {% block newsboard_action %}{% endblock %}
+        </ul>
+       </div>
+      </div>
+      </nav>
+    </div>
+   </div>
+   <div class="row">
+    {% block newsboard_content %}{% endblock %}
+   </div>
+  </div>
+ </body>
+</html>

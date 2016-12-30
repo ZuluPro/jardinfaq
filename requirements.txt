@@ -17,3 +17,4 @@ Faker
 bs4
 web-rich-object
 django-web-rich-object
+newsboard

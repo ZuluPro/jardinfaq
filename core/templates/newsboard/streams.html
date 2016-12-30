@@ -1,0 +1,34 @@
+{% extends "newsboard/base.html" %}
+{% load i18n %}
+
+{% block newsboard_action %}
+{% if user.is_staff %}
+<li>
+ <form action="" method="POST">
+   {% csrf_token %}
+   {% for stream in object_list %}
+   <input type="hidden" name="stream_id" value="{{ stream.id }}">
+   {% endfor %}
+   <button type="submit" name="mode" value="async"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+ </form>
+</li>
+<li>
+ <form action="" method="POST">
+   {% csrf_token %}
+   {% for stream in object_list %}
+   <input type="hidden" name="stream_id" value="{{ stream.id }}">
+   {% endfor %}
+   <button type="submit" name="mode" value="sync"><i class="fa fa-refresh" aria-hidden="true"></i> {% trans "sync" %}</button>
+ </form>
+</li>
+{% endif %}
+{% endblock %}
+
+{% block newsboard_content %}
+ <div class="col-xs-12">
+  <h1>{% trans "L'actualité du jardin en coup d'oeil" %}</h1>
+ </div>
+ {% include "newsboard/_stream_column.html" with column_index=0 %}
+ {% include "newsboard/_stream_column.html" with column_index=1 %}
+ {% include "newsboard/_stream_column.html" with column_index=2 %}
+{% endblock %}

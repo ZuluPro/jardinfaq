@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<div class="col-xs-12 col-sm-12 col-md-4">
+{% for stream in object_list %}
+  {% if forloop.counter0|add:column_index|divisibleby:3 %}
+   <div id="stream-{{ stream.slug }}" class="stream">
+    <h3>
+     <a href="{{ stream.get_absolute_url }}">{{ stream.name }}</a>
+     {% if user.is_staff %}
+     <form action="" method="POST">
+       {% csrf_token %}
+       <input type="hidden" name="stream_id" value="{{ stream.id }}">
+       <button class="btn btn-xs" type="submit" name="mode" value="async">{% trans "Update" %}</button>
+       <button class="btn btn-xs" type="submit" name="mode" value="sync">{% trans "Update sync" %}</button>
+     </form>
+     {% endif %}
+    </h3>
+    {% if stream.description %}
+    <p class="stream-description">{{ stream.description }}</p>
+    {% endif %}
+    <ul>
+      {% for post in stream.last_posts %}
+      <hr>
+      <li id="post-{{ post.id }}"><a href="{{ post.url }}">{{ post.title|truncatechars:75 }}</a></li>
+      {% empty %}
+      <li>{% trans "(Empty)" %}</li>
+      {% endfor %}
+    </ul>
+   </div>
+  {% endif %}
+{% endfor %}
+</div>

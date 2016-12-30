@@ -77,6 +77,9 @@
                            <li class="scope-selector">
                             <a class="help" href="{% url "help" %}" title="{% trans %}Help{% endtrans %}">{% trans %}Help{% endtrans %}</a>
                            </li>
+                           <li class="scope-selector">
+                            <a class="help" href="{% url "post-list" %}" title="{% trans %}News{% endtrans %}">{% trans %}News{% endtrans %}</a>
+                           </li>
                           </ul>
                           <ul class="nav navbar-nav navbar-right">
                      {% if request.user.is_superuser %}

@@ -1,13 +1,17 @@
 import os
-import dj_database_url
-
+import sys
+import site
 try:
     from ConfigParser import SafeConfigParser
 except ImportError:
     from configparser import SafeConfigParser
+
+import dj_database_url
+
+import celery
 import askbot
-import site
-import sys
+from newsboard.periodic_tasks import UPDATE_STREAMS
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 PROJECT_ROOT = os.path.dirname(__file__)
@@ -65,6 +69,7 @@ DEFAULT_CONFIG = {
     'nocaptcha': 'True',
     'recaptcha_use_ssl': 'True',
     'akismet_api_key': None,
+    'facebook_token': None,
 }
 
 CONFIG_FILE = os.environ.get('JARDINFAQ_CONFIG_FILE',
@@ -155,7 +160,6 @@ TEMPLATES = (
     },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -233,6 +237,7 @@ INSTALLED_APPS = [
     'favicon',
     'dbbackup',
     'dj_web_rich_object',
+    'newsboard',
 ]
 
 CACHES = {
@@ -278,10 +283,10 @@ ALLOW_UNICODE_SLUGS = False
 ASKBOT_USE_STACKEXCHANGE_URLS = False
 
 #Celery Settings
-BROKER_URL = CONFIG.get('DEFAULT', 'broker_url')
-BROKER_TRANSPORT = CONFIG.get('DEFAULT', 'broker_transport')
+CELERY_BROKER_URL = BROKER_URL = CONFIG.get('DEFAULT', 'broker_url')
+CELERY_BROKER_TRANSPORT = BROKER_TRANSPORT = CONFIG.get('DEFAULT', 'broker_transport')
 CELERY_RESULT_BACKEND = CONFIG.get('DEFAULT', 'celery_result_backend')
-CELERY_ALWAYS_EAGER = True
+CELERY_ALWAYS_EAGER = False
 
 import djcelery
 djcelery.setup_loader()
@@ -391,16 +396,15 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
-
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
-        },
-     'console': {
+         },
+         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-        },
+         },
     },
     'loggers': {
         'django.request': {
@@ -410,3 +414,11 @@ LOGGING = {
         },
     }
 }
+
+NEWSBOARD_FACEBOOK_TOKEN = CONFIG.get('DEFAULT', 'facebook_token')
+
+if celery.VERSION < (4, 0, 0):
+    CELERYBEAT_SCHEDULE = {
+        'auto-update-streams': UPDATE_STREAMS
+    }
+print DATABASES

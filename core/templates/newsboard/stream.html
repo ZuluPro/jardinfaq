@@ -1,0 +1,37 @@
+{% extends "newsboard/base.html" %}
+{% load i18n %}
+
+{% block newsboard_action %}
+{% if user.is_staff %}
+<li>
+ <form action="{{ obj.get_absolute_url }}" method="POST">
+   {% csrf_token %}
+   <input type="hidden" name="stream_id" value="{{ object.id }}">
+   <button type="submit" name="mode" value="async"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+ </form>
+</li>
+<li>
+ <form action="{{ obj.get_absolute_url }}" method="POST">
+   {% csrf_token %}
+   <input type="hidden" name="stream_id" value="{{ object.id }}">
+   <button type="submit" name="mode" value="sync"><i class="fa fa-refresh" aria-hidden="true"></i> {% trans "sync" %}</button>
+ </form>
+</li>
+{% endif %}
+{% endblock %}
+
+{% block newsboard_content %}
+  <div class="col-xs-12">
+   <h1>
+    {% if object.main_url %}
+     <a href="{{ object.main_url }}" target="_blank">{{ object.name }}</a>
+    {% else %}
+     {{ object.name }}
+    {% endif %}
+   </h1>
+   {% if object.description %}
+    <p>{{ object.description }}</p>
+   {% endif %}
+  </div>
+  {% include "newsboard/_posts.html" with posts=object.last_posts %}
+{% endblock %}
