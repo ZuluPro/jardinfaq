@@ -421,4 +421,3 @@ if celery.VERSION < (4, 0, 0):
     CELERYBEAT_SCHEDULE = {
         'auto-update-streams': UPDATE_STREAMS
     }
-print DATABASES
