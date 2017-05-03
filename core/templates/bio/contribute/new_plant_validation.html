@@ -3,8 +3,8 @@
 
 {% block title %}{% blocktrans with plant_name=question.name %}{{ plant_name }} validation{% endblocktrans %}{% endblock %}
 {% block forejs %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
  $(document).ready(function() {
    $(document).on('change', '[name="{{ fieldname }}"]', function () {
@@ -26,7 +26,7 @@
  });
 </script>
 <link href="/static/default/media/bootstrap/css/bootstrap.css?v=1" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="http://seiyria.com/bootstrap-slider/css/bootstrap-slider.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/static/jardin/media/style/bootstrap-slider.css" media="screen">
 {% endblock %}
 
 {% block action %}{% endblock %}
