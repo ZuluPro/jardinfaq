@@ -8,10 +8,11 @@ try:
 except ImportError:
     from django.conf.urls.defaults import handler404
     from django.conf.urls.defaults import include, patterns, url
-
-from askbot.views.error import internal_error as handler500
 from django.conf import settings
 from django.contrib import admin
+
+from askbot.views.error import internal_error as handler500
+from bio import urls as bio_urls
 
 admin.autodiscover()
 
@@ -29,6 +30,7 @@ else:
 
 urlpatterns += patterns('',
     (r'^admin/', include(admin.site.urls)),
+    (r'bio/', include(bio_urls, namespace='bio')),
     #(r'^cache/', include('keyedcache.urls')), - broken views disable for now
     #(r'^settings/', include('askbot.deps.livesettings.urls')),
     (r'^followit/', include('followit.urls')),
@@ -40,6 +42,7 @@ urlpatterns += patterns('',
         {'document_root': settings.MEDIA_ROOT.replace('\\','/')},
     ),
 )
+urlpatterns += bio_urls.urlpatterns
 
 if 'rosetta' in settings.INSTALLED_APPS:
     urlpatterns += patterns('',

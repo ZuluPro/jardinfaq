@@ -1,0 +1,104 @@
+{% extends "jardinfaq/base.html" %}
+{% load i18n bio_contribute %}
+
+{% block title %}{{ question.question }}{% endblock %}
+{% block forejs %}
+<script type="text/javascript">
+ $(document).ready(function() {
+   $(document).on('change', '[name="{{ fieldname }}"]', function () {
+     if (this.value.length > 0) {
+       $('#submit').removeAttr('disabled');
+     } else {
+       $('#submit').attr('disabled', 'disabled');
+     }
+   });
+   $(document).on('slide', '.slider', function () {
+     $('#submit').removeAttr('disabled');
+     $('#value').text(this.value);
+   });
+   $(document).on('click', 'label', function () {
+     if (! this.classList.contains('disabled') ) {
+       $('#submit').removeAttr('disabled');
+     }
+   });
+ });
+</script>
+<link href="/static/default/media/bootstrap/css/bootstrap.css?v=1" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="http://seiyria.com/bootstrap-slider/css/bootstrap-slider.css" media="screen">
+{% endblock %}
+
+{% block action %}{% endblock %}
+
+{% block breadcrumb %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  <ol class="breadcrumb">
+   <li><a href="{% url "bio:home" %}">{% trans "Database" %}</a></li>
+   <li><a href="{% url "contribute-home" %}">{% trans "Contribute" %}</a></li>
+   <li><a href="{% url "contribute-validation-home" %}">{% trans "Validate" %}</a></li>
+   <li><a href="{% url "contribute-plant-question-validate-list" %}">{% trans "Plant's attribute" %}</a></li>
+   <li>{{ question.plant }} - {{ question.get_field_verbose }}</li>
+  </ol>
+ </div>
+{% endblock %}
+
+{% block content %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  {% if disabled %}<div class="alert alert-info" role="alert">{{ disabled_reason }}</div>{% endif %}
+
+  <form class="contribute-form" method="POST">{% csrf_token %}
+  <h2>{% trans "To the question" %}</h2>
+  <h3>{{ question.question }}</h3>
+  <h3>{% blocktrans with user=question.user.username user_url=user.get_absolute_url response=question.get_response_display %}<a href="{{ user_url }}">{{ user }}</a> answered <i>{{ response }}</i>{% endblocktrans %}</h3>
+  {% if form.field_options.help_text %}<h3>{{ form.field_options.help_text }}</h3>{% endif %}
+
+  {% if question.reference.strip %}
+  <hr>
+  <h3>{% trans "Reference" %}<h3>
+  <blockquote>
+  <p>{{ question.reference }}</p>
+  </blockquote>
+  {% endif %}
+
+  <h2>{% trans "What do you think about ?" %}</h2>
+
+  <div data-toggle="buttons">
+  <div class="btn-group btn-group-justified">
+   <label class="btn btn-success btn-2xl btn-choice{% if current_vote == 1 %} active{% endif %}{% if disabled %} disabled{% endif %}">
+    <input name="validate" type="radio" value="validate" autocomplete="off">
+    <span>{% trans "Validate" %}</span>
+    <br>
+    <span class="badge">{{ question.plus_score }}</span>
+   </label>
+   <label class="btn btn-info btn-2xl btn-choice{% if current_vote == 0 %} active{% endif %}{% if disabled %} disabled{% endif %}">
+    <input name="neutral" type="radio" value="neutral" autocomplete="off">
+    <span>{% trans "I don't know" %}</span>
+   </label>
+   <label class="btn btn-danger btn-2xl btn-choice{% if current_vote == -1 %} active{% endif %}{% if disabled %} disabled{% endif %}">
+    <input name="decline" type="radio" value="decline" autocomplete="off">
+    <span>{% trans "Decline" %}</span>
+    <br>
+    <span class="badge">{{ question.minus_score }}</span>
+   </label>
+  </div>
+  </div>
+
+  <hr>
+
+  <div class="row"> 
+   <div class="col-xs-12">
+    <input id="submit" class="btn btn-xl" type="submit" name="submit" value="{% trans "Submit" %}" disabled="disabled"/>
+    <input class="btn btn-xl" type="submit" name="skip" value="{% trans "Skip" %}"/>
+  {% if user|can_validate %}
+  <br><br>
+  {% if question.validated %}
+    <input class="btn btn-xl" type="submit" name="unaccept" value="{% trans "Unaccept" %}"/>
+  {% else %}
+    <input class="btn btn-xl" type="submit" name="accept" value="{% trans "Accept" %}"/>
+  {% endif %}
+  {% endif %}
+   </div>
+  </div>
+  </form>
+
+ </div>
+{% endblock %}

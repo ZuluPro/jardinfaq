@@ -1,0 +1,45 @@
+{% load i18n %}
+<div class="row">
+ <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+  <nav class="navbar navbar-default">
+   <div class="container-fluid">
+    <div class="navbar-header">
+     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">{% trans "Toggle navigation" %}</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+     </button>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     <ul class="nav navbar-nav">
+      <li class="scope-selector {% if active_tab == 'questions' %}active on{% endif %}">
+          <a id="navQuestion" href="{% url "questions" %}" class="scope-selector on">{% trans "Questions" %}</a>
+      </li>
+      <li class="scope-selector {% if active_tab == 'tags' %}active on{% endif %}">
+          <a id="navTags" href="{% url "tags" %}" class="scope-selector">{% trans "Keywords" %}</a>
+      </li>
+      <li class="scope-selector {% if active_tab == 'users' %}active on{% endif %}">
+          <a id="navUsers" href="{% url "users" %}" class="scope-selector">{% trans "Users" %}</a>
+      </li>
+      <li class="scope-selector {% if active_tab == 'badges' %}active on{% endif %}">
+          <a id="navBadges" href="{% url "badges" %}" class="scope-selector">{% trans "Badges" %}</a>
+      </li>
+      <li class="scope-selector {% if active_tab == 'help' %}active on{% endif %}">
+          <a class="help" href="{% url "help" %}" title="Aide">{% trans "Help" %}</a>
+      </li>
+      <li class="scope-selector {{ active_tab }} {% if active_tab == 'wiki' %}active on{% endif %}">
+          <a class="help" href="{% url "bio:home" %}" title="Wiki">{% trans "Wiki" %}</a>
+      </li>
+     </ul>
+     <ul class="nav navbar-nav navbar-right">
+         {% if request.user.is_staff %}
+         <li><a href="{% url "admin:index" %}">{% trans "Admin" %}</a></li>
+         {% endif %}
+         <li><a id="askButton" href="{% url "ask" %}">{% trans "Ask your question" %}</a></li>
+     </ul>
+    </div>
+   </div>
+  </nav>
+ </div>
+</div>

@@ -1,0 +1,69 @@
+{% extends "jardinfaq/base.html" %}
+{% load i18n %}
+
+{% block body_class %}bio{% endblock %}
+{% block title %}{% trans "Database home" %}{% endblock %}
+{% block forestyle %}
+<style>
+.navbar .nav li.on.active a, .navbar .nav li a:hover, .navbar .nav li.on.active, 
+nav.navbar {
+  background-color: #d4ceb2 !important;
+  border-color: transparent;
+}
+#ground {
+  border-top: 1px solid #80784f;
+  background: #80784f;
+}
+</style>
+{% endblock %}
+
+{% block action %}
+{% endblock %}
+
+{% block content %}
+ <div class="row">
+ <a href="{% url "plants" %}">
+  <div class="no-padding col-xs-12 col-md-6">
+      <div class="bio-menu" style="background-image: url(/static/jardin/media/images/flor.jpg);">
+      <div class="shade shade-react">
+      <h2>{% trans "Wiki" %}</h2>
+      <h3>{% trans "Consult our knowledge database" %}
+      </div>
+      </div>
+  </div>
+ </a>
+ <a href="{% url "contribute-home" %}">
+  <div class="no-padding col-xs-12 col-md-6">
+      <div class="bio-menu" style="background-image: url(/static/jardin/media/images/bean.jpg);">
+      <div class="shade shade-react">
+      <h2>{% trans "Contribute" %}</h2>
+      <h3>{% trans "Bring your rock to the building" %}</h3>
+      </div>
+      </div>
+  </div>
+ </a>
+ <div class="no-padding col-xs-12">
+  <div class="bio-menu" style="background-image: url(/static/jardin/media/images/ficus.jpg);">
+      <div class="shade shade-react">
+   <h3>{% trans "This database is a collaborative work from a community" %}</h3>
+   <br>
+   <h3>{% trans "Like many other we gather data and share them to people" %}</h3>
+   <br>
+   <h3>{% trans "But our real difference:" %}</h3>
+   <h3>{% trans "Data collection and veracity of our information are validated by each of us" %}</h3>
+  </div>
+  </div>
+ </div>
+ <div class="no-padding col-xs-12">
+  <div class="bio-menu" style="background-image: url(/static/jardin/media/images/flor2.jpg);">
+      <div class="shade shade-react">
+   <h3>{% trans "Contibution is a very simple process:" %}</h3>
+   <br>
+   <h3>{% trans "Someone report a data and everyone validate it or not" %}</h3>
+   <br>
+   <h3>{% trans "If data is accpeted, it's displayed on our Wiki and contributor sees its karma increases" %}</h3>
+  </div>
+  </div>
+ </div>
+ </div>
+{% endblock %}

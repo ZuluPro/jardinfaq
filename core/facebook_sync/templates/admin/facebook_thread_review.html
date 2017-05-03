@@ -1,0 +1,185 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block extrahead %}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+{% endblock %}
+
+{% block coltype %}colM{% endblock %}
+
+{% block bodyclass %} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; {% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
+&rsaquo; {% if add %}{% blocktrans with name=opts.verbose_name %}Add {{ name }}{% endblocktrans %}{% else %}{{ original|truncatewords:"18" }}{% endif %}
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content %}<div id="content-main">
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+  <ul class="object-tools">
+    {% block object-tools-items %}
+    <li>
+        {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+        <a href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
+    </li>
+    {% if has_absolute_url %}<li><a href="{{ absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif %}
+    {% endblock %}
+  </ul>
+{% endif %}{% endif %}
+{% endblock %}
+<form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
+<div>
+{% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
+{% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
+{% if save_on_top %}{% block submit_buttons_top %}{% submit_row %}{% endblock %}{% endif %}
+{% if errors %}
+    <p class="errornote">
+    {% if errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+    </p>
+    {{ adminform.form.non_field_errors }}
+{% endif %}
+
+{% block field_sets %}
+<form method="POST">
+{% csrf_token %}
+<input type="hidden" name="id" value="{{ question.id }}">
+<input type="hidden" name="url" value="{{ url }}">
+<input type="hidden" name="likes" value="{{ likes }}">
+<input type="hidden" name="author_name" value="{{ question.from.name }}">
+<input type="hidden" name="author_id" value="{{ question.from.id }}">
+<input type="hidden" name="timestamp" value="{{ question.created_time }}">
+
+<div class="submit-row">
+    <input type="submit" value="{% trans "Import" %}" class="default" name="_import">
+</div>
+
+<fieldset class="module aligned ">
+<div class="form-row field-title">
+ <div class="field-box field-title">
+  <label class="required" for="id_title">{% trans "Title" %}&nbsp;:</label>
+  <input class="vLargeTextField" id="id_title" maxlength="255" name="title" type="text" value="{{ title }}">
+ </div>
+</div>
+<div class="form-row field-title">
+ <div class="field-box field-title">
+  <label class="required" for="id_title">{% trans "By" %}&nbsp;:</label>
+  {{ question.from.name }}
+ </div>
+</div>
+<div class="form-row field-tags">
+ <div class="field-box field-tags">
+  <label class="required" for="id_tags">{% trans "Tags" %}&nbsp;:</label>
+  <input class="vLargeTextField" id="id_tags" maxlength="255" name="tags" type="text" value="{{ tags }}">
+ </div>
+</div>
+<div class="form-row field-question_text">
+ <div class="field-box field-question_text">
+  <label class="required" for="id_question_text">{% trans "Question" %}&nbsp;:</label>
+  <textarea id="question_text" class="vLargeTextField" cols="40" rows="10" name="question_text">{{ text }}</textarea>
+ </div>
+</div>
+</fieldset>
+
+<fieldset>
+{% for answer in question.comments.data %}
+<input type="hidden" name="answer_ids" value="{{ answer.id }}">
+<input type="hidden" name="answer_{{ answer.id }}_url" value="{{ answer.link }}">
+<input type="hidden" name="answer_{{ answer.id }}_author_name" value="{{ answer.from.name }}">
+<input type="hidden" name="answer_{{ answer.id }}_author_id" value="{{ answer.from.id }}">
+<input type="hidden" name="answer_{{ answer.id }}_timestamp" value="{{ answer.created_time }}">
+<input type="hidden" name="answer_{{ answer.id }}_likes" value="{{ answer.like_count }}">
+<div class="form-row field-question_text">
+ <div class="field-box field-question_text">
+  <b>#{{ forloop.counter }}</b>
+ </div>
+ <div class="field-box field-question_text">
+  <b>{{ answer.from.name }}</b>
+  <br>
+  {{ answer.created_time }}
+  <br>
+  <label class="required" for="id_answer_{{ answer.id }}_import">{% trans "Import" %}&nbsp;:</label>
+  <input type="checkbox" name="answer_{{ answer.id }}_import" checked="checked">
+  <br>
+  <label class="required" for="id_import_{{ answer.id }}">{% trans "Comment of" %}&nbsp;:</label>
+  <select name="answer_{{ answer.id }}_com_of">
+    <option>{% trans "None" %}</option>
+    <option value="0">{% trans "Question" %}</option>
+    {% for ans in question.comments.data %}
+      {% if ans.id != answer.id %}
+        <option value="{{ ans.id }}">#{{ forloop.counter }}</option>
+      {% endif %}
+    {% endfor %}
+  <select>
+ </div>
+ <div class="field-box field-question_text">
+  <label class="required" for="id_question_text">{% trans "Answer" %}&nbsp;:</label>
+  <textarea name="answer_{{ answer.id }}_text" class="vLargeTextField" cols="40" rows="10">{{ answer.message }}</textarea>
+ </div>
+ <div class="field-box">
+ <b>{% trans "Comments" %}:</b>
+ {% for comment in answer.comments.data %}
+   <input type="hidden" name="answer_{{ answer.id }}_comment_ids" value="{{ comment.id }}">
+   <input type="hidden" name="comment_ids" value="{{ comment.id }}">
+   <input type="hidden" name="comment_{{ comment.id }}_url" value="{{ comment.permalink_url }}">
+   <input type="hidden" name="comment_{{ comment.id }}_likes" value="{{ comment.like_count }}">
+   <input type="hidden" name="comment_{{ comment.id }}_author_name" value="{{ comment.from.name }}">
+   <input type="hidden" name="comment_{{ comment.id }}_author_id" value="{{ comment.from.id }}">
+   <input type="hidden" name="comment_{{ comment.id }}_timestamp" value="{{ comment.created_time }}">
+   <input type="hidden" name="comment_{{ comment.id }}_text" value="{{ comment.message }}">
+   <p>
+    <b>{{ comment.from.name }}</b>: {{ comment.message }}
+    <input type="checkbox" name="comment_{{ comment.id }}_import" checked="checked">
+   </p>
+ {% endfor %}
+ </div>
+</div>
+{% endfor %}
+</fieldset>
+
+<div class="submit-row">
+    <input type="submit" value="{% trans "Import" %}" class="default" name="_import">
+</div>
+
+{% endblock %}
+
+{% block after_field_sets %}{% endblock %}
+
+{% block inline_field_sets %}
+{% for inline_admin_formset in inline_admin_formsets %}
+    {% include inline_admin_formset.opts.template %}
+{% endfor %}
+{% endblock %}
+
+{% block after_related_objects %}{% endblock %}
+
+{% block submit_buttons_bottom %}{# submit_row #}{% endblock %}
+
+{% block admin_change_form_document_ready %}
+    <script type="text/javascript"
+            id="django-admin-form-add-constants"
+            src="{% static 'admin/js/change_form.js' %}"
+            {% if adminform and add %}
+                data-model-name="{{ opts.model_name }}"
+            {% endif %}>
+    </script>
+{% endblock %}
+
+{# JavaScript for prepopulated fields #}
+{% prepopulated_fields_js %}
+
+</div>
+
+</form></div>
+{% endblock %}

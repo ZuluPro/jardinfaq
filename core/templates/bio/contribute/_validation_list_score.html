@@ -1,0 +1,3 @@
+<span class="text-{% if question.score > 0 %}success{% elif question.score < 0 %}danger{% endif %}">{{ question.score }}</span>
+<br>
+<small><span class="text-success">+{{ question.plus_score }}</span>/<span class="text-danger">-{{ question.minus_score }}</span></small>

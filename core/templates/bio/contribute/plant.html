@@ -1,0 +1,66 @@
+{% extends "jardinfaq/base.html" %}
+{% load i18n %}
+
+{% block title %}{% blocktrans with plant_name=plant.name %}Contribute to {{ plant_name }}{% endblocktrans %}{% endblock %}
+{% block action %}{% endblock %}
+
+{% block breadcrumb %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+ <ol class="breadcrumb">
+   <li><a href="{% url "bio:home" %}">{% trans "Database" %}</a></li>
+   <li><a href="{% url "contribute-home" %}">{% trans "Contribute" %}</a></li>
+   <li><a href="{% url "contribute-plant" %}">{% trans "Plant" %}</a></li>
+   <li>{{ plant }}</li>
+ </ol>
+ </div>
+{% endblock %}
+
+{% block content %}
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <div class="well bio-tile">
+          <h1>{{ plant }} <small><a href="{{ object.get_absolute_url }}">{% trans "See file" %}</a></small></h1>
+   {% if plant.description.strip %}
+   <p class="break-word">{{ plant.description }}</p>
+   {% else %}
+   <p><a href="{% url "contribute-plant-question" plant.id %}?fieldname=description"><small>{% blocktrans with plant_name=plant.name %}We don't have a global description of {{ plant_name }}, maybe you could add one ?{% endblocktrans %}</a></small></p>
+   {% endif %}
+  </div>
+  </div>
+  <div class="col-xs-12 col-md-5 col-md-offset-1">
+    <div class="well bio-tile">
+      <a href="{% url "contribute-plant-question" plant.id %}">
+       <h2 class="head-btn">{% trans "Contribute by answering questions" %}</h2>
+      </a>
+      <br>
+      <h3>{% blocktrans with plant_name=plant.name %}We'll ask you simple questions about {{ plant_name }}{% endblocktrans %}</h3>
+      <p>{% trans "You can answer or skip and get another question" %}</p>
+      {% if unknown_fields %}
+      <br>
+      <p>{% trans "We actually need this kind of data:" %}</p>
+      <ul class="no-style">
+        {% for field in unknown_fields %}
+        <li><a href="{% url "contribute-plant-question" plant.id %}?fieldname={{ field.attname }}">{% blocktrans with field=field.verbose_name|capfirst %}{{ field }} ?{% endblocktrans %}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-5">
+    <div class="well bio-tile">
+      <a href="{% url "contribute-plant-add-image" plant.id %}">
+       <h2 class="head-btn">{% trans "Submit images" %}</h2>
+      </a>
+      <br>
+      <h3>{% trans "Outside of data, visualization is very important" %}</h3>
+      <p>{% blocktrans with plant_name=plant.name %}Give us photographies or schemas representing {{ plant_name }}{% endblocktrans %}</p>
+      <br>
+      <div>
+      {% for image in plant.images.all %}
+      <a href="{{ image.get_absolute_url }}">
+      <img src="{{ image.image.url }}" style="width: 32%">
+      </a>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

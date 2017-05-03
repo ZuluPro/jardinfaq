@@ -1,0 +1,67 @@
+{% extends "jardinfaq/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Choose a plant" %}{% endblock %}
+{% block forestyle %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block forejs %}
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function() {
+   $("select").select2({
+       placeholder: "{% trans "Select or add a new one" %}",
+       maximumSelectionLength: 1,
+       tags: true,
+       language: {
+         noResults: function(args) {
+           return "{% trans "I don't know, you can add it" %}";
+         },
+         maximumSelected: function(args) {
+           return "{% trans "Ok, let's talk about!" %}";
+         }
+       },
+       escapeMarkup: function (markup) {
+         return markup;
+       }
+   });
+   $('select').on("select2:select", function (e) { $('#submit').removeAttr('disabled'); });
+   $('select').on("select2:unselect", function (e) { $('#submit').attr('disabled', 'disabled'); });
+ });
+ </script>
+{% endblock %}
+
+{% block action %}
+{% endblock %}
+
+{% block content %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  <ol class="breadcrumb">
+   <li><a href="{% url "bio:home" %}">{% trans "Database" %}</a></li>
+   <li><a href="{% url "contribute-home" %}">{% trans "Contribute" %}</a></li>
+   <li>{% trans "Plant" %}</li>
+  </ol>
+ </div>
+
+ <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8">
+  <form class="choose-plant-form" method="POST">{% csrf_token %}
+  {{ form.errors }}
+  <h2>{% trans "Do you have a plant you want to talk to us about ?" %}</h2>
+  <h3>{% trans "Else you can submit a new plant and other will validate it" %}</h3>
+  <br>
+  <select class="js-example-responsive" multiple="multiple" name="name" style="height: 50px">
+    <option value="{{ plant.name }}">{{ plant }}</option>
+    {% for plant in plants %}
+    <option value="{{ plant.name }}">{{ plant }}</option>
+    {% endfor %}
+  </select>
+<center>
+  <input id="submit" class="btn btn-xl" type="submit" name="submit" value="{% trans "Choose" %}" disabled="disabled">
+  <a class="btn btn-warning btn-xl" href="{% url "contribute-home" %}">{% trans "Go back" %}</a>
+</center>
+  </form>
+ </div>
+{% endblock %}
+

@@ -1,0 +1,43 @@
+{% extends "jardinfaq/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Plant list" %}{% endblock %}
+{% block forejs %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+ $(document).ready(function() {
+ });
+</script>
+{% endblock %}
+
+{% block action %}{% endblock %}
+
+{% block breadcrumb %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  <ol class="breadcrumb">
+   <li><a href="{% url "bio:home" %}">{% trans "Database" %}</a></li>
+   <li>{% trans "Plants" %}</li>
+  </ol>
+ </div>
+{% endblock %}
+
+{% block content %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  {% if not object_list %}
+    <h3>{% trans "There's no new plant's image to validate" %}</h3>
+  {% else %}
+    {% for plant in object_list %}
+     <div class="col-xs-6 col-sm-4">
+      <a class="plant-tile-link" href="{{ plant.get_absolute_url }}">
+       <div class="well plant-tile" style="background-image: url('{{ plant.illustration.image.url }}');">
+         <div class="shade shade-react">
+          <h2>{{ plant.name }}</h2>
+         </div>
+       </div>
+      </a>
+     </div>
+    {% endfor %}
+  {% endif %}
+ </div>
+{% endblock %}

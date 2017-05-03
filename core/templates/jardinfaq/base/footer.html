@@ -1,0 +1,59 @@
+{% load i18n %}
+<!-- template footer.html -->
+<div id="ground">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+    <div class="content-wrapper">
+        {% if settings.USE_LICENSE %}{# could be factored out into separate template #}
+            {% if settings.LICENSE_USE_URL %}
+            <div class="copyright">
+                {% if settings.LICENSE_USE_LOGO %}
+                <a href="{{ settings.LICENSE_URL}}">
+                        <img class="license-logo" src="{{settings.LICENSE_LOGO_URL|media }}" title="{{settings.LICENSE_ACRONYM}}" alt="{{settings.LICENSE_ACRONYM}}" /></a>
+                {% endif %}
+                {{settings.APP_COPYRIGHT}} {% blocktrans with license_title=settings.LICENSE_TITLE license_url=settings.LICENSE_URL %}Content on this site is licensed under a <a href="{{license_url}}">{{license_title}}</a> license.{% endblocktrans %}
+
+            </div>
+            {% else %}
+            <div class="copyright">
+                {% if settings.LICENSE_USE_LOGO %}
+                <img class="license-logo" src="{{settings.LICENSE_LOGO_URL|media }}" title="{{settings.LICENSE_ACRONYM}}" alt="{{settings.LICENSE_ACRONYM}}" />
+                {% endif %}
+                {{settings.APP_COPYRIGHT}} {% blocktrans with license=settings.LICENSE_TITLE %}Content on this site is licensed under a {{license}}{% endblocktrans %}
+            </div>
+            {% endif %}
+        {% endif %}
+        <div class="footer-links" >
+            <a href="{% url "about" %}">{% trans "about" %}</a>
+            <span class="link-separator"> |</span>
+            <a href="{% url "faq" %}">{% trans "faq" %}</a>
+            {% if user.is_authenticated and user.is_administrator %}
+                <span class="link-separator"> |</span>
+                <a class="settings" href="{% url "site_settings" %}">{% trans "settings" %}</a>
+                <span class="link-separator"> |</span>
+                <a class="widgets" href="{% url "widgets" %}">{% trans "widgets" %}</a>
+            {% endif %}
+            <!--
+            <span class="link-separator"> |</span>
+            <a href="{% url "privacy" %}">{% trans "privacy policy" %}</a>
+            <span class="link-separator"> |</span>
+            <a href="{% url "terms" %}">{% trans "terms of service" %}</a>
+            -->
+            {% if settings.FEEDBACK_MODE == 'open' or settings.FEEDBACK_MODE == 'auth-only' and request.user.is_authenticated %}
+            <span class="link-separator"> |</span>
+            <a 
+                {% if settings.FEEDBACK_SITE_URL %}
+                    href="{{settings.FEEDBACK_SITE_URL}}"
+                    target="_blank"
+                {% else %}
+                    href="{% url feedback %}?next={{request.path|escape}}"
+                {% endif %}
+            >
+                {% trans "give feedback" %}
+            </a>
+            {% endif %}
+        </div>
+        <div class="clean"></div>
+    </div>
+    </div>
+</div>
+<!-- end template footer.html -->

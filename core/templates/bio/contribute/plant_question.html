@@ -1,0 +1,94 @@
+{% extends "jardinfaq/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ question.question }}{% endblock %}
+{% block forejs %}
+<script src="http://seiyria.com/bootstrap-slider/js/bootstrap-slider.js"></script>
+<script type="text/javascript">
+ $(document).ready(function() {
+   $('.slider').slider({
+     ticks_snap_bounds: 10
+   });
+   $(document).on('change', '[name="{{ fieldname }}"]', function () {
+     if (this.value.length > 0) {
+       $('#submit').removeAttr('disabled');
+     } else {
+       $('#submit').attr('disabled', 'disabled');
+     }
+   });
+   $(document).on('slide', '.slider', function () {
+     $('#submit').removeAttr('disabled');
+     $('#value').text(this.value);
+   });
+   $(document).on('click', 'label', function () {
+     $('#submit').removeAttr('disabled');
+   });
+ });
+</script>
+<link href="/static/default/media/bootstrap/css/bootstrap.css?v=1" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="http://seiyria.com/bootstrap-slider/css/bootstrap-slider.css" media="screen">
+{% endblock %}
+
+{% block action %}
+{% endblock %}
+
+{% block content %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  <ol class="breadcrumb">
+   <li><a href="{% url "bio:home" %}">{% trans "Database" %}</a></li>
+   <li><a href="{% url "contribute-home" %}">{% trans "Contribute" %}</a></li>
+   <li><a href="{% url "contribute-plant" %}">{% trans "Plant" %}</a></li>
+   <li><a href="{% url "contribute-plant-home" question.plant.id %}">{{ question.plant }}</a></li>
+   <li>{{ question.get_field_verbose|capfirst }}</li>
+  </ol>
+ </div>
+
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  <form class="contribute-form" method="POST">{% csrf_token %}
+  <h2>{{ question.question }}</h2>
+  <h3>{{ form.field_options.help_text }}</h3>
+  {% for ex in exclude %}
+  <input type="hidden" name="exclude" value="{{ ex }}">
+  {% endfor %}
+  <input type="hidden" name="plant" value="{{ plant.id }}">
+  <input type="hidden" name="fieldname" value="{{ fieldname }}">
+
+  {% if form.field_options.widget %}
+    {{ form.field_options.widget|safe }}
+  {% else %}
+  <div data-toggle="buttons">
+  <div class="btn-group btn-group-justified">
+  {% for choice in form.field_options.choices %}
+     {% if form.field_options.choices|length == 2 %}
+       <label class="btn btn-success btn-2xl btn-choice">
+       <input name="{{ fieldname }}" type="radio" value="{{ choice.0 }}" autocomplete="off">
+       <span>{{ choice.1 }}</span>
+       </label>
+     {% else %}
+       {% if forloop.counter0|divisibleby:"5" %}
+         </div>
+         <div class="btn-group btn-group-justified">
+        {% endif %}
+       <label class="btn btn-success btn-xl">
+       <input name="{{ fieldname }}" type="radio" value="{{ choice.0 }}" autocomplete="off">
+       <span>{{ choice.1 }}</span>
+       </label>
+     {% endif %}
+  {% endfor %}
+  </div>
+  </div>
+  {% endif %}
+  <h3>{% trans "Give us your references" %}</h3>
+  {{ form.reference }}
+  <hr>
+  <div class="row"> 
+   <div class="col-xs-12">
+    <input id="submit" class="btn btn-xl" type="submit" name="submit" value="{% trans "Submit" %}" disabled="disabled"/>
+    <input class="btn btn-xl" type="submit" name="skip" value="{% trans "Skip" %}"/>
+    <a class="btn btn-warning btn-xl" href="{% url "contribute-plant" %}">{% trans "Choose another plant" %}</a>
+   </div>
+  </div>
+  </form>
+
+ </div>
+{% endblock %}

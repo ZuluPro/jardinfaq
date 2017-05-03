@@ -1,0 +1,32 @@
+{% load i18n %}
+<div class="col-xs-12 col-sm-12 col-md-3 col-md-offset-1">
+ <a id="logo" href="/questions/"> <img src="/static/jardin/media/images/jardinfaq_logo.png?v=1" alt="logo de JardinFAQ"> </a>
+</div>
+
+<div class="col-xs-8 col-xs-offset-2 col-md-2 col-md-offset-5">
+ {% if user.is_authenticated %}
+   <div class="user-widget">
+       <a href="{{ user.get_absolute_url }}"><img class="avatar" src="{{ user.get_avatar_url }}"></a>
+       <span class="user-info">
+        <a class="user-micro-info reputation" href="{{ user.get_absolute_url}}?sort=reputation" data-fetch-data-url="/get-perms-data/" data-url="/get-perms-data/">
+            {% blocktrans with reputation=user.get_localized_profile.get_reputation %}karma: {{ reputation }}{% endblocktrans %}
+        </a>
+        <br>
+        <a class="user-micro-info" href="{{ user.get_absolute_url}}#badges">
+          {% if user.gold %}
+              <span class='badge1'>&#9679;</span><span class="badgecount">{{ user.gold }}</span>
+          {% endif %}
+          {% if user.silver %}
+              <span class='badge2'>&#9679;</span><span class="badgecount">{{ user.silver }}</span>
+          {% endif %}
+          {% if user.bronze %}
+              <span class='badge3'>&#9679;</span><span class="badgecount">{{ user.bronze }}</span>
+          {% endif %}
+          <br>
+          <a class="logout-link" href="/compte/deconnexion/?next=/compte/deconnecter/">{% trans "sign out" %}</a>
+       </span>
+   </div>
+ {% else %}
+ <p class="login-widget"> <a class="login-link" href="/compte/connexion/?next={{ request.path }}">{% trans "Log in " %}</a> </p>
+ {% endif %}
+</div>

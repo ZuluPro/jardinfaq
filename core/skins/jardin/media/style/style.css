@@ -152,11 +152,11 @@ a {
 }
 h2 {
   font-size: 21px;
-  padding: 3px 0 3px 5px;
+  padding: 3px 0 3px 2px;
 }
 h3 {
   font-size: 19px;
-  padding: 3px 0 3px 5px;
+  padding: 3px 0 3px 0px;
 }
 ul {
   list-style: disc;
@@ -1003,7 +1003,7 @@ form.ajax-file-upload img.spinner {
   /* check blocks/secondary_header.html and widgets/ask_button.html*/
 
   float: right;
-  font-size: 20px;
+  font-size: larger;
   height: 42px;
   line-height: 44px;
   margin: -1px 0 0 0;
@@ -1526,13 +1526,13 @@ ul#searchTags {
 }
 .paginator {
   padding-top: 5px;
+  padding-bottom: 15px;
   font-size: 13px;
 }
 .paginator .prev a,
 .paginator .prev a:visited,
 .paginator .next a,
 .paginator .next a:visited {
-  background-color: #fff;
   color: #777;
   padding: 0 0.25em;
 }
@@ -3678,11 +3678,15 @@ body.question-page ins, body.main-page ins {
 #ground {
   width: 100%;
   clear: both;
-  padding: 16px 0 16px 0;
   font-size: 16px;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
   border-top: 1px solid #688e61;
   background: #4e8a43;
+  min-height: 40px;
+  padding: 10px 0 10px 0;
+}
+#ground {
+  bottom: 0;
 }
 #ground a:hover {
   color: #ebff88;
@@ -5505,4 +5509,219 @@ body.large #ContentFull {
   font-size: 15px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.well {
+  background-color: #e3efe0;
+  border: 1px solid #fffbec;
+  box-shadow: none;
+}
+.bio-tile {
+  text-align: center;
+}
+a.plant-tile-link {
+  text-decoration: none;
+}
+.plant-tile {
+  text-align: center;
+  color: #FFF;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  padding: 0px;
+}
+.plant-tile .shade {
+  padding-top: 20%;
+  padding-bottom: 20%;
+}
+.plant-tile h2 {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.choose-plant-form h2 {
+  font-size: 35px;
+  text-align: center;
+}
+.choose-plant-form h3 {
+  font-size: 30px;
+  text-align: center;
+}
+.choose-plant-form input {
+  margin: 20px
+}
+.choose-plant-form .select2-selection {
+  height: 75px;
+  font-size: 35px;
+  border: none;
+}
+.choose-plant-form .select2-selection input {
+  text-align: center;
+  line-height: 75px;
+}
+.choose-plant-form .select2-selection__choice {
+  text-align: center;
+  background-color: transparent !important;
+  border: none !important;
+  line-height: 75px;
+}
+
+.btn-xl {
+  min-height: 70px !important;
+  font-size: 35px !important;
+  line-height: 35px !important;
+  padding: 20px !important;
+}
+.btn-2xl {
+  height: 80px !important;
+  font-size: 50px !important;
+  line-height: 80px !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+.textarea-lg {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100px;
+  font-size: 30px;
+  line-height: 30px;
+  border-width: 1px;
+  text-align: center;
+} 
+.input-lg {
+  width: 80%;
+  text-align: center;
+  height: 50px !important;
+  font-size: 30px !important;
+}
+.contribute-form {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.contribute-form .btn {
+  padding: 0px
+}
+.contribute-form h1 {
+  font-size: 40px;
+}
+.contribute-form input[type="radio"] {
+  display: None;
+}
+div.slider.slider-horizontal {
+  width: 95% !important;
+}
+.slider-tick-label-container {
+  display: none;
+}
+
+ol.breadcrumb {
+  margin-left: 0px;
+  border-color: #e7e7e7;
+  background-color: #e3efe0 !important;
+}
+
+.btn-2xl .badge {
+  font-size: 20px;
+}
+.progress {
+  margin-bottom: 5px;
+}
+.plant-file {
+  background-color: #ededc8;
+  padding: 30px;
+}
+.plant-file h1 {
+  font-size: 35px;
+}
+.plant-file h2 {
+  margin-bottom: 10px;
+  padding-left: 0px;
+}
+.plant-file .contribute-row {
+  padding: 50px;
+  text-align: center;
+}
+.badge-success {
+  background-color: #5cb85c;
+}
+.badge-danger {
+  background-color: #d9534f;
+}
+.progress-bar-transparent {
+  background-color: transparent;
+  color: #333;
+}
+.user-top-box {
+  width: 100%;
+  background-color: #e3efe0;
+  border: 1px solid #fffbec;
+  box-shadow: none;
+  padding: 10px;
+  display: flex;
+  height: 60px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.bio-menu {
+  background-position: center top;
+  background-size: 120% auto;
+  text-align: center;
+  color: #FFF;
+}
+@media (min-width: 992px) {
+.bio-menu {
+  background-size: 100% auto;
+}
+}
+.bio-menu .shade{
+  padding: 7%;
+  min-height: 300px;
+}
+.bio-menu h2 {
+  font-size: 40px;
+}
+.bio-menu h3 {
+  font-size: 30px;
+}
+.no-padding {
+  padding: 0px !important;
+}
+body.bio {
+  background: #80784f !important;
+}
+.shade {
+  background-color: rgba(0,0,0,0.30);
+}
+.shade-react:hover {
+  background-color: rgba(0,0,0,0.20);
+}
+body {
+  font-family: 'Open Sans Condensed', Arial, sans-serif;
+}
+.message {
+  display: flex;
+  text-align: center;
+  padding: 5px;
+}
+.message .close {
+  top: 0px;
+  right: 0px;
+}
+.bio-tile .head-btn {
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 5px;
+  width: 50%;
+  margin-left: 25%;
+  padding: 10px;
+}
+ul.no-style {
+  list-style: none;
+}
+p.break-word {
+  word-wrap: break-word;
+}
+.paginator span.prev,
+.paginator span.next,
+.paginator span.page {
+background-color: #e3efe0 !important;
 }

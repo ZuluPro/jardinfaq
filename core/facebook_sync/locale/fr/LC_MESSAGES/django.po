@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-27 06:58+0200\n"
+"POT-Creation-Date: 2017-05-02 16:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,14 +30,14 @@ msgstr "Jeton d'accès à l'API Facebook"
 msgid "Facebook page synchronized."
 msgstr "Page Facebook synchronizée"
 
-#: facebook_sync/models.py:152
+#: facebook_sync/models.py:154
 msgid "Facebook post"
 msgstr "Publication Facebook"
 
-#: facebook_sync/models.py:153
+#: facebook_sync/models.py:155
 msgid "Facebook posts"
 msgstr "Publications Facebook"
 
-#: facebook_sync/models.py:170
+#: facebook_sync/models.py:175
 msgid "Facebook link"
 msgstr "Lien Facebook"

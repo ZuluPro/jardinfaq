@@ -1,0 +1,75 @@
+{% extends "jardinfaq/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Add image" %}{% endblock %}
+{% block action %}
+{% endblock %}
+
+{% block forejs %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+ $(document).ready(function() {
+   document.getElementById("id_image").onchange = function () {
+   };
+   $(document).on('change', '#id_image', function (e) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+           document.getElementById("image").src = e.target.result;
+           $("#image").show();
+       };
+       reader.readAsDataURL(this.files[0]);
+   });
+   $(document).on('click', '#image-btn', function (e) {
+        $('#id_image').click()
+   });
+ });
+</script>
+{% endblock %}
+
+{% block breadcrumb %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+ <ol class="breadcrumb">
+   <li><a href="{% url "bio:home" %}">{% trans "Database" %}</a></li>
+   <li><a href="{% url "contribute-home" %}">{% trans "Contribute" %}</a></li>
+   <li><a href="{% url "contribute-plant" %}">{% trans "Plant" %}</a></li>
+   <li><a href="{% url "contribute-plant-home" plant.id %}">{{ plant }}</a></li>
+   <li>{% trans "Add image" %}</li>
+ </ol>
+ </div>
+{% endblock %}
+
+{% block content %}
+
+    <form class="contribute-form" method="POST" enctype="multipart/form-data">{% csrf_token %}
+     <input type="hidden" name="plant" value="{{ plant.id }}">
+     <input type="hidden" name="user" value="{{ request.user.id }}">
+
+ <div class="col-xs-12 col-md-5 col-md-offset-1">
+     <h1>{{ form.title.label }}</h1>
+     {{ form.title }}
+     <br><br>
+
+     <h1>{{ form.description.label }}</h1>
+     {{ form.description }}
+     <br><br>
+ </div>
+
+ <div class="col-xs-12 col-md-5">
+     <h1>{{ form.image.label }}</h1>
+     <label id="image-btn" class="btn btn-primary btn-xl">{% trans "Choose image" %}</label>
+     {{ form.image }}
+     <br><br>
+
+     <img class="img-thumbnail" id="image" style="max-width: 100%; display: none;"/>
+     <br><br>
+ </div>
+
+
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+     <input class="btn btn-primary btn-xl" type="submit" name="submit" value="{% trans "Submit" %}">
+     <br><br>
+ </div>
+
+    </form>
+{% endblock %}

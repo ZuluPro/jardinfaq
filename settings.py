@@ -154,6 +154,19 @@ RECAPTCHA_USE_SSL = CONFIG.getboolean('DEFAULT', 'recaptcha_use_ssl')
 AKISMET_API_KEY = CONFIG.get('DEFAULT', 'akismet_api_key')
 
 
+ASKBOT_CSS_DEVEL = False
+if 'ASKBOT_CSS_DEVEL' in locals() and ASKBOT_CSS_DEVEL:
+    COMPRESS_PRECOMPILERS = (
+        ('text/less', 'lessc {infile} {outfile}'),
+    )
+
+COMPRESS_JS_FILTERS = []
+COMPRESS_PARSER = 'compressor.parser.HtmlParser'
+JINJA2_EXTENSIONS = (
+    'compressor.contrib.jinja2ext.CompressorExtension',
+)
+JINJA2_TEMPLATES = ('captcha',)
+
 TEMPLATES = (
     {
         'BACKEND': 'askbot.skins.template_backends.AskbotSkinTemplates',
@@ -238,6 +251,10 @@ INSTALLED_APPS = [
     'dbbackup',
     'dj_web_rich_object',
     'newsboard',
+    'mathfilters',
+    # Wiki
+    'bio',
+    'bio.contribute',
 ]
 
 CACHES = {
@@ -277,10 +294,11 @@ AUTHENTICATION_BACKENDS = (
 ASKBOT_URL = ''
 ASKBOT_TRANSLATE_URL = True
 _ = lambda v: v  #fake translation function for the login url
-LOGIN_URL = '/%s%s%s' % (ASKBOT_URL, _('account/'), _('signin/'))
+LOGIN_URL = '/%s%s%s' % (ASKBOT_URL, _('compte/'), _('connexion/'))
 LOGIN_REDIRECT_URL = ASKBOT_URL
 ALLOW_UNICODE_SLUGS = False
 ASKBOT_USE_STACKEXCHANGE_URLS = False
+ASKBOT_CUSTOM_BADGES = 'core.badges.BADGES'
 
 #Celery Settings
 CELERY_BROKER_URL = BROKER_URL = CONFIG.get('DEFAULT', 'broker_url')
@@ -347,18 +365,6 @@ GROUP_MESSAGING = {
 }
 
 
-ASKBOT_CSS_DEVEL = False
-if 'ASKBOT_CSS_DEVEL' in locals() and ASKBOT_CSS_DEVEL:
-    COMPRESS_PRECOMPILERS = (
-        ('text/less', 'lessc {infile} {outfile}'),
-    )
-
-COMPRESS_JS_FILTERS = []
-COMPRESS_PARSER = 'compressor.parser.HtmlParser'
-JINJA2_EXTENSIONS = (
-    'compressor.contrib.jinja2ext.CompressorExtension',
-)
-JINJA2_TEMPLATES = ('captcha',)
 
 VERIFIER_EXPIRE_DAYS = 3
 AVATAR_AUTO_GENERATE_SIZES = (16, 32, 48, 128)
@@ -416,6 +422,10 @@ LOGGING = {
 }
 
 NEWSBOARD_FACEBOOK_TOKEN = CONFIG.get('DEFAULT', 'facebook_token')
+
+BIO_USER_CAN_ADD_PLANT_FUNC = 'core.perms.user_can_add_plant'
+BIO_USER_CAN_VALIDATE_FUNC = 'core.perms.user_can_validate'
+BIO_USER_CAN_VOTE_FUNC = 'core.perms.user_can_vote'
 
 if celery.VERSION < (4, 0, 0):
     CELERYBEAT_SCHEDULE = {

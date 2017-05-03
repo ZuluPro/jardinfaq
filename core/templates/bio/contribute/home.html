@@ -1,0 +1,63 @@
+{% extends "jardinfaq/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Contribute" %}{% endblock %}
+{% block action %}{% endblock %}
+{% block breadcrumb %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  <ol class="breadcrumb">
+   <li><a href="{% url "bio:home" %}">{% trans "Database" %}</a></li>
+   <li>{% trans "Contribute" %}</li>
+  </ol>
+ </div>
+{% endblock %}
+
+{% block content %}
+  <div class="col-xs-12 col-md-5 col-md-offset-1">
+    <div class="well bio-tile">
+      <a href="{% url "contribute-plant" %}">
+       <h2 class="head-btn">{% trans "Add informations" %}</h2>
+      </a>
+      <br>
+      <h3>{% trans "Everyone can contribute by give us simple data" %}</h3>
+      <br>
+      <p>{% trans "We aim to gather simple information:" %}</p>
+      <p>{% trans "Germination temperature, reproduction type, exposition or photos" %}</p>
+      <br>
+      <p>{% trans "Here's a sample of last contributions:" %}</p>
+      <ul class="no-style">
+       {% for question in last_questions %}
+       <li>
+         <i><a href="{{ question.get_absolute_url }}">{{ question.question }}</a></i>
+         {% trans "by" %}
+         <a href="{{ question.user.get_absolute_url }}">{{ question.user.username }}</a>
+       </li>
+       {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-5">
+    <div class="well bio-tile">
+      <a href="{% url "contribute-validation-home" %}">
+       <h2 class="head-btn">{% trans "Validate data" %}</h2>
+      </a>
+      <br>
+      <h3>{% trans "Check submitted informations and give them a value" %}</h3>
+      <br>
+      <p>{% trans "You can decide to accept or decline a data" %}</p>
+      <p>{% trans "User and data's score will help admins to decide to include data or not" %}</p>
+      <br>
+      <p>{% trans "Some data have already been validated by community, like the ones below:" %}</p>
+      <ul class="no-style">
+       {% for question in last_validated_questions %}
+       <li>
+         <i><a href="{{ question.get_absolute_url }}">{{ question.question }}</a></i>
+         {% trans "by" %}
+         <a href="{{ question.user.get_absolute_url }}">{{ question.user.username }}</a>
+         {% blocktrans with score=question.score %}{{ score }} points{% endblocktrans %}
+       </li>
+       {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

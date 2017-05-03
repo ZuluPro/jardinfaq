@@ -1,0 +1,475 @@
+{% extends "jardinfaq/base.html" %}
+{% load i18n mathfilters %}
+
+{% block title %}{{ plant }}{% endblock %}
+{% block forejs %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type='text/javascript' src='/static/jardin/media/jslib/unitegallery/js/unitegallery.min.js'></script>
+<script type='text/javascript' src='/static/jardin/media/jslib/unitegallery/themes/default/ug-theme-default.js'></script>
+<link rel='stylesheet' href='/static/jardin/media/jslib/unitegallery/css/unite-gallery.css' type='text/css' />
+<script type='text/javascript' src='/static/jardin/media/jslib/unitegallery/themes/tiles/ug-theme-tiles.js'></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+        $('#gallery').unitegallery({
+            gallery_theme: "tiles",
+            tile_enable_textpanel: true,
+            tile_textpanel_title_text_align: "center",
+        });
+    });
+</script>
+{% endblock %}
+
+{% block action %}
+{% endblock %}
+
+{% block breadcrumb %}
+<div class="col-xs-12 col-md-10 col-md-offset-1">
+ <ol class="breadcrumb">
+  <li><a href="{% url "bio:home" %}">{% trans "Database" %}</a></li>
+  <li><a href="{% url "bio:plants" %}">{% trans "Plants" %}</a></li>
+  <li>{{ plant }}</li>
+ </ol>
+</div>
+{% endblock %}
+
+{% block content %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  <div class="form-horizontal plant-file">
+
+   <h1>{{ plant }}</h1>
+   <div class="row">
+    <div class="col-xs-12 col-md-8">
+        
+     {% if plant.description.strip %}
+     <p class="break-word">{{ plant.description }}</p>
+     {% else %}
+     <p><a href="{% url "contribute-plant-question" plant.id %}?fieldname=description"><small>{% blocktrans with plant_name=plant.name %}We don't have a global description of {{ plant_name }}, maybe you could add one ?{% endblocktrans %}</a></small></p>
+     {% endif %}
+
+     {% if plant.lifecycle %}
+     <div class="form-group">
+      <label class="col-xs-3">{% trans "Lifecycle" %}</label>
+      <div class="col-xs-9">
+       {{ plant.get_lifecycle_display }}
+       {% if plant.max_age %}
+       ({% blocktrans with max_age=plant.max_age %}{{ max_age }} year max{% endblocktrans %})
+       {% endif %}
+      </div>
+     </div>
+     {% endif %}
+
+     {% if plant.get_growth_types %}
+      <div class="form-group">
+       <label class="col-xs-3">{% trans "Growth type" %}</label>
+       <div class="col-xs-9">
+        {{ plant.get_growth_types_display }}
+       </div>
+      </div>
+     {% endif %}
+
+     {% if plant.food != None %}
+      <div class="form-group">
+       <label class="col-xs-3">{% trans "Is food" %}</label>
+       <div class="col-xs-9">
+        {% if plant.food %}
+        <span class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i></span>
+        {% else %}
+        <span class="badge badge-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
+        {% endif %}
+       </div>
+      </div>
+     {% endif %}
+     {% if plant.toxic != None %}
+      <div class="form-group">
+       <label class="col-xs-3">{% trans "Is toxic" %}</label>
+       <div class="col-xs-9">
+        {% if plant.toxic %}
+        <span class="badge badge-danger"><i class="fa fa-check" aria-hidden="true"></i></span>
+        {% else %}
+        <span class="badge badge-success"><i class="fa fa-times" aria-hidden="true"></i></span>
+        {% endif %}
+       </div>
+      </div>
+     {% endif %}
+
+     {% if plant.green_manure != None %}
+      <div class="form-group">
+       <label class="col-xs-3">{% trans "Is green manure" %}</label>
+       <div class="col-xs-9">
+        {% if plant.green_manure %}
+        <span class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i></span>
+        {% else %}
+        <span class="badge badge-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
+        {% endif %}
+       </div>
+      </div>
+     {% endif %}
+
+     {% if plant.nitrogen_fixing != None %}
+      <div class="form-group">
+       <label class="col-xs-3">{% trans "Nitrogen fixing" %}</label>
+       <div class="col-xs-9">
+        {% if plant.nitrogen_fixing %}
+        <span class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i></span>
+        {% else %}
+        <span class="badge badge-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
+        {% endif %}
+       </div>
+      </div>
+     {% endif %}
+    </div>
+    <div class="col-xs-12 col-md-4">
+     {% if plant.illustration %}
+     <img class="img-thumbnail" src="{{ plant.get_illustration_url }}" width="100%">
+     {% else %}
+     <div class="well">
+      <a href="{% url "contribute-plant-add-image" plant.id %}">
+       <i class="fa fa-plus-circle" aria-hidden="true"></i> 
+       {% trans "Add an illustration" %}
+      </a>
+     </div>
+     {% endif %}
+    </div>
+   </div>
+
+  <div class="row">
+   <div class="col-xs-12 col-md-6">
+    <h2>{% trans "Root morphology" %}</h2>
+    {% if plant.get_root_types %}
+     <div class="form-group">
+      <label class="col-xs-3">{% trans "Type" %}</label>
+      <div class="col-xs-9">
+       {{ plant.get_root_types_display }}
+      </div>
+     </div>
+    {% endif %}
+
+    {% if plant.root_depth or plant.root_area %}
+     <div class="form-group">
+      <label class="col-xs-3">{% trans "Maximum size" %}</label>
+      <div class="col-xs-9">
+       {% if plant.root_depth %}
+       {% blocktrans with depth=plant.root_depth %}{{ depth }}cm deep{% endblocktrans %}
+       {% endif %}
+       {% if plant.root_area %}
+       {% blocktrans with area=plant.root_area %}{{ area }}m2{% endblocktrans %}
+       {% endif %}
+      </div>
+     </div>
+    {% endif %}
+   </div>
+
+   <div class="col-xs-12 col-md-6">
+    <h2>{% trans "Aerial morphology" %}</h2>
+    {% if plant.deciduous_leaf != None %}
+     <div class="form-group">
+      <label class="col-xs-3">{% trans "Leaves" %}</label>
+      <div class="col-xs-9">
+       {% trans "Deciduous" %}
+      </div>
+     </div>
+    {% endif %}
+
+    {% if plant.get_tissue_types %}
+     <div class="form-group">
+      <label class="col-xs-3">{% trans "Tissue type" %}</label>
+      <div class="col-xs-9">
+       {{ plant.get_tissue_types_display }}
+      </div>
+     </div>
+    {% endif %}
+   </div>
+  </div>
+
+  <div class="row">
+   <div class="col-xs-12 col-md-6">
+    <h2>{% trans "Reproduction" %}</h2>
+    {% if plant.transplantable != None %}
+     <div class="form-group">
+      <label class="col-xs-4">{% trans "Transplantable" %}</label>
+      <div class="col-xs-8">
+        {% if plant.transplantable %}
+        <span class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i></span>
+        {% else %}
+        <span class="badge badge-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
+        {% endif %}
+      </div>
+     </div>
+    {% endif %}
+
+    {% if plant.get_reproduction_types %}
+     <div class="form-group">
+      <label class="col-xs-4">{% trans "Repoduction type" %}</label>
+      <div class="col-xs-8">
+       {{ plant.get_reproduction_types_display }}
+      </div>
+     </div>
+    {% endif %}
+
+    {% if plant.get_sexual_repartitions %}
+     <div class="form-group">
+      <label class="col-xs-4">{% trans "Sexual repartition" %}</label>
+      <div class="col-xs-8">
+       {{ plant.get_sexual_repartition_display }}
+      </div>
+     </div>
+    {% endif %}
+
+    {% if plant.seed_conservation_time %}
+     <div class="form-group">
+      <label class="col-xs-4">{% trans "Seed conservation time" %}</label>
+      <div class="col-xs-8">
+       {% blocktrans with seed_conservation_time=plant.seed_conservation_time %}
+       {{ seed_conservation_time }} month(s)
+       {% endblocktrans %}
+      </div>
+     </div>
+    {% endif %}
+   </div>
+
+   <div class="col-xs-12 col-md-6">
+    <h2>{% trans "Germination environment" %}</h2>
+    {% if plant.seed_need_stratification != None %}
+     <div class="form-group">
+      <label class="col-xs-3">{% trans "Needs stratification" %}</label>
+      <div class="col-xs-9">
+       {% if plant.seed_need_stratification %}
+       <span class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i></span>
+       {% else %}
+       <span class="badge badge-info"><i class="fa fa-times" aria-hidden="true"></i></span>
+       {% endif %}
+      </div>
+     </div>
+    {% endif %}
+
+    {% if plant.germination_min_time %}
+     <div class="form-group">
+      <label class="col-xs-4">{% trans "Minimum time" %}</label>
+      <div class="col-xs-8">
+       {% blocktrans with germination_min_time=plant.germination_min_time %}
+       {{ germination_min_time }} day(s)
+       {% endblocktrans %}
+      </div>
+     </div>
+    {% endif %}
+
+    {% if plant.germination_rate %}
+     <div class="form-group">
+      <label class="col-xs-4">{% trans "Germination rate" %}</label>
+      <div class="col-xs-8">
+       <div class="progress">
+        <div class="progress-bar" style="width: {{ plant.germination_rate }}%;">{{ plant.germination_rate }}%</div>
+       </div>
+      </div>
+     </div>
+    {% endif %}
+
+    {% if plant.get_germination_temp_display %}
+     <div class="form-group">
+      <label class="col-xs-4">{% trans "Temperature" %}</label>
+      <div class="col-xs-8">
+       <div class="progress">
+        {% if plant.germination_min_temp != None and plant.germination_max_temp != None %}
+        {% widthratio plant.germination_min_temp|add:20 80 100 as min_width %}
+        {% widthratio plant.germination_max_temp|sub:plant.germination_min_temp|add:20 80 100 as ok_width %}
+        <div class="progress-bar" style="width: {{ min_width }}%;"></div>
+        <div class="progress-bar progress-bar-success" style="width: {{ ok_width }}%;">{{ plant.get_germination_temp_display }}</div>
+        <div class="progress-bar progress-bar-danger" style="width: {{ 100|sub:min_width|sub:ok_width }}%;"></div>
+        {% elif plant.germination_min_temp != None %}
+        {% widthratio plant.germination_min_temp|add:30 80 100 as width %}
+        <div class="progress-bar" style="width: {{ width }}%;"></div>
+        <div class="progress-bar progress-bar-transparent" style="width: {{ 100|sub:width }}%;">{{ plant.get_germination_temp_display }}</div>
+        {% elif plant.humidity_max != None %}
+        {% widthratio plant.germination_max_temp|add:30 80 100 as min_width %}
+        {% widthratio plant.germination_min_temp|add:30 80 100 as ok_width %}
+        <div class="progress-bar" style="margin-left: {{ min_width }}%; width: {{ ok_width }}%;">{{ plant.get_germination_temp_display }}</div>
+        {% endif %}
+       </div>
+      </div>
+     </div>
+    {% endif %}
+    {% if plant.get_germination_humidity_display %}
+     <div class="form-group">
+      <label class="col-xs-4">{% trans "Humidity" %}</label>
+      <div class="col-xs-8">
+       <div class="progress">
+        {% if plant.germination_humidity_min != None and plant.germination_humidity_max != None %}
+        <div class="progress-bar" style="margin-left: {{ plant.germination_humidity_min }}%; width: {{ plant.germination_humidity_max|sub:plant.germination_humidity_min }}%;">{{ plant.get_germination_humidity_display }}</div>
+        {% elif plant.germination_humidity_min != None %}
+        <div class="progress-bar" style="margin-left: {{ plant.germination_humidity_min }}%; width: {{ 100|sub:plant.germination_humidity_min }}%;">{{ plant.get_germination_humidity_display }}</div>
+        {% elif plant.germination_humidity_max != None %}
+        <div class="progress-bar" style="width: {{ plant.germination_humidity_max }}%;">{{ plant.get_germination_humidity_display }}</div>
+        {% endif %}
+       </div>
+      </div>
+     </div>
+    {% endif %}
+   </div>
+  </div>
+
+
+  <div class="row">
+   <div class="col-xs-12 col-md-6">
+    <h2>{% trans "Environment" %}</h2>
+    {% if plant.environment_description %}
+    <p>{{ plant.environment_description }}</p>
+    {% endif %}
+    {% if plant.bio_indication %}
+    <p>{{ plant.bio_indication }}</p>
+    {% endif %}
+   {% if plant.get_temp_display %}
+    <div class="form-group">
+     <label class="col-xs-4">{% trans "Temperature" %}</label>
+     <div class="col-xs-8">
+      <div class="progress">
+       {% if plant.temp_min != None and plant.temp_max != None %}
+       {% widthratio plant.temp_min|add:20 80 100 as min_width %}
+       {% widthratio plant.temp_max|sub:plant.temp_min|add:20 80 100 as ok_width %}
+       <div class="progress-bar" style="width: {{ min_width }}%;"></div>
+       <div class="progress-bar progress-bar-success" style="width: {{ ok_width }}%;">{{ plant.get_temp_display }}</div>
+       <div class="progress-bar progress-bar-danger" style="width: {{ 100|sub:min_width|sub:ok_width }}%;"></div>
+       {% elif plant.temp_min != None %}
+       {% widthratio plant.temp_min|add:30 80 100 as width %}
+       <div class="progress-bar" style="width: {{ width }}%;"></div>
+       <div class="progress-bar progress-bar-transparent" style="width: {{ 100|sub:width }}%;">{{ plant.get_temp_display }}</div>
+       {% elif plant.humidity_max != None %}
+       {% widthratio plant.temp_max|add:30 80 100 as min_width %}
+       {% widthratio plant.temp_min|add:30 80 100 as ok_width %}
+       <div class="progress-bar" style="margin-left: {{ min_width }}%; width: {{ ok_width }}%;">{{ plant.get_temp_display }}</div>
+       {% endif %}
+      </div>
+     </div>
+    </div>
+   {% endif %}
+   {% if plant.get_humidity_display %}
+   <div class="form-group">
+    <label class="col-xs-4">{% trans "Humidity" %}</label>
+     <div class="col-xs-8">
+      <div class="progress">
+       {% if plant.humidity_min != None and plant.humidity_max != None %}
+       <div class="progress-bar" style="margin-left: {{ plant.humidity_min }}%; width: {{ plant.humidity_max|sub:plant.humidity_min }}%;">{{ plant.get_humidity_display }}</div>
+       {% elif plant.humidity_min != None %}
+       <div class="progress-bar" style="margin-left: {{ plant.humidity_min }}%; width: {{ 100|sub:plant.humidity_min }}%;">{{ plant.get_humidity_display }}</div>
+       {% elif plant.humidity_max != None %}
+       <div class="progress-bar" style="width: {{ plant.humidity_max }}%;">{{ plant.get_humidity_display }}</div>
+       {% endif %}
+      </div>
+     </div>
+    </div>
+   {% endif %}
+
+   {% if plant.get_ph_display %}
+    <div class="form-group">
+     <label class="col-xs-4">{% trans "pH" %}</label>
+     <div class="col-xs-8">
+      <div class="progress">
+       {% if plant.ph_min != None and plant.ph_max != None %}
+       {% widthratio plant.ph_min 14 100 as min %}
+       {% widthratio plant.ph_max 14 100 as max %}
+       {{ plant.get_ph_display }}
+       <div class="progress-bar" style="margin-left: {{ min }}%; width: {{ max|sub:min }}%;"></div>
+       {% elif plant.ph_min %}
+       {% widthratio plant.ph_min 14 100 as min %}
+       <div class="progress-bar" style="margin-left: {{ min }}%; width: {{ 100|sub:min }}%;">{{ plant.get_ph_display }}</div>
+       {% elif plant.ph_max %}
+       {% widthratio plant.ph_max 14 100 as max %}
+       <div class="progress-bar" style="width: {{ max }}%;">{{ plant.get_ph_display }}</div>
+       {% endif %}
+      </div>
+     </div>
+    </div>
+   {% endif %}
+   </div>
+
+   <div class="col-xs-12 col-md-6">
+   <h2>{% trans "Requirements" %}</h2>
+
+   {% if plant.get_exposition_types %}
+    <div class="form-group">
+     <label class="col-xs-4">{% trans "Exposition" %}</label>
+     <div class="col-xs-8">
+      {{ plant.get_exposition_types_display }}
+     </div>
+    </div>
+   {% endif %}
+
+    {% if plant.water_requirement %}
+    <div class="form-group">
+     <label class="col-xs-4">{% trans "Water" %}</label>
+     <div class="col-xs-8">
+      <div class="progress">
+       <div class="progress-bar" role="progressbar" aria-valuenow="{{ plant.water_requirement }}" aria-valuemin="1" aria-valuemax="5" style="width: {% widthratio plant.water_requirement 5 100 %}%;">
+        {{ plant.get_water_requirement_display }}
+       </div>
+      </div>
+     </div>
+    </div>
+    {% endif %}
+    {% if plant.nitrogen %}
+    <div class="form-group">
+     <label class="col-xs-4">{% trans "Nitrogen" %}</label>
+     <div class="col-xs-8">
+      <div class="progress">
+       <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ plant.nitrogen }}" aria-valuemin="1" aria-valuemax="5" style="width: {% widthratio plant.nitrogen 5 100 %}%;">
+        {{ plant.get_nitrogen_display }}
+       </div>
+      </div>
+     </div>
+    </div>
+    {% endif %}
+    {% if plant.phosphorus %}
+    <div class="form-group">
+     <label class="col-xs-4">{% trans "Phosphorus" %}</label>
+     <div class="col-xs-8">
+      <div class="progress">
+       <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ plant.phosphorus }}" aria-valuemin="1" aria-valuemax="5" style="width: {% widthratio plant.phosphorus 5 100 %}%;">
+        {{ plant.get_phosphorus_display }}
+       </div>
+      </div>
+     </div>
+    </div>
+    {% endif %}
+    {% if plant.potassium %}
+    <div class="form-group">
+     <label class="col-xs-4">{% trans "Potassium" %}</label>
+     <div class="col-xs-8">
+      <div class="progress">
+       <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{ plant.potassium }}" aria-valuemin="1" aria-valuemax="5" style="width: {% widthratio plant.potassium 5 100 %}%;">
+        {{ plant.get_potassium_display }}
+       </div>
+      </div>
+     </div>
+    </div>
+    {% endif %}
+    </div>
+   </div>
+
+   {% if plant.images.exists %}
+   <div class="row">
+    <div class="col-xs-12">
+     <h2>{% trans "Illustrations" %}</h2>
+     <div id="gallery">
+      {% for img in plant.images.all %}
+      <img data-description="{{ img.description }}" data-image="{{ img.image.url }}" src="{{ img.image.url }}" alt="{{ img.title }}">
+      {% endfor %}
+     </div>
+    </div>
+   </div>
+   {% endif %}
+
+ </div>
+
+ <br>
+ <div class="row contribute-row">
+  <div class="col-xs-12">
+   <div class="well bio-tile">
+     <h2>{% blocktrans %}If you think you can improve this file, do not hesitate{% endblocktrans %}</h2>
+     <br>
+     <a href="{% url "contribute-plant-home" plant.id %}"><h3 class="head-btn">{% trans "Contribute to our database" %}</h3></a>
+   </div>
+  </div>
+ </div>
+
+
+{% endblock %}

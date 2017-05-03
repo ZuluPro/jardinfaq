@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 try:
     from urllib.urlparse import urlparse, parse_qs
@@ -16,8 +17,10 @@ from askbot.deps.django_authopenid.models import UserAssociation
 
 
 FEEDS_URL = '%s/feed?fields=full_picture,link,message,from,likes,reactions,type,created_time,updated_time,message_tags,permalink_url'
-POST_URL = '%s?fields=type,message,from,likes,created_time,attachments,link,permalink_url,comments{message,from,like_count,created_time,comment_count,link,attachment}'
-COMMENT_URL = '%s?fields=message,from,likes,created_time,comments{message,from,like_count,created_time,comment_count}'
+POST_URL = '%s?fields=type,message,from,likes,created_time,attachments,link,permalink_url,comments.limit(500){message,from,like_count,created_time,comment_count,link,attachment,comments.limit(50){like_count,from,message,id,created_time,permalink_url,attachment}}'
+COMMENT_URL = '%s?fields=message,from,likes,created_time,comments.limit(500){message,from,like_count,created_time,comment_count}'
+
+POST_ID_REG = re.compile(r'https://www.facebook.com/groups/[^/]*/permalink/(\d*)/')
 
 
 def get_facebook_api(token=None):

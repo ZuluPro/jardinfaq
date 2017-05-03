@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-27 06:58+0200\n"
+"POT-Creation-Date: 2017-05-02 16:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,639 +18,957 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: skins/jardin/templates/authopenid/complete.html:21
-#: skins/jardin/templates/authopenid/complete.html:30
-msgid "Complete registration"
-msgstr "Terminer l'enregistrement"
+#: badges.py:19
+msgid "Sorter"
+msgstr "Rangeur"
 
-#: skins/jardin/templates/authopenid/complete.html:27
-msgid "New user registrations are disabled"
+#: badges.py:31
+#, python-format
+msgid "Added %(count)s plant(s)"
+msgstr "%(count)s plante(s) ajoutée(s)"
+
+#: badges.py:36
+msgid "Classificator"
+msgstr "Classificator"
+
+#: badges.py:43
+msgid "Systematician"
+msgstr "Systematicien"
+
+#: badges.py:50
+msgid "Witness"
+msgstr "Témoin"
+
+#: badges.py:62
+#, python-format
+msgid "Added %(count)s plant's attibute(s)"
+msgstr "%(count)s plante(s) ajoutée(s)"
+
+#: badges.py:67
+msgid "Observer"
+msgstr "Observateur"
+
+#: badges.py:74
+msgid "Reporter"
+msgstr "Reporteur"
+
+#: badges.py:81
+msgid "Illustrator"
+msgstr "Illustrateur"
+
+#: badges.py:93
+#, python-format
+msgid "Added %(count)s plant's image"
+msgstr "%(count)s image(s) de plante ajoutée(s)"
+
+#: badges.py:98
+msgid "Displayer"
+msgstr "Afficheur"
+
+#: badges.py:105
+msgid "Physionomist"
+msgstr "Physionomiste"
+
+#: templates/bio/contribute/choose_plant.html:4
+msgid "Choose a plant"
+msgstr "Choisir autre plante"
+
+#: templates/bio/contribute/choose_plant.html:15
+msgid "Select or add a new one"
+msgstr "Selectionner ou en ajouter une"
+
+#: templates/bio/contribute/choose_plant.html:20
+msgid "I don't know, you can add it"
+msgstr "Je ne connais pas, tu peux l'ajouter"
+
+#: templates/bio/contribute/choose_plant.html:23
+msgid "Ok, let's talk about!"
+msgstr "Ok, parlons-en!"
+
+#: templates/bio/contribute/choose_plant.html:42
+#: templates/bio/contribute/home.html:9
+#: templates/bio/contribute/new_plant_validation.html:37
+#: templates/bio/contribute/new_plant_validation_list.html:15
+#: templates/bio/contribute/plant.html:10
+#: templates/bio/contribute/plant_add_image.html:33
+#: templates/bio/contribute/plant_image_validation.html:37
+#: templates/bio/contribute/plant_image_validation_list.html:16
+#: templates/bio/contribute/plant_question.html:38
+#: templates/bio/contribute/plant_validation.html:35
+#: templates/bio/contribute/plant_validation_list.html:17
+#: templates/bio/contribute/validation_home.html:10
+#: templates/bio/plant.html:29 templates/bio/plant_list.html:19
+msgid "Database"
+msgstr "Base de données"
+
+#: templates/bio/contribute/choose_plant.html:43
+#: templates/bio/contribute/home.html:4 templates/bio/contribute/home.html:10
+#: templates/bio/contribute/new_plant_validation.html:38
+#: templates/bio/contribute/new_plant_validation_list.html:16
+#: templates/bio/contribute/plant.html:11
+#: templates/bio/contribute/plant_add_image.html:34
+#: templates/bio/contribute/plant_image_validation.html:38
+#: templates/bio/contribute/plant_image_validation_list.html:17
+#: templates/bio/contribute/plant_question.html:39
+#: templates/bio/contribute/plant_validation.html:36
+#: templates/bio/contribute/plant_validation_list.html:18
+#: templates/bio/contribute/validation_home.html:11 templates/bio/home.html:39
+msgid "Contribute"
+msgstr "Contribuer"
+
+#: templates/bio/contribute/choose_plant.html:44
+#: templates/bio/contribute/plant.html:12
+#: templates/bio/contribute/plant_add_image.html:35
+#: templates/bio/contribute/plant_question.html:40
+msgid "Plant"
+msgstr "Plante"
+
+#: templates/bio/contribute/choose_plant.html:51
+msgid "Do you have a plant you want to talk to us about ?"
+msgstr "As-tu une plante dont tu veux qu'on parle ?"
+
+#: templates/bio/contribute/choose_plant.html:52
+msgid "Else you can submit a new plant and other will validate it"
+msgstr "Sinon tu peux soumettre une nouvelle plante et d'autres la valideront"
+
+#: templates/bio/contribute/choose_plant.html:61
+msgid "Choose"
+msgstr "Choisis"
+
+#: templates/bio/contribute/choose_plant.html:62
+msgid "Go back"
+msgstr "Retour"
+
+#: templates/bio/contribute/home.html:19
+msgid "Add informations"
+msgstr "Ajouter des informations"
+
+#: templates/bio/contribute/home.html:22
+msgid "Everyone can contribute by give us simple data"
+msgstr "Tout le monde peut contriuber en donnant des données simples"
+
+#: templates/bio/contribute/home.html:24
+msgid "We aim to gather simple information:"
+msgstr "Nous visons à rassembler des informations simples"
+
+#: templates/bio/contribute/home.html:25
+msgid "Germination temperature, reproduction type, exposition or photos"
 msgstr ""
+"Température de germination, type de reproduction, exposition ou des photos"
 
-#: skins/jardin/templates/authopenid/complete.html:60
-msgid "Choose a screen name"
+#: templates/bio/contribute/home.html:27
+msgid "Here's a sample of last contributions:"
+msgstr "Voici un échantillon des dernières contributions:"
+
+#: templates/bio/contribute/home.html:32 templates/bio/contribute/home.html:55
+#: templates/bio/contribute/validation_home.html:31
+#: templates/bio/contribute/validation_home.html:52
+msgid "by"
+msgstr "par"
+
+#: templates/bio/contribute/home.html:42
+#: templates/bio/contribute/validation_home.html:4
+#: templates/bio/contribute/validation_home.html:12
+msgid "Validate data"
+msgstr "Valider des données"
+
+#: templates/bio/contribute/home.html:45
+msgid "Check submitted informations and give them a value"
+msgstr "Vérifie les informations soumises and donne leur une valeur"
+
+#: templates/bio/contribute/home.html:47
+msgid "You can decide to accept or decline a data"
+msgstr "Tu peux décider d'accepter ou de décliner cette donnée"
+
+#: templates/bio/contribute/home.html:48
+msgid "User and data's score will help admins to decide to include data or not"
 msgstr ""
+"Le score de l'utilisateur et de la donnée aide les admins à décider de "
+"l'inclure ou non"
 
-#: skins/jardin/templates/authopenid/complete.html:72
-msgid "Email address"
+#: templates/bio/contribute/home.html:50
+msgid ""
+"Some data have already been validated by community, like the ones below:"
 msgstr ""
+"Certaines données ont déjà été validé par la communauté, comme celles ci-"
+"dessous:"
 
-#: skins/jardin/templates/authopenid/complete.html:88
-msgid "Signup"
-msgstr "S'inscrire"
+#: templates/bio/contribute/home.html:57
+#: templates/bio/contribute/validation_home.html:33
+#: templates/bio/contribute/validation_home.html:54
+#, python-format
+msgid "%(score)s points"
+msgstr "%(score)s points"
 
-#: skins/jardin/templates/authopenid/complete.html:95
-#: skins/jardin/templates/authopenid/signin.html:184
-msgid "Recover account"
-msgstr ""
+#: templates/bio/contribute/new_plant_validation.html:4
+msgid "%(plant_name)s validation"
+msgstr "Validation de %(plant_name)s"
 
-#: skins/jardin/templates/authopenid/complete.html:100
-msgid "Already have an account?"
-msgstr ""
+#: templates/bio/contribute/new_plant_validation.html:39
+#: templates/bio/contribute/new_plant_validation.html:66
+#: templates/bio/contribute/new_plant_validation_list.html:17
+#: templates/bio/contribute/plant_image_validation.html:39
+#: templates/bio/contribute/plant_image_validation.html:69
+#: templates/bio/contribute/plant_image_validation_list.html:18
+#: templates/bio/contribute/plant_validation.html:37
+#: templates/bio/contribute/plant_validation.html:68
+#: templates/bio/contribute/plant_validation_list.html:19
+msgid "Validate"
+msgstr "Valider"
 
-#: skins/jardin/templates/authopenid/complete.html:101
-msgid "Recover it by email."
-msgstr ""
+#: templates/bio/contribute/new_plant_validation.html:40
+#: templates/bio/contribute/new_plant_validation_list.html:4
+#: templates/bio/contribute/new_plant_validation_list.html:18
+msgid "New plants validation"
+msgstr "Validation de nouveaux plants"
 
-#: skins/jardin/templates/authopenid/complete.html:104
-msgid "Prefer to create a new account?"
-msgstr ""
+#: templates/bio/contribute/new_plant_validation.html:56
+#: templates/bio/contribute/plant_image_validation.html:59
+#: templates/bio/contribute/plant_validation.html:56
+msgid "Reference"
+msgstr "Référence"
 
-#: skins/jardin/templates/authopenid/complete.html:105
-msgid "Return to registration."
-msgstr ""
+#: templates/bio/contribute/new_plant_validation.html:72
+#: templates/bio/contribute/plant_image_validation.html:75
+#: templates/bio/contribute/plant_validation.html:74
+msgid "I don't know"
+msgstr "Je ne sais pas"
 
-#: skins/jardin/templates/authopenid/logout.html:4
-msgid "Logout"
-msgstr ""
+#: templates/bio/contribute/new_plant_validation.html:76
+#: templates/bio/contribute/plant_image_validation.html:79
+#: templates/bio/contribute/plant_validation.html:78
+msgid "Decline"
+msgstr "Décliner"
 
-#: skins/jardin/templates/authopenid/logout.html:12
-msgid "You have successfully logged out"
-msgstr ""
+#: templates/bio/contribute/new_plant_validation.html:87
+#: templates/bio/contribute/plant_add_image.html:70
+#: templates/bio/contribute/plant_image_validation.html:90
+#: templates/bio/contribute/plant_question.html:86
+#: templates/bio/contribute/plant_validation.html:89
+msgid "Submit"
+msgstr "Soumettre"
 
-#: skins/jardin/templates/authopenid/logout.html:13
+#: templates/bio/contribute/new_plant_validation.html:88
+#: templates/bio/contribute/plant_image_validation.html:91
+#: templates/bio/contribute/plant_question.html:87
+#: templates/bio/contribute/plant_validation.html:90
+msgid "Skip"
+msgstr "Passer"
+
+#: templates/bio/contribute/new_plant_validation.html:92
+#: templates/bio/contribute/new_plant_validation_list.html:39
+#: templates/bio/contribute/plant_image_validation.html:95
+#: templates/bio/contribute/plant_image_validation_list.html:38
+#: templates/bio/contribute/plant_validation.html:94
+#: templates/bio/contribute/plant_validation_list.html:52
+msgid "Unaccept"
+msgstr "Désaccepter"
+
+#: templates/bio/contribute/new_plant_validation.html:94
+#: templates/bio/contribute/new_plant_validation_list.html:41
+#: templates/bio/contribute/plant_image_validation.html:97
+#: templates/bio/contribute/plant_image_validation_list.html:40
+#: templates/bio/contribute/plant_validation.html:96
+#: templates/bio/contribute/plant_validation_list.html:54
+msgid "Accept"
+msgstr "Accepter"
+
+#: templates/bio/contribute/new_plant_validation_list.html:26
+#: templates/bio/contribute/plant_validation_list.html:37
+msgid "There's no new plant to validate"
+msgstr "Il n'y a pas de nouvelle plante à valider"
+
+#: templates/bio/contribute/new_plant_validation_list.html:33
+#: templates/bio/contribute/plant_image_validation_list.html:29
+msgid "Submitted by:"
+msgstr "Soumis par:"
+
+#: templates/bio/contribute/plant.html:4
+msgid "Contribute to %(plant_name)s"
+msgstr "Contribue à %(plant_name)s"
+
+#: templates/bio/contribute/plant.html:21
+msgid "See file"
+msgstr "Regarder la fiche"
+
+#: templates/bio/contribute/plant.html:25 templates/bio/plant.html:47
 #, python-format
 msgid ""
-"Don't hesitate to take a look at our <a href=\"//facebook.com/"
-"%(facebook_page)s\">Facebook page"
+"We don't have a global description of %(plant_name)s, maybe you could add "
+"one ?"
 msgstr ""
-"N'hésitez pas à jeter un œil à notre <a href=\"//facebook.com/"
-"%(facebook_page)s\">page Facebook"
+"Nous n'avons pas de description globale de %(plant_name)s, peut-être tu peux "
+"en ajouter une ?"
 
-#: skins/jardin/templates/authopenid/signin.html:6
-msgid "User login"
-msgstr ""
+#: templates/bio/contribute/plant.html:32
+msgid "Contribute by answering questions"
+msgstr "Contribue en répondant à des questions"
 
-#: skins/jardin/templates/authopenid/signin.html:18
-msgid ""
-"It's a good idea to make sure that your existing login methods still work, "
-"or add a new one. Please click any of the icons below to check/change or add "
-"new login methods."
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:20
-msgid ""
-"Please add a more permanent login method by clicking one of the icons below, "
-"to avoid logging in via email each time."
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:24
-msgid ""
-"Click on one of the icons below to add a new login method or re-validate an "
-"existing one."
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:26
-msgid ""
-"You don't have a method to log in right now, please add one or more by "
-"clicking any of the icons below."
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:29
-msgid ""
-"Please check your email and visit the enclosed link to re-connect to your "
-"account"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:50
-msgid "Authentication without password with:"
-msgstr "Identification sans mot de passe avec:"
-
-#: skins/jardin/templates/authopenid/signin.html:51
-msgid "Facebook connection"
-msgstr "Connexion Facebook"
-
-#: skins/jardin/templates/authopenid/signin.html:55
-msgid "Facebook users have their public posts counted in their karma"
-msgstr ""
-"Les utilisateurs Facebook ont leur publications publiques comptées dans leur "
-"karma"
-
-#: skins/jardin/templates/authopenid/signin.html:64
-msgid "Or enter your <span>user name and password</span>"
-msgstr "Ou entrez votre nom et mot de passe"
-
-#: skins/jardin/templates/authopenid/signin.html:68
-msgid "Please, sign in"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:73
-msgid "Login failed, please try again"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:82
-msgid "Username"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:84
-msgid "Username or email"
-msgstr "Nom ou mot de passe"
-
-#: skins/jardin/templates/authopenid/signin.html:94
-msgid "Password"
-msgstr "Mot de passe"
-
-#: skins/jardin/templates/authopenid/signin.html:98
-#: skins/jardin/templates/widgets/login_link.html:20
-msgid "Sign in"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:100
-msgid "Create a password-protected account"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:105
-msgid "To change your password - please enter the new one twice, then submit"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:115
-msgid "New password"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:125
-msgid "Please, retype"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:130
-msgid "Change password"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:146
-msgid "Here are your current login methods"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:150
-msgid "provider"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:151
-msgid "last used"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:165
-#: skins/jardin/templates/question/answer_controls.html:33
-msgid "delete"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:167
-msgid "cannot be deleted"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:179
-msgid "Having trouble signing in?"
-msgstr ""
-
-#: skins/jardin/templates/authopenid/signin.html:183
-msgid "Enter your email"
-msgstr ""
-
-#: skins/jardin/templates/base.html:14
+#: templates/bio/contribute/plant.html:35
 #, python-format
-msgid "RSS feed from %(site_title)s"
-msgstr ""
+msgid "We'll ask you simple questions about %(plant_name)s"
+msgstr "Nous allons te poser des questions simples à propos de %(plant_name)s"
 
-#: skins/jardin/templates/home.html:9
-msgid "Home"
-msgstr "Accueil"
+#: templates/bio/contribute/plant.html:36
+msgid "You can answer or skip and get another question"
+msgstr "Tu peux répondre ou passer à une autre question"
 
-#: skins/jardin/templates/home.html:15
+#: templates/bio/contribute/plant.html:39
+msgid "We actually need this kind of data:"
+msgstr "Nous avons actuellement besoin de ce genre de données:"
+
+#: templates/bio/contribute/plant.html:42
 #, python-format
-msgid "Welcome to %(app_name)s"
-msgstr "Bienvenue sur %(app_name)s"
+msgid "%(field)s ?"
+msgstr "%(field)s ?"
 
-#: skins/jardin/templates/home.html:16
+#: templates/bio/contribute/plant.html:51
+msgid "Submit images"
+msgstr "Soumettre des images"
+
+#: templates/bio/contribute/plant.html:54
+msgid "Outside of data, visualization is very important"
+msgstr "En dehors des données, la visualisation est très importante"
+
+#: templates/bio/contribute/plant.html:55
+#, python-format
+msgid "Give us photographies or schemas representing %(plant_name)s"
+msgstr "Partage tes photos ou schémas représentant un/une %(plant_name)s"
+
+#: templates/bio/contribute/plant_add_image.html:4
+#: templates/bio/contribute/plant_add_image.html:37
+msgid "Add image"
+msgstr "Ajouter une image"
+
+#: templates/bio/contribute/plant_add_image.html:60
+msgid "Choose image"
+msgstr "Choisir l'image"
+
+#: templates/bio/contribute/plant_image_validation.html:40
+#: templates/bio/contribute/plant_image_validation_list.html:4
+#: templates/bio/contribute/plant_image_validation_list.html:19
+msgid "Image validation"
+msgstr "Validation d'image"
+
+#: templates/bio/contribute/plant_image_validation_list.html:22
+#: templates/bio/plant_list.html:28
+msgid "There's no new plant's image to validate"
+msgstr "Il n'y a pas de nouvelle image plante à valider"
+
+#: templates/bio/contribute/plant_question.html:81
+msgid "Give us your references"
+msgstr "Donne nous tes références"
+
+#: templates/bio/contribute/plant_question.html:88
+msgid "Choose another plant"
+msgstr "Choisir une autre plante"
+
+#: templates/bio/contribute/plant_validation.html:38
+#: templates/bio/contribute/plant_validation_list.html:20
+msgid "Plant's attribute"
+msgstr "Attribut de plante"
+
+#: templates/bio/contribute/plant_validation.html:49
+msgid "To the question"
+msgstr "À la question"
+
+#: templates/bio/contribute/plant_validation.html:51
+#, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> answered <i>%(response)s</i>"
+msgstr "<a href=\"%(user_url)s\">%(user)s</a> a répondu <i>%(response)s</i>"
+
+#: templates/bio/contribute/plant_validation.html:62
+msgid "What do you think about ?"
+msgstr "Que penses-tu de ça ?"
+
+#: templates/bio/contribute/plant_validation_list.html:4
+msgid "Validate plants' attributes"
+msgstr "Valider des attributs de plantes"
+
+#: templates/bio/contribute/plant_validation_list.html:27
+msgid "Validation"
+msgstr "Validation"
+
+#: templates/bio/contribute/plant_validation_list.html:29
+msgid "Filters"
+msgstr "Filtres"
+
+#: templates/bio/contribute/plant_validation_list.html:31
+msgid "Show accepted"
+msgstr "Afficher les acceptés"
+
+#: templates/bio/contribute/plant_validation_list.html:33
+msgid "Hide accepted"
+msgstr "Cacher les acceptés"
+
+#: templates/bio/contribute/plant_validation_list.html:45
+msgid "Answered by:"
+msgstr "Répondu par:"
+
+#: templates/bio/contribute/validation_home.html:22
+msgid "New plants"
+msgstr "Nouvelles plantes"
+
+#: templates/bio/contribute/validation_home.html:25
+msgid "Some people submitted plants"
+msgstr "Des gens ont soumis des plantes"
+
+#: templates/bio/contribute/validation_home.html:26
+msgid "Say us your opinion about"
+msgstr "Dit nous ton opinion à ce propos"
+
+#: templates/bio/contribute/validation_home.html:37
+#: templates/bio/contribute/validation_home.html:58
+#: templates/bio/contribute/validation_home.html:76
+msgid "See all"
+msgstr "Voir tous"
+
+#: templates/bio/contribute/validation_home.html:43
+msgid "Plants' attributes"
+msgstr "Attributs de plantes"
+
+#: templates/bio/contribute/validation_home.html:46
+msgid "After gave information about plants"
+msgstr "Après avoir donné des informations sur des plantes"
+
+#: templates/bio/contribute/validation_home.html:47
+msgid "We need to validate them together"
+msgstr "Nous avons besoin de les valider ensemble"
+
+#: templates/bio/contribute/validation_home.html:64
+msgid "Plants' images"
+msgstr "Images de plantes"
+
+#: templates/bio/contribute/validation_home.html:67
+msgid "Vote for submitted images"
+msgstr "Votes pour les images soumises"
+
+#: templates/bio/home.html:5
+msgid "Database home"
+msgstr "Acceuil du Wiki"
+
+#: templates/bio/home.html:29 templates/jardinfaq/base/navbar.html:32
+msgid "Wiki"
+msgstr "Wiki"
+
+#: templates/bio/home.html:30
+msgid "Consult our knowledge database"
+msgstr "Consulter notre base de connaissances"
+
+#: templates/bio/home.html:40
+msgid "Bring your rock to the building"
+msgstr "Apporte ta pierre à l'édifice"
+
+#: templates/bio/home.html:48
+msgid "This database is a collaborative work from a community"
+msgstr "Cette base de données est un travail collaboratif d'une communauté"
+
+#: templates/bio/home.html:50
+msgid "Like many other we gather data and share them to people"
+msgstr "Comme d'autres nous rassemblons des données et les partageons"
+
+#: templates/bio/home.html:52
+msgid "But our real difference:"
+msgstr "Mais notre réelle différence:"
+
+#: templates/bio/home.html:53
+msgid ""
+"Data collection and veracity of our information are validated by each of us"
+msgstr ""
+"La collection et la véracité des données sont validés par chacun d'entre nous"
+
+#: templates/bio/home.html:60
+msgid "Contibution is a very simple process:"
+msgstr "La contribution est un processus très simple:"
+
+#: templates/bio/home.html:62
+msgid "Someone report a data and everyone validate it or not"
+msgstr "Quelqu'un rapporte une donnée et tout le monde la valide ou pas"
+
+#: templates/bio/home.html:64
+msgid ""
+"If data is accpeted, it's displayed on our Wiki and contributor sees its "
+"karma increases"
+msgstr ""
+"Si la donnée est acceptée, elle sera affichée dans notre Wiki and le "
+"contributeur vera son Karma augmenter"
+
+#: templates/bio/plant.html:30 templates/bio/plant_list.html:20
+msgid "Plants"
+msgstr "Plantes"
+
+#: templates/bio/plant.html:52
+msgid "Lifecycle"
+msgstr "Cycle de vie"
+
+#: templates/bio/plant.html:56
+#, python-format
+msgid "%(max_age)s year max"
+msgstr "%(max_age)s années max"
+
+#: templates/bio/plant.html:64
+msgid "Growth type"
+msgstr "Type de croissance"
+
+#: templates/bio/plant.html:73
+msgid "Is food"
+msgstr "Est comestible"
+
+#: templates/bio/plant.html:85
+msgid "Is toxic"
+msgstr "Est toxique"
+
+#: templates/bio/plant.html:98
+msgid "Is green manure"
+msgstr "Est un engrais vert"
+
+#: templates/bio/plant.html:111
+msgid "Nitrogen fixing"
+msgstr "Fixateur d'azote"
+
+#: templates/bio/plant.html:129
+msgid "Add an illustration"
+msgstr "Ajouter une illustration"
+
+#: templates/bio/plant.html:138
+msgid "Root morphology"
+msgstr "Morphologie des racines"
+
+#: templates/bio/plant.html:141
+msgid "Type"
+msgstr "Type"
+
+#: templates/bio/plant.html:150
+msgid "Maximum size"
+msgstr "Taille maximum"
+
+#: templates/bio/plant.html:153
+#, python-format
+msgid "%(depth)scm deep"
+msgstr "%(depth)scm de profondeur"
+
+#: templates/bio/plant.html:156
+#, python-format
+msgid "%(area)sm2"
+msgstr "%(area)sm2"
+
+#: templates/bio/plant.html:164
+msgid "Aerial morphology"
+msgstr "Morphologie aérienne"
+
+#: templates/bio/plant.html:167
+msgid "Leaves"
+msgstr "Feuilles"
+
+#: templates/bio/plant.html:169
+msgid "Deciduous"
+msgstr "Caduques"
+
+#: templates/bio/plant.html:176
+msgid "Tissue type"
+msgstr "Type de tissue"
+
+#: templates/bio/plant.html:187
+msgid "Reproduction"
+msgstr "Reproduction"
+
+#: templates/bio/plant.html:190
+msgid "Transplantable"
+msgstr "Bouturable"
+
+#: templates/bio/plant.html:203
+msgid "Repoduction type"
+msgstr "Type de reproduction"
+
+#: templates/bio/plant.html:212
+msgid "Sexual repartition"
+msgstr "Repartition sexuelle"
+
+#: templates/bio/plant.html:221
+msgid "Seed conservation time"
+msgstr "Temps de conservation des graines"
+
+#: templates/bio/plant.html:223
 #, python-format
 msgid ""
-"<b>%(app_name)s</b> is question and answer website for gardening enthusiast. "
-"It's built by a community of horticulturist, permaculturist and nature "
-"lovers."
+"\n"
+"       %(seed_conservation_time)s month(s)\n"
+"       "
 msgstr ""
-"<b>%(app_name)s</b> est site de questions/réponses pour les passionnés de "
-"jardin. Il est créer par une communauté d'horticulturistes, permaculteurs "
-"et amoureux de la nature"
+"\n"
+" %(seed_conservation_time)s mois\n"
+" "
 
-#: skins/jardin/templates/home.html:21
-msgid "Ask questions about:"
-msgstr "Posez des questions à propos de:"
+#: templates/bio/plant.html:232
+msgid "Germination environment"
+msgstr "Environment de germination"
 
-#: skins/jardin/templates/home.html:42
-msgid "Or answer to questions"
-msgstr "Ou répondez aux questions"
+#: templates/bio/plant.html:235
+msgid "Needs stratification"
+msgstr "Besoin de stratification"
 
-#: skins/jardin/templates/home.html:43
-msgid "And earn badges and points"
-msgstr "Et gagnez des points et des médailles"
+#: templates/bio/plant.html:248
+msgid "Minimum time"
+msgstr "Temps minimum"
 
-#: skins/jardin/templates/home.html:48
-msgid "Join us"
-msgstr "Rejoignez-nous"
-
-#: skins/jardin/templates/home.html:49
-msgid "And"
-msgstr "Et"
-
-#: skins/jardin/templates/home.html:50
-msgid "Enjoy our community"
-msgstr "Prenez plaisir dans notre commaunauté"
-
-#: skins/jardin/templates/macros.html:5
-#, python-format
-msgid "Share this content on %(site)s"
-msgstr ""
-
-#: skins/jardin/templates/macros.html:48
-msgid "current number of votes"
-msgstr ""
-
-#: skins/jardin/templates/macros.html:61
-msgid "anonymous user"
-msgstr ""
-
-#: skins/jardin/templates/macros.html:80
-msgid "posted"
-msgstr ""
-
-#: skins/jardin/templates/macros.html:86
-msgid "this post is marked as community wiki"
-msgstr ""
-
-#: skins/jardin/templates/macros.html:90
+#: templates/bio/plant.html:250
 #, python-format
 msgid ""
-"This post is a wiki.\n"
-"        Anyone with karma &gt;%(wiki_min_rep)s is welcome to improve it."
+"\n"
+"       %(germination_min_time)s day(s)\n"
+"       "
 msgstr ""
+"\n"
+"%(germination_min_time)s jours\n"
+" "
 
-#: skins/jardin/templates/macros.html:239
-#: skins/jardin/templates/macros.html:245
-msgid "Leave this group"
-msgstr ""
+#: templates/bio/plant.html:259
+msgid "Germination rate"
+msgstr "Taux de germination"
 
-#: skins/jardin/templates/macros.html:240
-#: skins/jardin/templates/macros.html:242
-#: skins/jardin/templates/macros.html:261
-msgid "Join this group"
-msgstr ""
+#: templates/bio/plant.html:270 templates/bio/plant.html.py:323
+msgid "Temperature"
+msgstr "Température"
 
-#: skins/jardin/templates/macros.html:241
-#: skins/jardin/templates/macros.html:246
-#: skins/jardin/templates/macros.html:256
-msgid "You are a member"
-msgstr ""
+#: templates/bio/plant.html:294 templates/bio/plant.html.py:347
+msgid "Humidity"
+msgstr "Humidité"
 
-#: skins/jardin/templates/macros.html:248
-msgid "Cancel application"
-msgstr ""
+#: templates/bio/plant.html:314
+msgid "Environment"
+msgstr "Environement"
 
-#: skins/jardin/templates/macros.html:249
-#: skins/jardin/templates/macros.html:258
-msgid "Awaiting approval"
-msgstr ""
+#: templates/bio/plant.html:364
+msgid "pH"
+msgstr "pH"
 
-#: skins/jardin/templates/macros.html:251
-#: skins/jardin/templates/macros.html:252
-#: skins/jardin/templates/macros.html:263
-msgid "Ask to join"
-msgstr ""
+#: templates/bio/plant.html:386
+msgid "Requirements"
+msgstr "Besoins"
 
-#: skins/jardin/templates/macros.html:337
-#: skins/jardin/templates/macros.html:348
-msgid "add a comment"
-msgstr ""
+#: templates/bio/plant.html:390
+msgid "Exposition"
+msgstr "Exposition"
 
-#: skins/jardin/templates/macros.html:341
-msgid "load older comments"
-msgstr ""
+#: templates/bio/plant.html:399
+msgid "Water"
+msgstr "Eau"
 
-#: skins/jardin/templates/macros.html:343
-msgid "see more comments"
-msgstr ""
+#: templates/bio/plant.html:411
+msgid "Nitrogen"
+msgstr "Azote"
 
-#: skins/jardin/templates/macros.html:376
-msgid "delete this comment"
-msgstr ""
+#: templates/bio/plant.html:423
+msgid "Phosphorus"
+msgstr "Phosphore"
 
-#: skins/jardin/templates/macros.html:379
-msgid "This post is awaiting moderation"
-msgstr ""
+#: templates/bio/plant.html:435
+msgid "Potassium"
+msgstr "Potasse"
 
-#: skins/jardin/templates/macros.html:395
-#: skins/jardin/templates/question/answer_controls.html:5
-msgid "edit"
-msgstr ""
+#: templates/bio/plant.html:451
+msgid "Illustrations"
+msgstr "Illustrations"
 
-#: skins/jardin/templates/macros.html:404
-msgid "convert to answer"
-msgstr ""
+#: templates/bio/plant.html:467
+msgid "If you think you can improve this file, do not hesitate"
+msgstr "Si tu penses que tu peux améliorer cette fiche, n'hésites pas"
 
-#: skins/jardin/templates/macros.html:583
-#, python-format
-msgid "%(username)s gravatar image"
-msgstr ""
+#: templates/bio/plant.html:469
+msgid "Contribute to our database"
+msgstr "Contribue à notre base de données"
 
-#: skins/jardin/templates/macros.html:592
-#, python-format
-msgid "%(username)s's website is %(url)s"
-msgstr ""
+#: templates/bio/plant_list.html:4
+msgid "Plant list"
+msgstr "Liste de plante"
 
-#: skins/jardin/templates/macros.html:613
-#: skins/jardin/templates/macros.html:614
-#: skins/jardin/templates/macros.html:675
-#: skins/jardin/templates/macros.html:676
+#: templates/jardinfaq/_paginator.html:5
 msgid "previous"
-msgstr ""
+msgstr "précédent"
 
-#: skins/jardin/templates/macros.html:632
-#: skins/jardin/templates/macros.html:687
+#: templates/jardinfaq/_paginator.html:5
+msgid "previous page"
+msgstr "page précedente"
+
+#: templates/jardinfaq/_paginator.html:12
 msgid "current page"
-msgstr ""
+msgstr "page actuelle"
 
-#: skins/jardin/templates/macros.html:638
-#: skins/jardin/templates/macros.html:651
-#: skins/jardin/templates/macros.html:689
-#: skins/jardin/templates/macros.html:696
+#: templates/jardinfaq/_paginator.html:14
 #, python-format
 msgid "page %(num)s"
-msgstr ""
+msgstr "page %(num)s"
 
-#: skins/jardin/templates/macros.html:660
-#: skins/jardin/templates/macros.html:700
+#: templates/jardinfaq/_paginator.html:21
 msgid "next page"
-msgstr ""
+msgstr "page suivante"
 
-#: skins/jardin/templates/macros.html:661
+#: templates/jardinfaq/_paginator.html:21
 msgid "next"
-msgstr ""
+msgstr "suivant"
 
-#: skins/jardin/templates/macros.html:722
-#: skins/jardin/templates/macros.html:723
+#: templates/jardinfaq/base/footer.html:13
 #, python-format
-msgid "%(new)s new flagged posts and %(seen)s previous"
-msgstr ""
-
-#: skins/jardin/templates/macros.html:725
-#: skins/jardin/templates/macros.html:726
-#, python-format
-msgid "%(new)s new flagged posts"
-msgstr ""
-
-#: skins/jardin/templates/macros.html:731
-#: skins/jardin/templates/macros.html:732
-#, python-format
-msgid "%(seen)s flagged posts"
-msgstr ""
-
-#: skins/jardin/templates/question/answer_controls.html:11
-msgid "remove offensive flag"
-msgstr ""
-
-#: skins/jardin/templates/question/answer_controls.html:13
-msgid "remove flag"
-msgstr ""
-
-#: skins/jardin/templates/question/answer_controls.html:18
-#: skins/jardin/templates/question/answer_controls.html:26
 msgid ""
-"report as offensive (i.e containing spam, advertising, malicious text, etc.)"
+"Content on this site is licensed under a <a href=\"%(license_url)s\">"
+"%(license_title)s</a> license."
 msgstr ""
 
-#: skins/jardin/templates/question/answer_controls.html:20
-#: skins/jardin/templates/question/answer_controls.html:28
-msgid "flag offensive"
-msgstr ""
-
-#: skins/jardin/templates/question/answer_controls.html:33
-msgid "undelete"
-msgstr ""
-
-#: skins/jardin/templates/question/answer_controls.html:44
-msgid "unpublish"
-msgstr ""
-
-#: skins/jardin/templates/question/answer_controls.html:49
-msgid "publish"
-msgstr ""
-
-#: skins/jardin/templates/question/answer_controls.html:56
-msgid "permanent link"
-msgstr ""
-
-#: skins/jardin/templates/question/answer_controls.html:57
-msgid "link"
-msgstr ""
-
-#: skins/jardin/templates/question/answer_controls.html:65
-msgid "Facebook link link"
-msgstr ""
-
-#: skins/jardin/templates/question/answer_controls.html:71
-msgid "more"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:14
-msgid "Unfollow"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:15
-#: skins/jardin/templates/question/sidebar.html:17
-#: skins/jardin/templates/question/sidebar.html:23
-msgid "Follow"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:16
-#: skins/jardin/templates/question/sidebar.html:21
-msgid "Following"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:30
-#, python-format
-msgid "%(count)s follower"
-msgid_plural "%(count)s followers"
-msgstr[0] ""
-msgstr[1] ""
-
-#: skins/jardin/templates/question/sidebar.html:38
-msgid "subscribe to the RSS feed"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:39
-msgid "subscribe to rss feed"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:44
-msgid "see on Facebook"
-msgstr "voir sur Facebook"
-
-#: skins/jardin/templates/question/sidebar.html:54
-msgid "Invite"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:59
-#: skins/jardin/templates/question/sidebar.html:65
-msgid "add"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:61
-#: skins/jardin/templates/question/sidebar.html:67
-msgid "- or -"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:79
-msgid "share with everyone"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:92
-msgid "Individual users"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:97
-msgid "You"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:104
-#: skins/jardin/templates/question/sidebar.html:124
-msgid "and"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:117
-msgid "Groups"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:129
-#, python-format
-msgid "%(more_count)s more"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:135
-msgid "Public thread"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:136
-#, python-format
-msgid "This thread is public, all members of %(site_name)s can read this page."
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:144
-msgid "Stats"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:146
-msgid "Asked"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:149
-msgid "Seen"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:149
-msgid "times"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:152
-msgid "Last updated"
-msgstr ""
-
-#: skins/jardin/templates/question/sidebar.html:156
-msgid "Likes"
-msgstr "J'aimes"
-
-#: skins/jardin/templates/widgets/footer.html:33
+#: templates/jardinfaq/base/footer.html:21
 #, python-format
 msgid "Content on this site is licensed under a %(license)s"
 msgstr ""
 
-#: skins/jardin/templates/widgets/footer.html:38
+#: templates/jardinfaq/base/footer.html:26
 msgid "about"
-msgstr ""
+msgstr "à propos"
 
-#: skins/jardin/templates/widgets/footer.html:40
+#: templates/jardinfaq/base/footer.html:28
 msgid "faq"
-msgstr ""
+msgstr "faq"
 
-#: skins/jardin/templates/widgets/footer.html:43
+#: templates/jardinfaq/base/footer.html:31
 msgid "settings"
-msgstr ""
+msgstr "paramètres"
 
-#: skins/jardin/templates/widgets/footer.html:45
+#: templates/jardinfaq/base/footer.html:33
 msgid "widgets"
-msgstr ""
+msgstr "widgets"
 
-#: skins/jardin/templates/widgets/footer.html:49
+#: templates/jardinfaq/base/footer.html:37
 msgid "privacy policy"
 msgstr ""
 
-#: skins/jardin/templates/widgets/footer.html:51
+#: templates/jardinfaq/base/footer.html:39
 msgid "terms of service"
-msgstr ""
+msgstr "termes"
 
-#: skins/jardin/templates/widgets/footer.html:64
+#: templates/jardinfaq/base/footer.html:51
 msgid "give feedback"
-msgstr ""
+msgstr "faire une remarque"
 
-#: skins/jardin/templates/widgets/login_link.html:15
+#: templates/jardinfaq/base/header.html:12
 #, python-format
-msgid "Sign in via %(login_name)s"
-msgstr ""
+msgid "karma: %(reputation)s"
+msgstr "karma: %(reputation)s"
 
-#: skins/jardin/templates/widgets/logo.html:2
-#, python-format
-msgid "%(site)s logo"
-msgstr ""
+#: templates/jardinfaq/base/header.html:26
+msgid "sign out"
+msgstr "déconnexion"
 
-#: skins/jardin/templates/widgets/question_summary.html:15
-msgid "view"
-msgid_plural "views"
-msgstr[0] ""
-msgstr[1] ""
+#: templates/jardinfaq/base/header.html:30
+msgid "Log in "
+msgstr "S'identifier"
 
-#: skins/jardin/templates/widgets/question_summary.html:44
-msgid "vote"
-msgid_plural "votes"
-msgstr[0] ""
-msgstr[1] ""
+#: templates/jardinfaq/base/navbar.html:8
+msgid "Toggle navigation"
+msgstr "Changer la navigation"
 
-#: skins/jardin/templates/widgets/question_summary.html:51
-msgid "like"
-msgid_plural "likes"
-msgstr[0] "j'aime"
-msgstr[1] "j'aimes"
-
-#: skins/jardin/templates/widgets/secondary_header.html:56
+#: templates/jardinfaq/base/navbar.html:17 templates/newsboard/base.html:89
 msgid "Questions"
-msgstr ""
+msgstr "Questions"
 
-#: skins/jardin/templates/widgets/secondary_header.html:59
-msgid "Tags"
-msgstr "Mots-clés"
+#: templates/jardinfaq/base/navbar.html:20
+msgid "Keywords"
+msgstr "Mots-cléfs"
 
-#: skins/jardin/templates/widgets/secondary_header.html:64
-msgid "people & groups"
-msgstr ""
-
-#: skins/jardin/templates/widgets/secondary_header.html:69
+#: templates/jardinfaq/base/navbar.html:23
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: skins/jardin/templates/widgets/secondary_header.html:74
+#: templates/jardinfaq/base/navbar.html:26
 msgid "Badges"
-msgstr ""
+msgstr "Médailles"
 
-#: skins/jardin/templates/widgets/secondary_header.html:78
+#: templates/jardinfaq/base/navbar.html:29
 msgid "Help"
-msgstr ""
+msgstr "Aide"
 
-#: skins/jardin/templates/widgets/secondary_header.html:84
+#: templates/jardinfaq/base/navbar.html:37
 msgid "Admin"
+msgstr "Admin"
+
+#: templates/jardinfaq/base/navbar.html:39
+msgid "Ask your question"
+msgstr "Pose ta question"
+
+#: templates/jardinfaq/home.html:16
+msgid "Home"
+msgstr "Accueil"
+
+#: templates/jardinfaq/home.html:22
+msgid "Welcome to JardinFAQ"
+msgstr "Bienvenue sur JardinFAQ"
+
+#: templates/jardinfaq/home.html:24
+msgid ""
+"It's a collaborative website for gardening enthusiast. It's built by a "
+"community of horticulturist, permaculturist and nature lovers."
+msgstr ""
+"C'est un site web collaboratif pour les passionnés de jardin. Il "
+"est créer par une communauté d'horticulteurs, permaculteurs et amoureux de "
+"la nature"
+
+#: templates/jardinfaq/home.html:29
+msgid "Our goals are"
+msgstr "Notre objectif est"
+
+#: templates/jardinfaq/home.html:30
+msgid "To gather, share and discuss data about agronomy"
+msgstr "Rassembler, partager et discuter de données à propos d'agronomie"
+
+#: templates/jardinfaq/home.html:31
+msgid "Veracity of data is given collectiviely"
+msgstr "La véracité de nos informations est donnée collectivement"
+
+#: templates/jardinfaq/home.html:33
+msgid "And with this value, we try to develop the best gardener's tools:"
+msgstr ""
+"Et avec cette valeur, nous essayons de développer les meilleurs outils du "
+"jardinier"
+
+#: templates/jardinfaq/home.html:34
+msgid "A collaborative knowledge database"
+msgstr "Une base de données collaborative"
+
+#: templates/jardinfaq/home.html:35
+msgid "A Question & Answer forum"
+msgstr "Un forum de questions/réponses"
+
+#: templates/jardinfaq/home.html:36
+msgid "And much ideas in the box"
+msgstr "Et pleins d'autres idées dans la carton"
+
+#: templates/jardinfaq/home.html:41
+msgid "You can contribute by"
+msgstr "Vous pouvez contribuer en"
+
+#: templates/jardinfaq/home.html:42
+msgid "Give us your knowledge"
+msgstr "Partageant avec nous votre savoir"
+
+#: templates/jardinfaq/home.html:43
+msgid "Or validate data given by others"
+msgstr "Ou en validant celui donné par les autres"
+
+#: templates/jardinfaq/home.html:48
+msgid "Ask or answer questions about:"
+msgstr "Posez ou répondez à des questions à propos de:"
+
+#: templates/jardinfaq/home.html:77
+msgid "All contributions are appreciated by peers"
+msgstr "Toutes les contributions sont appréciées par des pairs"
+
+#: templates/jardinfaq/home.html:78
+msgid "You can give your opinion about content"
+msgstr "Vous pouvez donner votre avis sur le contenu"
+
+#: templates/jardinfaq/home.html:79
+msgid "And our global point of view give an idea of quality"
+msgstr "Et notre point de vue global donne une idée de la qualité"
+
+#: templates/jardinfaq/home.html:81
+msgid "Users also earn karma and badges like the following:"
+msgstr "Les utilisateurs gagnent du karma et des médailles:"
+
+#: templates/jardinfaq/home.html:94
+msgid "Join us"
+msgstr "Rejoignez-nous"
+
+#: templates/jardinfaq/home.html:95
+msgid "And"
+msgstr "Et"
+
+#: templates/jardinfaq/home.html:96
+msgid "Help us to gather quality informations"
+msgstr "Aidez-nous à rassembler des informations de qualité"
+
+#: templates/newsboard/_post.html:7
+msgid "From: "
+msgstr "De: "
+
+#: templates/newsboard/_post.html:18
+msgid "Remove"
+msgstr "Enlever"
+
+#: templates/newsboard/_stream_column.html:13
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: templates/newsboard/_stream_column.html:14
+msgid "Update sync"
+msgstr "Mettre à jour sync"
+
+#: templates/newsboard/_stream_column.html:26
+msgid "(Empty)"
+msgstr "(Vide)"
+
+#: templates/newsboard/base.html:90
+msgid "Streams"
+msgstr "Flux"
+
+#: templates/newsboard/base.html:91
+msgid "Posts"
+msgstr "Publications"
+
+#: templates/newsboard/posts.html:17 templates/newsboard/stream.html:17
+#: templates/newsboard/streams.html:21
+msgid "sync"
 msgstr ""
 
-#: skins/jardin/templates/widgets/user_long_score_and_badge_summary.html:3
-msgid "read only access"
+#: templates/newsboard/posts.html:24 templates/newsboard/streams.html:29
+msgid "L'actualité du jardin en coup d'oeil"
 msgstr ""
 
-#: skins/jardin/templates/widgets/user_long_score_and_badge_summary.html:6
-msgid "points"
-msgstr ""
+#~ msgid "Complete registration"
+#~ msgstr "Terminer l'enregistrement"
 
-#: skins/jardin/templates/widgets/user_navigation.html:12
-msgid "sign out"
-msgstr ""
+#~ msgid "Signup"
+#~ msgstr "S'inscrire"
+
+#~ msgid ""
+#~ "Don't hesitate to take a look at our <a href=\"//facebook.com/"
+#~ "%(facebook_page)s\">Facebook page"
+#~ msgstr ""
+#~ "N'hésitez pas à jeter un œil à notre <a href=\"//facebook.com/"
+#~ "%(facebook_page)s\">page Facebook"
+
+#~ msgid "Authentication without password with:"
+#~ msgstr "Identification sans mot de passe avec:"
+
+#~ msgid "Facebook connection"
+#~ msgstr "Connexion Facebook"
+
+#~ msgid "Facebook users have their public posts counted in their karma"
+#~ msgstr ""
+#~ "Les utilisateurs Facebook ont leur publications publiques comptées dans "
+#~ "leur karma"
+
+#~ msgid "Or enter your <span>user name and password</span>"
+#~ msgstr "Ou entrez votre nom et mot de passe"
+
+#~ msgid "Username or email"
+#~ msgstr "Nom ou mot de passe"
+
+#~ msgid "Password"
+#~ msgstr "Mot de passe"
+
+#~ msgid "And earn badges and points"
+#~ msgstr "Et gagnez des points et des médailles"
+
+#~ msgid "Enjoy our community"
+#~ msgstr "Prenez plaisir dans notre commaunauté"
+
+#~ msgid "see on Facebook"
+#~ msgstr "voir sur Facebook"
+
+#~ msgid "Likes"
+#~ msgstr "J'aimes"
+
+#~ msgid "like"
+#~ msgid_plural "likes"
+#~ msgstr[0] "j'aime"
+#~ msgstr[1] "j'aimes"
+
+#~ msgid "Tags"
+#~ msgstr "Mots-clés"

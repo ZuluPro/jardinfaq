@@ -1,0 +1,81 @@
+{% extends "jardinfaq/base.html" %}
+{% load i18n bio_contribute %}
+
+{% block title %}{% trans "Validate plants' attributes" %}{% endblock %}
+{% block forejs %}
+<script type="text/javascript">
+ $(document).ready(function() {
+ });
+</script>
+{% endblock %}
+
+{% block action %}{% endblock %}
+
+{% block breadcrumb %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  <ol class="breadcrumb">
+   <li><a href="{% url "bio:home" %}">{% trans "Database" %}</a></li>
+   <li><a href="{% url "contribute-home" %}">{% trans "Contribute" %}</a></li>
+   <li><a href="{% url "contribute-validation-home" %}">{% trans "Validate" %}</a></li>
+   <li>{% trans "Plant's attribute" %}</li>
+  </ol>
+ </div>
+{% endblock %}
+
+{% block content %}
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+  <h2>{% trans "Validation" %}</h2>
+  <p>
+   {% trans "Filters" %}:
+   {% if hide_accepted %}
+   <a href="?hide_accepted=no">{% trans "Show accepted" %}</a>
+   {% else %}
+   <a href="?hide_accepted=yes">{% trans "Hide accepted" %}</a>
+   {% endif %}
+  </p>
+  {% if not object_list %}
+    <h3>{% trans "There's no new plant to validate" %}</h3>
+  {% else %}
+  <div class="row">
+    {% for question in object_list %}
+    <div class="col-xs-6 col-md-4">
+      <div class="thumbnail">
+        <div class="caption">
+          <h3><a href="{{ question.get_absolute_url }}">{{ question.question }}</a></h3>
+          <p><small>{% trans "Answered by:" %} {% include "bio/contribute/user_link.html" with user=question.user %}</small></p>
+          <div class="row">
+            <div class="col-sm-10">
+              <p class="break-word"><i>{{ question.get_response_display|truncatechars:300 }}</i></p>
+              {% if user|can_validate %}
+               <form method="POST" action="{{ question.get_absolute_url }}">{% csrf_token %}
+               {% if question.validated %}
+                 <input class="btn btn-success" type="submit" name="unaccept" value="{% trans "Unaccept" %}"/>
+               {% else %}
+                 <input class="btn btn-danger" type="submit" name="accept" value="{% trans "Accept" %}"/>
+               {% endif %}
+               </form>
+              {% endif %}
+            </div>
+            <div class="col-sm-2">
+              <center>
+                <h3>{% include "bio/contribute/_validation_list_score.html" %}</h3>
+                {% if question.validated %}
+                <br>
+                <i class="text-success fa fa-2x fa-check-circle" aria-hidden="true"></i>
+                {% endif %}
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if is_paginated %}
+  {% include "jardinfaq/_paginator.html" %}
+  {% endif %}
+
+ </div>
+{% endblock %}

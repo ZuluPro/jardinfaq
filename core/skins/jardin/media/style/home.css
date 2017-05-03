@@ -37,33 +37,12 @@ body.home .nav li:hover {
 }
 
 .splash {
-  padding-top: 10%;
-  padding-bottom: 10%;
-  height: 500px;
-  line-height: 500px;
   width: 100%;
   text-align: center;
   color: #FFF;
   font-family: 'Open Sans Condensed', Arial, sans-serif;
   vertical-align: middle;
   position: relative;
-  margin-bottom: 5px
-}
-
-.splash div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 80%;
-}
-.splash h1 {
-  font-size: 80px;
-  line-height: 100px;
-}
-.splash h2 {
-  font-size: 40px;
-  line-height: 60px;
 }
 .splash a.btn {
   height: 100px;
@@ -71,36 +50,7 @@ body.home .nav li:hover {
   padding: 40px;
   font-size: 50px;
 }
-
-#welcome {
-  background: url(/static/jardin/media/images/jardinfaq/sauterelle.jpg?v=1);
-  background-size: 100%;
-  background-repeat: round;
-  min-height: 700px;
-}
-#whatis {
-  background: url(/static/jardin/media/images/jardinfaq/olives-large.jpg?v=1);
-  background-size: 100%;
-  background-repeat: round;
-  min-height: 700px;
-}
-#whatis h2 {
-  text-align: left;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-#votes {
-  background: url(/static/jardin/media/images/jardinfaq/robinet.jpg?v=1);
-  background-size: 100%;
-  background-repeat: round;
-  min-height: 800px;
-}
-#go {
-  background: url(/static/jardin/media/images/jardinfaq/caneton.jpg?v=1);
-  background-size: 100%;
-  background-repeat: round;
-  min-height: 800px;
-}
+#whatis a,
 a.tag {
   padding-left: 5px;
   padding-right: 5px;
@@ -111,6 +61,7 @@ a.tag {
   border-radius: 5px;
   */
 }
+#whatis a:hover,
 a.tag:hover {
   text-decoration: none;
   color: #4e6050;
@@ -127,8 +78,8 @@ a.big-btn {
   color: #FFF;
   border-color: #728e5b;
   border-style: solid;
-  border-width: 10px;
-  border-radius: 5px;
+  border-width: 1vw;
+  border-radius: 10px;
   text-shadow: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
