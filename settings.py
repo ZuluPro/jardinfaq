@@ -251,10 +251,10 @@ INSTALLED_APPS = [
     'dbbackup',
     'dj_web_rich_object',
     'newsboard',
-    'mathfilters',
     # Wiki
     'bio',
     'bio.contribute',
+    'mathfilters'
 ]
 
 CACHES = {

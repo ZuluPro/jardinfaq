@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
+
 from askbot.models import Thread, BadgeData
 from askbot.models import badges as badge_data
 from askbot.context import application_settings
@@ -9,7 +11,7 @@ def home(request):
         return redirect('questions')
 
     exclusion = []
-    threads = Thread.objects.exclude(closed=True)
+    threads = Thread.objects.exclude(Q(closed=True) | Q(deleted=True))
 
     most_viewed_thread = threads.order_by('-view_count').first()
     if most_viewed_thread:
