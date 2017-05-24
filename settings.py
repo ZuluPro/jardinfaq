@@ -369,13 +369,6 @@ GROUP_MESSAGING = {
 VERIFIER_EXPIRE_DAYS = 3
 AVATAR_AUTO_GENERATE_SIZES = (16, 32, 48, 128)
 
-DBBACKUP_HOSTNAME = 'jardinfaq'
-DBBACKUP_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DBBACKUP_STORAGE_OPTIONS = {
-    'oauth2_access_token': CONFIG.get('DEFAULT', 'dropbox_oauth2_token')
-}
-
-
 def add_debug_toolbar():
     try:
         __import__('imp').find_module('debug_toolbar')
@@ -427,7 +420,23 @@ BIO_USER_CAN_ADD_PLANT_FUNC = 'core.perms.user_can_add_plant'
 BIO_USER_CAN_VALIDATE_FUNC = 'core.perms.user_can_validate'
 BIO_USER_CAN_VOTE_FUNC = 'core.perms.user_can_vote'
 
+BIO_BASE_TAG_MODEL = 'askbot.models.Tag'
+
 if celery.VERSION < (4, 0, 0):
     CELERYBEAT_SCHEDULE = {
         'auto-update-streams': UPDATE_STREAMS
     }
+
+STORAGES = {
+    'media': {
+      'root_path': 'media',
+      'oauth2_token': CONFIG.get('DEFAULT', 'dropbox_oauth2_token'),
+    },
+    'backups': {
+      'root_path': 'backups',
+      'oauth2_token': CONFIG.get('DEFAULT', 'dropbox_oauth2_token'),
+    }
+}
+DBBACKUP_HOSTNAME = 'jardinfaq'
+DBBACKUP_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+DBBACKUP_STORAGE_OPTIONS = STORAGES['backups']

@@ -1,7 +1,6 @@
 from django.dispatch import receiver
 from django.utils.timezone import now
 from bio.contribute import signals
-from bio.contribute import models as bio_models
 
 
 @receiver([signals.vote_plus_answer, signals.unvote_minus_answer])
@@ -17,6 +16,7 @@ def voted_minus_answer(instance, user, **kwargs):
 @receiver(signals.accepted_answer)
 def accepted_answer(instance, user, **kwargs):
     from askbot.models.badges import award_badges_signal
+    from bio.contribute import models as bio_models
     user.receive_reputation(25)
     if isinstance(instance, bio_models.NewPlant):
         award_badges_signal.send(None,

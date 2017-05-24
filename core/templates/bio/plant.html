@@ -2,6 +2,14 @@
 {% load i18n mathfilters %}
 
 {% block title %}{{ plant }}{% endblock %}
+
+{% block meta_description %}
+{{ block.super }}
+{% if plant.illustration %}
+<meta property="og:image" content="{{ plant.get_illustration_url }}">
+{% endif %}
+{% endblock %}
+
 {% block forejs %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -462,11 +470,27 @@
 
  <br>
  <div class="row contribute-row">
-  <div class="col-xs-12">
+  <div class="col-xs-12 col-md-6">
    <div class="well bio-tile">
      <h2>{% blocktrans %}If you think you can improve this file, do not hesitate{% endblocktrans %}</h2>
      <br>
      <a href="{% url "contribute-plant-home" plant.id %}"><h3 class="head-btn">{% trans "Contribute to our database" %}</h3></a>
+   </div>
+  </div>
+  <div class="col-xs-12 col-md-6">
+   <div class="well bio-tile">
+     {% if plant.get_tag.threads.get_opened.exists %}
+     <h2>{% blocktrans with plant_name=plant.name %}We also have some discussions about {{ plant_name }}{% endblocktrans %}</h2>
+     {% else %}
+     <h2>{% blocktrans with plant_name=plant.name %}We don't have discussions about {{ plant_name }}{% endblocktrans %}</h2>
+     {% endif %}
+     <ul class="no-style">
+     {% for question in plant.get_tag.threads.get_opened|slice:":5" %}
+     <li><a href="{{ question.get_absolute_url }}"><i>{{ question.title }}</i></a></li>
+     {% endfor %}
+     <br>
+     <li><a href="{% url "ask" %}"><h3 class="head-btn">{% trans "Ask your question" %}</h3></a></li>
+     </ul>
    </div>
   </div>
  </div>
